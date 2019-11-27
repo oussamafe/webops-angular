@@ -45,7 +45,7 @@
         </li>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-        <li class="nav-item d-none d-lg-block ml-lg-4">
+        <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
           <a [routerLink]="['/login']" class="btn btn-success">
             <span class="btn-inner--icon">
               <i class="fa fa-sign-in mr-2"></i>
@@ -53,7 +53,7 @@
             <span class="nav-link-inner--text">Login</span>
           </a>
         </li>
-        <li class="nav-item d-none d-lg-block ml-lg-4">
+        <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
           <a [routerLink]="['/register']" class="btn btn-white">
             <span class="btn-inner--icon">
               <i class="fa fa-user-plus mr-2"></i>
@@ -61,6 +61,14 @@
             <span class="nav-link-inner--text">Register</span>
           </a>
         </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="authService.isLoggedIn()">
+            <a [routerLink]="['/user-profile']" class="btn btn-white">
+              <span class="btn-inner--icon">
+                <i class="fa fa-user mr-2"></i>
+              </span>
+              <span class="nav-link-inner--text">Profile</span>
+            </a>
+          </li>
       </ul>
     </div>
   </div>
