@@ -1,0 +1,67 @@
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
+  <div class="container">
+    <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+      <img src="./assets/img/brand/argon-white.png">
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a [routerLink]="['/home']">
+              <img src="./assets/img/brand/blue.png">
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        <li class="nav-item ">
+          <a class="nav-link no-caret">
+            <i class="ni ni-collection d-lg-none"></i>
+            <a [routerLink]="['/landing']" class="navbar-brand">Page 1</a>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link no-caret">
+            <i class="ni ni-collection d-lg-none"></i>
+            <a [routerLink]="['/landing']" class="navbar-brand">Page 2</a>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link no-caret">
+            <i class="ni ni-collection d-lg-none"></i>
+            <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item d-none d-lg-block ml-lg-4">
+          <a [routerLink]="['/login']" class="btn btn-success">
+            <span class="btn-inner--icon">
+              <i class="fa fa-sign-in mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Login</span>
+          </a>
+        </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4">
+          <a [routerLink]="['/register']" class="btn btn-white">
+            <span class="btn-inner--icon">
+              <i class="fa fa-user-plus mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Register</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
