@@ -18,27 +18,28 @@
     </div>
   </section>
   <section class="section">
-    <div class="container">
+
+    <div class="container" *ngIf="DetailsCandidate!= null">
       <div class="card card-profile shadow mt--300">
         <div class="px-4">
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
                 <a href="javascript:void(0)">
-                  <img src="./assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                  <img src="./assets/img/theme/User.jpg" class="rounded-circle">
                 </a>
               </div>
             </div>
             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
               <div class="card-profile-actions py-4 mt-lg-0">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
                 <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
               </div>
             </div>
             <div class="col-lg-4 order-lg-1">
               <div class="card-profile-stats d-flex justify-content-center">
                 <div>
-                  <span class="heading">22</span>
+                  <span class="heading">89</span>
                   <span class="description">Friends</span>
                 </div>
                 <div>
@@ -53,17 +54,17 @@
             </div>
           </div>
           <div class="text-center mt-5">
-            <h3>Jessica Jones
-              <span class="font-weight-light">, 27</span>
+            <h3>{{DetailsCandidate.first_Name}} {{DetailsCandidate.last_Name }}
+              <span class="font-weight-light">, {{DetailsCandidate.age}}</span>
             </h3>
-            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Bucharest, Romania</div>
-            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer</div>
-            <div><i class="ni education_hat mr-2"></i>University of Computer Science</div>
+
+            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{DetailsCandidate.post}}</div>
+
           </div>
           <div class="mt-5 py-5 border-top text-center">
             <div class="row justify-content-center">
               <div class="col-lg-9">
-                <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
+                <p>{{DetailsCandidate.profilIntro}}</p>
                 <a href="javascript:void(0)">Show more</a>
               </div>
             </div>
@@ -73,3 +74,67 @@
     </div>
   </section>
 </main>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <img  src="./assets/img/icons/common/CV.svg" height="50" width="50">
+    <h4 class="modal-title" id="modal-basic-title">{{DetailsCandidate.last_Name}} {{DetailsCandidate.first_Name}} </h4>
+    <br>
+    <h6 class="modal-dialog" >{{DetailsCandidate.email}}</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table>
+      <tr>
+        <th> <img  src="./assets/img/icons/common/courses.png" height="25" width="25" ></th>
+        <th>  <h4>Courses</h4></th>
+        <div class="col-sm-4">
+          <div class="single-horizontal-timeline">
+            <div class="experience-time">
+              <h2>2018 - 2021</h2>
+              <h3>Engineer <span>of </span> computer science</h3>
+            </div><!--/.experience-time-->
+            <div class="timeline-horizontal-border">
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              <span class="single-timeline-horizontal"></span>
+            </div>
+            <div class="timeline">
+              <div class="timeline-content">
+                <h4 class="title">
+                  ESPRIT
+                </h4>
+                <h5>	El Ghazela - Ariana</h5>
+                <p class="description">
+                  Private Higher School of Engineering and Technologies
+                </p>
+              </div><!--/.timeline-content-->
+            </div><!--/.timeline-->
+          </div>
+        </div>
+
+      </tr>
+      <tr>
+        <td> <img  src="./assets/img/icons/common/profexp.png" height="25" width="25"></td>
+        <td><h4>Professional Experiences </h4></td>
+
+      </tr>
+      <tr>
+        <td>  <img  src="./assets/img/icons/common/cartifications.png" height="40" width="40"></td>
+        <td><h4>Certifications</h4></td>
+      </tr>
+      <tr>
+        <td>  <img  src="./assets/img/icons/common/skills.png" height="40" width="40"></td>
+        <td><h4>Skills</h4></td>
+      </tr>
+      <tr>
+        <td>  <img  src="./assets/img/icons/common/hobbies.png" height="40" width="40"></td>
+        <td><h4>Hobbies And Activities</h4></td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>

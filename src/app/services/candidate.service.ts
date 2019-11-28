@@ -3,13 +3,12 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Candidate} from '../models/Candidate';
+import {config} from '../models/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateService {
-  apiURL = '/api/Candidate';
-  apiURLProfil = '/api/Candidate/profileCandidate';
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -43,7 +42,7 @@ export class CandidateService {
   }
   createCandidate(candidate): Observable<Candidate> {
 
-    return this.http.post<Candidate>(this.apiURL, JSON.stringify(candidate),  this.httpOptions
+    return this.http.post<Candidate>(`${config.apiUrl}/Candidate`, JSON.stringify(candidate),  this.httpOptions
     ).pipe(
         catchError(this.handleError)
 
@@ -52,7 +51,7 @@ export class CandidateService {
 
 
   getCandidate(): Observable<Candidate> {
-    return this.http.get<Candidate>(this.apiURLProfil, this.httpOptions )
+    return this.http.get<Candidate>(`${config.apiUrl}/Candidate/profileCandidate`, this.httpOptions )
         .pipe(
             retry(1),
             catchError(this.handleError)

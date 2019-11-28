@@ -4,7 +4,6 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
@@ -18,6 +17,9 @@ import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './services/TokenInterceptor';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +28,11 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     ProfileComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
+
     BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
