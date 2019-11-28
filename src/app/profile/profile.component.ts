@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {CandidateService} from '../services/candidate.service';
 import {Router} from '@angular/router';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ProfessionalExperience} from '../models/ProfessionalExperience';
 
 
 @Component({
@@ -15,9 +16,10 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 
 export class ProfileComponent implements OnInit {
     DetailsCandidate: Candidate ;
-
+    ProfExp: ProfessionalExperience ;
     constructor( private http: HttpClient, public candidateService: CandidateService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
         this.loadEmployees();
+        this.getProfExp();
         config.backdrop = 'static';
         config.keyboard = false;
     }
@@ -26,6 +28,13 @@ export class ProfileComponent implements OnInit {
         console.log(this.DetailsCandidate);
     });
 
+    }
+    getProfExp() {
+        this.candidateService.getCandidate().subscribe((data) => {
+            this.DetailsCandidate = data;
+            this.DetailsCandidate.professionalExperiences.forEach(element => { this.ProfExp = element; });
+            console.log(this.ProfExp);
+        });
     }
     ngOnInit() {
 

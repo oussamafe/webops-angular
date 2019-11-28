@@ -14,7 +14,8 @@ export class Candidate {
     experiences: string ;
     age: string ;
     post: string ;
-
+    professionalExperiences: [
+    ] ;
 
 
 }
