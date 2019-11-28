@@ -16,6 +16,6 @@ export class Candidate {
     post: string ;
     professionalExperiences: [
     ] ;
-
-
+    courses: [];
+    skills: [] ;
 }

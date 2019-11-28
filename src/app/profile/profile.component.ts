@@ -5,6 +5,8 @@ import {CandidateService} from '../services/candidate.service';
 import {Router} from '@angular/router';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ProfessionalExperience} from '../models/ProfessionalExperience';
+import {Course} from '../models/Course';
+import {Skill} from '../models/Skill';
 
 
 @Component({
@@ -17,9 +19,14 @@ import {ProfessionalExperience} from '../models/ProfessionalExperience';
 export class ProfileComponent implements OnInit {
     DetailsCandidate: Candidate ;
     ProfExp: ProfessionalExperience ;
+    course: Course ;
+    skill : Skill ;
     constructor( private http: HttpClient, public candidateService: CandidateService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
         this.loadEmployees();
         this.getProfExp();
+        this.getCourse();
+        this.getSkill();
+
         config.backdrop = 'static';
         config.keyboard = false;
     }
@@ -36,6 +43,18 @@ export class ProfileComponent implements OnInit {
             console.log(this.ProfExp);
         });
     }
+    getCourse() {
+        this.candidateService.getCandidate().subscribe((data) => {
+            this.DetailsCandidate = data;
+            this.DetailsCandidate.courses.forEach(element => { this.course = element; });
+            console.log(this.course);
+        }); }
+    getSkill() {
+        this.candidateService.getCandidate().subscribe((data) => {
+            this.DetailsCandidate = data;
+            this.DetailsCandidate.skills.forEach(element => { this.skill = element; });
+            console.log(this.skill);
+        }); }
     ngOnInit() {
 
 
