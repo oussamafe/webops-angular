@@ -7,6 +7,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ProfessionalExperience} from '../models/ProfessionalExperience';
 import {Course} from '../models/Course';
 import {Skill} from '../models/Skill';
+import {CVService} from '../services/cv.service';
 
 
 @Component({
@@ -18,48 +19,44 @@ import {Skill} from '../models/Skill';
 
 export class ProfileComponent implements OnInit {
     DetailsCandidate: Candidate ;
-    ProfExp: ProfessionalExperience ;
-    course: Course ;
-    skill : Skill ;
-    constructor( private http: HttpClient, public candidateService: CandidateService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
-        this.loadEmployees();
+    ProfExp: ProfessionalExperience [] = [] ;
+    skill: Skill [] = [] ;
+    Course: Course [] = [] ;
+    // tslint:disable-next-line:max-line-length
+    constructor( private http: HttpClient, public candidateService: CandidateService, public cvService: CVService,  private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
+        this.loadCandidate();
         this.getProfExp();
         this.getCourse();
         this.getSkill();
-
         config.backdrop = 'static';
         config.keyboard = false;
     }
-    loadEmployees() { this.candidateService.getCandidate().subscribe((data) => {
+    loadCandidate() { this.candidateService.getCandidate().subscribe((data) => {
         this.DetailsCandidate = data;
-        console.log(this.DetailsCandidate);
-    });
+     });
 
     }
     getProfExp() {
-        this.candidateService.getCandidate().subscribe((data) => {
-            this.DetailsCandidate = data;
-            this.DetailsCandidate.professionalExperiences.forEach(element => { this.ProfExp = element; });
-            console.log(this.ProfExp);
+        this.cvService.getProfessionalExperiences().subscribe((data) => {
+            this.ProfExp = data;
         });
     }
     getCourse() {
-        this.candidateService.getCandidate().subscribe((data) => {
-            this.DetailsCandidate = data;
-            this.DetailsCandidate.courses.forEach(element => { this.course = element; });
-            console.log(this.course);
-        }); }
+        this.cvService.getCourses().subscribe((data) => {
+            this.Course = data;
+            console.log(this.Course );
+        });
+    }
     getSkill() {
-        this.candidateService.getCandidate().subscribe((data) => {
-            this.DetailsCandidate = data;
-            this.DetailsCandidate.skills.forEach(element => { this.skill = element; });
-            console.log(this.skill);
+        this.cvService.getSkills().subscribe((data) => {
+            this.skill = data;
+
         }); }
+
     ngOnInit() {
 
 
     }
-
 
     open(content) {
         this.modalService.open(content , { size: 'lg' });

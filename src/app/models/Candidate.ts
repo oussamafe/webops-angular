@@ -10,12 +10,9 @@ export class Candidate {
     profilIntro: string ;
     activities: string ;
     phoneNumber: number ;
-    Certifications: string ;
+    certifications: string ;
     experiences: string ;
     age: string ;
     post: string ;
-    professionalExperiences: [
-    ] ;
-    courses: [];
-    skills: [] ;
+
 }

@@ -26,14 +26,14 @@
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
                 <a href="javascript:void(0)">
-                  <img src="./assets/img/theme/User.jpg" class="rounded-circle">
+                  <img src="./assets/img/theme/User.jpeg" class="rounded-circle">
                 </a>
               </div>
             </div>
             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
               <div class="card-profile-actions py-4 mt-lg-0">
                 <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " [routerLink]="['/EditCV']" >Edit My CV </a>
               </div>
             </div>
             <div class="col-lg-4 order-lg-1">
@@ -76,43 +76,93 @@
 </main>
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <img  src="./assets/img/icons/common/CV.svg" height="50" width="50">
-    <h4 class="modal-title" id="modal-basic-title">{{DetailsCandidate.last_Name}} {{DetailsCandidate.first_Name}} </h4>
-    <br>
-    <h6 class="modal-dialog" >{{DetailsCandidate.email}}</h6>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10"> <img  src="./assets/img/icons/common/CV.svg" height="50" width="50">
+          <h4 id="modal-basic-title" class="text-primary text-uppercase" >{{DetailsCandidate.last_Name}} {{DetailsCandidate.first_Name}} </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-7"> <h6> @Email: {{DetailsCandidate.email}}</h6></div>
+        <div class="col-sm-7"> <h6 > Phone Number: {{DetailsCandidate.phoneNumber}}</h6></div>
+      </div>
+    </div>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <table>
-      <tr>
-        <th> <img  src="./assets/img/icons/common/courses.png" height="25" width="25" ></th>
-        <th>  <h4>Courses</h4></th>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1"> <img  src="./assets/img/icons/common/courses.png" height="30" width="30" ></div>
+        <div class="col-sm-10"><h4 class="text-warning text-uppercase" >Courses</h4></div>
+        <br>
+        <div *ngFor=" let C of Course " class="col-lg-4"  >
+          <div class="card card-lift--hover shadow border-0">
+            <div class="card-body py-5">
+              <h6 class="text-warning text-uppercase">{{C.diploma}}</h6>
+              <p class="description mt-3">{{C.institution}}</p>
+              <div>
+                <span class="badge badge-pill badge-warning">{{C.startDate}}</span>
+                <span class="badge badge-pill badge-warning">{{C.endDate}}</span>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
 
-      </tr>
-      <tr>
-        <td> <img  src="./assets/img/icons/common/profexp.png" height="25" width="25"></td>
-        <td><h4>Professional Experiences </h4></td>
-    {{ProfExp.description}}
-      </tr>
-      <tr>
-        <td>  <img  src="./assets/img/icons/common/cartifications.png" height="40" width="40"></td>
-        <td><h4>Certifications</h4></td>
-      </tr>
-      <tr>
-        <td>  <img  src="./assets/img/icons/common/skills.png" height="40" width="40"></td>
-        <td><h4>Skills</h4></td>
-      </tr>
-      <tr>
-        <td>  <img  src="./assets/img/icons/common/hobbies.png" height="40" width="40"></td>
-        <td><h4>Hobbies And Activities</h4></td>
-      </tr>
-    </table>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-1"><img  src="./assets/img/icons/common/profexp.png" height="25" width="25"></div>
+        <div class="col-sm-10"> <h4 class="text-primary text-uppercase" >Professional Experiences </h4></div>
+        <div class="col-lg-4" *ngFor=" let P of ProfExp " >
+          <div class="card card-lift--hover shadow border-0">
+            <div class="card-body py-5">
+              <div>
+                <span class="badge badge-pill badge-primary">{{P.startDate}}</span>
+                <span class="badge badge-pill badge-primary">{{P.endDate}}</span>
+              </div>
+              <h6 class="text-primary text-uppercase">{{P.description}}</h6>
+                  <p class="description mt-3">{{P.company}}</p>
+              <span class="badge badge-pill badge-primary">{{P.place}}</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-1">  <img  src="./assets/img/icons/common/cartifications.png" height="40" width="40"></div>
+        <div class="col-sm-10"> <h4  class="text-success text-uppercase" >Certifications</h4>
+          <p>{{DetailsCandidate.certifications}}</p></div>
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-1"><img  src="./assets/img/icons/common/skills.png" height="40" width="40"></div>
+        <div class="col-sm-10"><h4 class="text-warning text-uppercase" >Skills</h4></div>
+        <ul  *ngFor=" let s of skill ">
+          <li>
+          <span class="badge badge-pill badge-warning">{{s.type}}</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-1"> <img  src="./assets/img/icons/common/hobbies.png" height="40" width="40"></div>
+        <div class="col-sm-10"><h4>Hobbies And Activities</h4>
+          <p>{{DetailsCandidate.activities}}</p></div>
+
+      </div>
+    </div>
+
 
   </div>
+
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Done</button>
   </div>
 </ng-template>

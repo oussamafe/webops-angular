@@ -16,6 +16,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './services/TokenInterceptor';
+import { CVComponent } from './cv/cv.component';
 
 
 
@@ -29,6 +30,7 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
+    CVComponent,
 
   ],
   imports: [
