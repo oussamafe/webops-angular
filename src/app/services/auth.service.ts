@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
+import { of, Observable, throwError } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { config } from '../models/config';
 import { Tokens } from '../models/tokens';
+import {MatDialog} from '@angular/material/dialog';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +21,9 @@ export class AuthService {
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , public dialog: MatDialog) {}
 
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string): Observable<any> {
     const body = new HttpParams()
     .set('username', username)
     .set('password', password);
@@ -34,13 +36,12 @@ export class AuthService {
         tap(tokens => this.doLoginUser(username, tokens)),
         mapTo(true),
         catchError(error => {
-          alert(error.error);
-          return of(false);
+          return throwError(error.status);
         }));
   }
 
   logout() {
-    return this.http.post<any>(`${config.apiUrl}/logout`, {
+   /* return this.http.post<any>(`${config.apiUrl}/logout`, {
       'refreshToken': this.getRefreshToken()
     }).pipe(
       tap(() => this.doLogoutUser()),
@@ -48,7 +49,9 @@ export class AuthService {
       catchError(error => {
         alert(error.error);
         return of(false);
-      }));
+      }));*/
+
+      return this.doLogoutUser();
   }
 
   isLoggedIn() {

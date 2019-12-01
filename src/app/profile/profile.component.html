@@ -31,40 +31,62 @@
             </div>
             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
               <div class="card-profile-actions py-4 mt-lg-0">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right" (click)="logout()"><i class="fa fa-sign-out mr-2" ></i> Logout</a>
               </div>
             </div>
-            <div class="col-lg-4 order-lg-1">
-              <div class="card-profile-stats d-flex justify-content-center">
-                <div>
-                  <span class="heading">22</span>
-                  <span class="description">Friends</span>
-                </div>
-                <div>
-                  <span class="heading">10</span>
-                  <span class="description">Photos</span>
-                </div>
-                <div>
-                  <span class="heading">89</span>
-                  <span class="description">Comments</span>
+            <div class="col-lg-4 order-lg-1" >
+              <div class="card-profile-stats d-flex justify-content-center" >
+                <div *ngIf="employeeDetails != null" class="btn btn-md btn-primary mb-3" (click)="open(classic,'' , '')">
+                  <span class="heading">{{employeeDetails.jobsSubmitted.length}}</span>
+                  <span>Jobs Submitted</span>
+                  <ng-template #classic let-c="close" let-d="dismiss">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="modal-title-default"></h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <ngb-tabset [justify]="'center'" class="custom-tab-content flex-column flex-md-row" type="pills">
+                                <ngb-tab *ngFor="let item of employeeDetails.jobsSubmitted , let i = index">
+                                  <ng-template ngbTabTitle>
+                                    <i class="ni ni-cloud-upload-96 mr-2"></i> Job {{i+1}}
+                                  </ng-template>
+                                    <ng-template ngbTabContent>
+                                      <h4 class="h4 text-success font-weight-bold mb-4">{{item.job_title}}</h4>
+                                      <dl class="row">
+                                      <dt class="col-sm-3 text-truncate"> <i class="fa fa-calendar mr-2"></i> <strong>Deposit Date : </strong> </dt>  <dd class="col-sm-9">{{item.depositDate | date:'dd/MM/yyyy' }} </dd>
+                                      <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i> <strong>Description : </strong> </dt> <dd class="col-sm-9">{{item.description}}</dd>
+                                      <dt class="col-sm-3 text-truncate"> <i class="fa fa fa-cogs mr-2"></i> <strong>Skills : </strong> </dt> <dd class="col-sm-9"> <span class="badge badge-pill badge-default mr-2" *ngFor="let skills of item.skills">{{skills.type}}</span> </dd>
+                                      <dt class="col-sm-3 text-truncate"> <i class="fa fa-check mr-2"></i> <strong>Availability : </strong> </dt> <dd class="col-sm-9"><span [ngClass]=" item.available == true ? {'badge badge-success': 'true'} : {'badge badge-danger': 'true'}"> {{item.available == true ? 'Yes' : 'No' }} </span></dd>
+                                      <dt class="col-sm-3 text-truncate"> <i class="fa fa-map-marker mr-2"></i> <strong>Location : </strong> </dt> <dd class="col-sm-9"> <span class="mr-2">{{ adress[i] != null ? adress[i].address : item.location}}</span> <button type="button" class="btn btn-secondary  btn-sm" (click)="lookupLocation(item.location , i)">Lookup Location</button> </dd>
+                                    </dl>
+                                    </ng-template>
+                                </ngb-tab>
+                            </ngb-tabset>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+                        </div>
+                      </div>
+                    </ng-template>
                 </div>
               </div>
-            </div>
+            </div> 
           </div>
-          <div class="text-center mt-5">
-            <h3>Jessica Jones
-              <span class="font-weight-light">, 27</span>
+          <div class="text-center mt-5" *ngIf="employeeDetails != null">
+            <h3>{{employeeDetails.first_Name}} {{employeeDetails.last_Name}}
             </h3>
-            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Bucharest, Romania</div>
-            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer</div>
-            <div><i class="ni education_hat mr-2"></i>University of Computer Science</div>
+            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>{{employeeDetails.role}}</div>
+            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{employeeDetails.email}}</div>
+            <div><i class="ni education_hat mr-2"></i></div>
           </div>
           <div class="mt-5 py-5 border-top text-center">
             <div class="row justify-content-center">
               <div class="col-lg-9">
-                <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
-                <a href="javascript:void(0)">Show more</a>
+                <p></p>
+                <a href="javascript:void(0)"></a>
               </div>
             </div>
           </div>

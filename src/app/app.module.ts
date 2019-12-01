@@ -4,7 +4,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
@@ -17,6 +17,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './services/TokenInterceptor';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     ProfileComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    LoginDialogComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,12 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     HttpClientModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+  ],
+  entryComponents:[
+    LoginDialogComponent
   ],
   providers: [
     {

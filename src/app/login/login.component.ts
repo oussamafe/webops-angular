@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   focus;
   focus1;
   loginForm: FormGroup;
+  errorLogin = null;
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
@@ -24,12 +25,22 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   login() {
+    this.errorLogin = null;
     this.authService.login(this.f.username.value , this.f.password.value)
     .subscribe(success => {
-      if (success) {
+      if (success === true) {
         this.router.navigate(['/home']);
       }
-    });
+    },
+    error => {
+      if (error === 406 )  {
+        this.errorLogin = false;
+      }
+      else {
+        this.errorLogin = true;
+      }
+    }
+    );
   }
 
 

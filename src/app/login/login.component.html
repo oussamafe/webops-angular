@@ -20,6 +20,10 @@
                   <h4 class="display-4 mb-0">Login</h4>
                 </div>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="errorLogin != null">
+                <span *ngIf="errorLogin == true"><strong>Wrong Email/Password.</strong></span>
+                <span *ngIf="errorLogin == false"><strong>Your account is inactive , Please check your Email and confirm your Account !</strong></span>
+             </div>
               <form role="form" [formGroup]="loginForm" (ngSubmit)="login()" >
                 <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative">
