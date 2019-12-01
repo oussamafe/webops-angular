@@ -32,9 +32,11 @@
             </div>
             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
               <div class="card-profile-actions py-4 mt-lg-0">
+
                 <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
                 <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " [routerLink]="['/EditCV']" >Edit My CV </a>
-              </div>
+</div>
+              <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right " (click)="open1(classic1, 'modal_large', 'sm')" >Edit My Profile </a>
             </div>
             <div class="col-lg-4 order-lg-1">
               <div class="card-profile-stats d-flex justify-content-center">
@@ -44,21 +46,21 @@
                 </div>
                 <div>
                   <span class="heading">10</span>
-                  <span class="description">Photos</span>
+                  <span class="description">Friends Requests</span>
                 </div>
-                <div>
-                  <span class="heading">89</span>
-                  <span class="description">Comments</span>
-                </div>
+
               </div>
             </div>
           </div>
           <div class="text-center mt-5">
+
             <h3>{{DetailsCandidate.first_Name}} {{DetailsCandidate.last_Name }}
               <span class="font-weight-light">, {{DetailsCandidate.age}}</span>
             </h3>
 
-            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{DetailsCandidate.post}}</div>
+            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{DetailsCandidate.post}}
+            </div>
+
 
           </div>
           <div class="mt-5 py-5 border-top text-center">
@@ -164,5 +166,85 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Done</button>
+  </div>
+</ng-template>
+<ng-template #classic1 let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-white pb-5">
+          <div class="text-muted text-center mb-3">
+            <h6>Edit Your Profile Information</h6>
+          </div>
+
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+
+          <form role="form">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <input class="form-control" placeholder="First Name " [(ngModel)]="DetailsCandidate.first_Name" name="first_Name" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <input class="form-control" placeholder="Last Name " [(ngModel)]="DetailsCandidate.last_Name" name="last_Name" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" placeholder="Study Level" type="text"  [(ngModel)]="DetailsCandidate.studyLevel" name="studyLevel" >
+              </div>
+            </div><div class="form-group">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-tablet-button"></i></span>
+              </div>
+              <input class="form-control" placeholder="Phone Number" type="text" [(ngModel)]="DetailsCandidate.phoneNumber" name="phoneNumber">
+            </div>
+          </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+
+
+                  <textarea class="form-control form-control-alternative"  [(ngModel)]="DetailsCandidate.profilIntro" name="profilIntro" rows="4" cols="80" placeholder="Type a profile description...."></textarea>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-sound-wave"></i></span>
+                </div>
+                <input class="form-control" placeholder="Age" type="text" [(ngModel)]="DetailsCandidate.age" name="age" >
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-briefcase-24"></i></span>
+                </div>
+                <input class="form-control" placeholder="Your current Post" type="text" [(ngModel)]="DetailsCandidate.post" name="post" >
+              </div>
+            </div>
+
+
+
+            <div class="text-center">
+              <button type="button" class="btn btn-primary my-4" (click)="updateCandidate()">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-template>

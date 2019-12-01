@@ -57,4 +57,11 @@ export class CandidateService {
             catchError(this.handleError)
         );
   }
+  updateCandidate(candidate): Observable<Candidate> {
+    return this.http.put<Candidate>(`${config.apiUrl}/Candidate/updateCandidate`, JSON.stringify(candidate), this.httpOptions)
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
 }
