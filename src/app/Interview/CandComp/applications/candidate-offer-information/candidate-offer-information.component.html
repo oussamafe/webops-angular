@@ -1,0 +1,50 @@
+<button type="button" class="btn btn-sm btn-primary "
+        (click)="open(classicc,'' , '')">Candidate
+</button>
+
+<button type="button" class="btn btn-sm btn-default" (click)="open(classicj,'' , '')">JobOffer
+</button>
+
+<ng-template #classicc let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" >Candidate Information</h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p align="center">{{ca.last_Name}}&emsp;{{ca.first_Name}}</p>
+      <p><strong>Profil Intro :</strong> {{ca.profilIntro}}</p>
+      <p><strong>Skills&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong>{{ca.skills}}</p>
+      <p><strong>Experiences  : </strong>{{ca.experiences}}</p>
+      <p><strong>Activities   :</strong> {{ca.activities}}</p>
+      <p><strong>Study Level  : </strong>{{ca.studyLevel}}</p>
+      <p><strong>Certif       :</strong> {{ca.certifications}}</p>
+    </div>
+
+      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+
+  </div>
+</ng-template>
+
+<ng-template #classicj let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" >Job Offer Information</h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p align="center">{{j.job_title}}</p>
+      <p><strong>Type   :</strong> {{j.type}}</p>
+      <p><strong>Skills : </strong>{{j.skills}}</p>
+      <p><strong>Level  : </strong>{{j.level}}</p>
+      <p><strong>Description :</strong> {{j.description}}</p>
+
+    </div>
+      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

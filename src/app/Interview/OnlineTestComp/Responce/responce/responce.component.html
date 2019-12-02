@@ -1,0 +1,131 @@
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-shaped ">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <div class="col px-0">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1 class="display-3  text-white">Responces
+                                &nbsp;
+                                <button class="btn btn-1 btn-neutral" routerLink="/AddResponce/{{idq}}" type="button">
+                                    Add Responce
+                                </button>
+                                <span>{{RespSPANTITLE}}</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+
+        </section>
+        <!-- 1st Hero Variation -->
+
+        <div class="container custom-container-2">
+
+          <div  class="row py-3 align-items-center">
+            <div  class="col-sm-3">
+              <small  class="text-uppercase text-muted font-weight-bold">Question : </small>
+            </div>
+            <div  class="col-sm-9">
+              <h3  class="mb-0">&emsp;{{quest.question}}</h3>
+            </div>
+          </div>
+          <div  class="row py-3 align-items-center">
+            <div  class="col-sm-3">
+              <small  class="text-uppercase text-muted font-weight-bold">Module : </small>
+            </div>
+            <div  class="col-sm-9">
+              <h3  class="mb-0">&emsp;{{quest.module}}</h3>
+            </div>
+          </div>
+          <div  class="row py-3 align-items-center">
+            <div  class="col-sm-3">
+              <small  class="text-uppercase text-muted font-weight-bold">Estimated Time  : </small>
+            </div>
+            <div  class="col-sm-9">
+              <h3  class="mb-0">&emsp;{{quest.estimated_Time}}</h3>
+            </div>
+          </div>
+
+            <!-- Show it when there is no employee     -->
+            <div class="no-data text-center" *ngIf="!listResponces" >
+                <p>There is no Responce added yet!</p>
+                <button class="btn btn-outline-primary" routerLink="/AddResponce/{{idq}}">Add Responce</button>
+            </div>
+            <br>
+
+            <!-- Employees list table, it hides when there is no employee -->
+            <div *ngIf="listResponces">
+
+                <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{'focused': focus===true}">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Search" type="text" (focus)="focus=true"
+                                   (blur)="focus=false">
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr style="text-align: center">
+                            <th scope="col">reponce</th>
+                            <th scope="col">IsValid</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let Resp of listResponces | paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td contenteditable="true" (blur)="updateResponce(Resp.id,Resp ,'reponce', $event);open(classic2, 'Notification', '');">{{Resp.reponce}}</td>
+                            <td contenteditable="false" (blur)="updateResponce(Resp.id,Resp ,'IsValid', $event);open(classic2, 'Notification', '');" style="text-align: center">
+                                <app-res-isvalid  [rid]="Resp.id" ></app-res-isvalid>
+                            </td>
+                            <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" routerLink="/Responce/{{idq}}" (click)="DeleteResponce(Resp.id)">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <ng-template #classic2 let-c="close" let-d="dismiss"  >
+                        <div  style="background-color: #4fd69c;">
+                            <ngb-alert [type]="alertSucc.type"  [dismissible]="true"  (click)="c('Close click')">
+                                <i class="{{alertSucc.icon}} alert-inner--icon"></i> &nbsp;
+                                <strong class="alert-inner--text">{{alertSucc.strong}} </strong>
+                            </ngb-alert>
+                        </div>
+                    </ng-template>
+
+
+                    <nav aria-label="Page navigation example">
+                        <ngb-pagination [collectionSize]="px*10" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+                            <ng-template ngbPaginationPrevious><i _ngcontent-c9="" class="fa fa-angle-left"></i></ng-template>
+                            <ng-template ngbPaginationNext><i _ngcontent-c9="" class="fa fa-angle-right"></i></ng-template>
+                        </ngb-pagination>
+                    </nav>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</main>

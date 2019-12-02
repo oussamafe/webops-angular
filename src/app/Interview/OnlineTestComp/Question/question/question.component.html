@@ -1,0 +1,107 @@
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-shaped ">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <div class="col px-0">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1 class="display-3  text-white">Questions
+                                &nbsp;
+                                <button class="btn btn-1 btn-neutral" [routerLink]="['/AddQuestion']" type="button">
+                                    Add Question
+                                </button>
+                                <span>{{QUESTSPANTITLE}}</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+
+        </section>
+        <!-- 1st Hero Variation -->
+
+    </div>
+    <div class="container custom-container-2">
+
+        <!-- Show it when there is no employee     -->
+        <div class="no-data text-center" *ngIf="!listQuestion" >
+            <p>There is no Question added yet!</p>
+            <button class="btn btn-outline-primary" [routerLink]="['/AddQuestion']">Add Question</button>
+        </div>
+        <br>
+
+        <!-- Employees list table, it hides when there is no employee -->
+        <div *ngIf="listQuestion">
+
+            <div class="col-md-12">
+                <div class="form-group" [ngClass]="{'focused': focus===true}">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchQ(thisInput.value)">
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr style="text-align: center">
+                        <th scope="col">question</th>
+                        <th scope="col">module</th>
+                        <th scope="col">estimated/Min</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let Quest of listQuestion | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td contenteditable="true" (blur)="updateQuestion(Quest.id,Quest ,'question', $event);open(classic2, 'Notification', '');">{{Quest.question}}</td>
+                        <td contenteditable="true" (blur)="updateQuestion(Quest.id,Quest ,'module', $event);open(classic2, 'Notification', '');" style="text-align: center">{{Quest.module}}</td>
+                        <td contenteditable="true" (blur)="updateQuestion(Quest.id,Quest ,'estimated', $event);open(classic2, 'Notification', '');" style="text-align: center">{{Quest.estimated_Time}}</td>
+                        <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" [routerLink]="['/Question']" (click)="DeleteQuestion(Quest.id)">Delete</a></td>
+                        <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-info" routerLink="/Responce/{{Quest.id}}" >Responces</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #classic2 let-c="close" let-d="dismiss"  >
+                    <div  style="background-color: #4fd69c;">
+                        <ngb-alert [type]="alertSucc.type"  [dismissible]="true"  (click)="c('Close click')">
+                                <i class="{{alertSucc.icon}} alert-inner--icon"></i> &nbsp;
+                                <strong class="alert-inner--text">{{alertSucc.strong}} </strong>
+                          </ngb-alert>
+                    </div>
+                </ng-template>
+
+
+                <nav aria-label="Page navigation example">
+                    <ngb-pagination [collectionSize]="px*10" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+                        <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+                        <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+                    </ngb-pagination>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
