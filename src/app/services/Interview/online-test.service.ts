@@ -12,8 +12,7 @@ export class OnlineTestService {
   //
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.token.getJwtToken()
+      'Content-Type': 'application/json'
     })
   };
   //
@@ -65,8 +64,12 @@ export class OnlineTestService {
   setTestNoteByQuestion(otid, qid, jo) {
     return this.http.put(this.URL + '/setTestNoteByQuestion?otid=' + otid + '&qid=' + qid, jo , this.httpOptions);
   }
-
-
+  setResponceInValid(rid) {
+    return this.http.put<OnlineTest>(this.URL + '/setResponceInValid?rid=' + rid, this.httpOptions);
+  }
+  setResponceValid(rid) {
+    return this.http.put<OnlineTest>(this.URL + '/setResponceValid?rid=' + rid, this.httpOptions);
+  }
 
   // delete
   DeleteResponce(rid) {
@@ -84,6 +87,15 @@ export class OnlineTestService {
   // get
   getListAllQuestion() {
     return this.http.get<Question[]>(this.URL + '/ListQuestion', this.httpOptions);
+  }
+  ListAlltest() {
+    return this.http.get<OnlineTest[]>(this.URL + '/ListAlltest', this.httpOptions);
+  }
+  ListAcceptedtest() {
+    return this.http.get<OnlineTest[]>(this.URL + '/ListAcceptedtest', this.httpOptions);
+  }
+  ListRejectedtest() {
+    return this.http.get<OnlineTest[]>(this.URL + '/ListRejectedtest', this.httpOptions);
   }
   getQuestionbyid(id) {
     return this.http.get<Question>(this.URL + '/getQuestionbyid?qid=' + id, this.httpOptions);
@@ -115,7 +127,17 @@ export class OnlineTestService {
   ListQuestionByTest(otid) {
     return this.http.get<Question[]>(this.URL + '/ListQuestionByTest?otid=' + otid, this.httpOptions);
   }
+  serchByQuestion(question) {
+    return this.http.get<Question[]>(this.URL + '/serchByQuestion?question=' + question, this.httpOptions);
+  }
   GetOnlinetestResult(otid) {
     return this.http.get<string>(this.URL + '/GetOnlinetestResult?otid=' + otid, this.httpOptions);
+  }
+    getModulsByTest(otid) {
+        return this.http.get<string[]>(this.URL + '/getModulsByTest?otid=' + otid, this.httpOptions);
+    }
+
+  getStateResponcebyId(rid) {
+    return this.http.get<any>(this.URL + '/getStateResponcebyId?rid=' + rid, this.httpOptions);
   }
 }

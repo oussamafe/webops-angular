@@ -25,18 +25,30 @@
         </div>
       </div>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <li class="nav-item ">
-          <a class="nav-link no-caret">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/OnlineTest']">
             <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/landing']" class="navbar-brand">Page 1</a>
+            <span class="nav-link-inner--text navbar-brand">OnlineTest</span>
           </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/OnlineTest']" class="dropdown-item ">OnlineTests</a>
+            <a [routerLink]="['/Question']" class="dropdown-item">Questions</a>
+          </div>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link no-caret">
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/Applications']">
             <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/landing']" class="navbar-brand">Page 2</a>
+            <span class="nav-link-inner--text navbar-brand">Applications</span>
           </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/Applications']" class="dropdown-item ">All Application</a>
+
+          </div>
         </li>
+
         <li class="nav-item ">
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
