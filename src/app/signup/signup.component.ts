@@ -9,7 +9,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-    @Input() candidateDetails = { first_Name: '', last_Name: '', email: '' , password: ''}
+    @Input() candidateDetails = { first_Name: '', last_Name: '', email: '' , password: ''};
     test: Date = new Date();
     focus;
     focus1;

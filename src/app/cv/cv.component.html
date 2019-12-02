@@ -24,7 +24,7 @@
   <section class="section section-lg pt-lg-0 section-contact-us">
     <div class="container">
       <div class="row justify-content-center mt--300">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
           <div class="card bg-gradient-secondary shadow">
             <div class="card-body p-lg-5">
               <h4 class="mb-1">Want to add Courses?</h4>
@@ -34,7 +34,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-ruler-pencil"></i></span>
                   </div>
-                  <input class="form-control" placeholder="Diploma" type="text" (focus)="focus=true" (blur)="focus=false">
+                  <input class="form-control" [(ngModel)]="DetailsCourse.diploma" name="diploma" placeholder="Diploma" type="text"  (focus)="focus=true" (blur)="focus=false">
                 </div>
               </div>
               <div class="form-group" [ngClass]="{'focused':focus1===true}">
@@ -42,59 +42,27 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                   </div>
-                  <input class="form-control" placeholder="Institution" type="Institution" (focus)="focus1=true" (blur)="focus1=false">
+                  <input class="form-control" placeholder="Institution" type="text" [(ngModel)]="DetailsCourse.institution" name="institution" (focus)="focus1=true" (blur)="focus1=false">
                 </div>
               </div>
-              <div class="input-daterange datepicker row align-items-center">
-                <div class="col">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select Start date" name="dp1" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" (select)="mama($event)" type="text" [dayTemplate]="t" (dateSelect)="startDateChanged($event)" autocomplete="off"/>
-                      <ng-template #t let-date let-focused="focused" >
-           <span class="custom-day"
-                 [class.text-white]="isActive(date)"
-                 [class.range-end]="isRangeEnd(date)"
-                 [class.range-start]="isRangeStart(date)"
-                 [class.btn-light]="isActive(date)"
-                 [class.bg-primary]="isActive(date)"
-                 [class.range]="isInRange(date)"
-                 [class.faded]="isInRange(date)"
-           >
-             {{ date.day }}
-           </span>
-                      </ng-template>
+                <div class="form-group">
+                    <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                        </div>
+                        <input class="form-control datepicker" placeholder="Select a start date" [(ngModel)]="DetailsCourse.startDate" name="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" />
                     </div>
-                  </div>
                 </div>
-                <div class="col">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select End date" name="dp2" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text" [dayTemplate]="t1" (dateSelect)="endDateChanged($event)" autocomplete="off"/>
-                      <ng-template #t1 let-date let-focused="focused" >
-           <span class="custom-day"
-                 [class.text-white]="isActive(date)"
-                 [class.range-end]="isRangeEnd(date)"
-                 [class.range-start]="isRangeStart(date)"
-                 [class.btn-light]="isActive(date)"
-                 [class.bg-primary]="isActive(date)"
-                 [class.range]="isInRange(date)"
-                 [class.faded]="isInRange(date)"
-           >
-             {{ date.day }}
-           </span>
-                      </ng-template>
+                <div class="form-group">
+                    <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                        </div>
+                        <input class="form-control datepicker" placeholder="Select an end date" [(ngModel)]="DetailsCourse.endDate" name="endDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
                     </div>
-                  </div>
                 </div>
-              </div>
               <div>
-                <button type="button" class="btn btn-warning btn-round btn-block btn-lg">Add Course to your CV</button>
+                <button type="button" class="btn btn-warning btn-round btn-block btn-lg" (click)="AddCourse()">Add Course to your CV</button>
               </div>
             </div>
           </div>
@@ -123,7 +91,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-bag-17"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Company" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Company" type="text" (focus)="focus2=true" (blur)="focus2=false">
                   </div>
                 </div>
 
@@ -135,54 +103,7 @@
                     <input class="form-control" placeholder="Place" type="text" (focus)="focus1=true" (blur)="focus1=false">
                   </div>
                 </div>
-                <div class="input-daterange datepicker row align-items-center">
-                  <div class="col">
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control datepicker" placeholder="Select Start date" name="dp1" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" (select)="mama($event)" type="text" [dayTemplate]="t" (dateSelect)="startDateChanged($event)" autocomplete="off"/>
-                        <ng-template #t let-date let-focused="focused" >
-           <span class="custom-day"
-                 [class.text-white]="isActive(date)"
-                 [class.range-end]="isRangeEnd(date)"
-                 [class.range-start]="isRangeStart(date)"
-                 [class.btn-light]="isActive(date)"
-                 [class.bg-primary]="isActive(date)"
-                 [class.range]="isInRange(date)"
-                 [class.faded]="isInRange(date)"
-           >
-             {{ date.day }}
-           </span>
-                        </ng-template>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control datepicker" placeholder="Select End date" name="dp2" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text" [dayTemplate]="t1" (dateSelect)="endDateChanged($event)" autocomplete="off"/>
-                        <ng-template #t1 let-date let-focused="focused" >
-           <span class="custom-day"
-                 [class.text-white]="isActive(date)"
-                 [class.range-end]="isRangeEnd(date)"
-                 [class.range-start]="isRangeStart(date)"
-                 [class.btn-light]="isActive(date)"
-                 [class.bg-primary]="isActive(date)"
-                 [class.range]="isInRange(date)"
-                 [class.faded]="isInRange(date)"
-           >
-             {{ date.day }}
-           </span>
-                        </ng-template>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
                 <div>
                   <button type="button" class="btn btn-default btn-round btn-block btn-lg">Add Professional Experiences to your CV</button>
                 </div>

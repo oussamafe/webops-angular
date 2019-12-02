@@ -1,41 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {CVService} from '../services/cv.service';
+import {Candidate} from '../models/Candidate';
+import {Course} from '../models/Course';
+import * as moment from 'moment';
+import {formatDate} from '@angular/common';
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.css']
 })
 export class CVComponent implements OnInit {
-  fromDate: NgbDate;
-  toDate: NgbDate;
-  hoveredDate: NgbDate;
-  model1: NgbDate;
-  model2: NgbDate;
-  constructor(calendar: NgbCalendar) {  this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10); }
+  focus;
+  focus1;
+    focus2;
+ done = false ;
+  @Input() DetailsCourse = {diploma: ' ', institution: ' ', endDate: ' ' , startDate: ' '} ;
+  constructor(public cvService: CVService ) {   }
 
   ngOnInit() {
   }
-  isRangeStart(date: NgbDate) {
-    return this.model1 && this.model2 && date.equals(this.model1);
-  }
-  isRangeEnd(date: NgbDate) {
-    return this.model1 && this.model2 && date.equals(this.model2);
-  }
-  isInRange(date: NgbDate) {
-    return date.after(this.model1) && date.before(this.model2);
-  }
-  isActive(date: NgbDate) {
-    return date.equals(this.model1) || date.equals(this.model2);
-  }
-  endDateChanged(date) {
-    if (this.model1 && this.model2 && (this.model1.year > this.model2.year || this.model1.year === this.model2.year && this.model1.month > this.model2.month || this.model1.year === this.model2.year && this.model1.month === this.model2.month && this.model1.day > this.model2.day )) {
-      this.model1 = this.model2;
-    }
-  }
-  startDateChanged(date) {
-    if (this.model1 && this.model2 && (this.model1.year > this.model2.year || this.model1.year === this.model2.year && this.model1.month > this.model2.month || this.model1.year === this.model2.year && this.model1.month === this.model2.month && this.model1.day > this.model2.day )) {
-      this.model2 = this.model1;
-    }
+
+
+  AddCourse() {
+      const date = this.DetailsCourse.startDate['year'] + '-' + this.DetailsCourse.startDate['month'] + '-' + this.DetailsCourse.startDate['day'];
+      const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
+      const date2 = this.DetailsCourse.endDate['year'] + '-' + this.DetailsCourse.endDate['month'] + '-' + this.DetailsCourse.endDate['day'];
+      const formattedDate2 = formatDate(date2, 'yyyy-MM-dd', 'en-US');
+      this.DetailsCourse.startDate = formattedDate ;
+      this.DetailsCourse.endDate = formattedDate2 ;
+        this.cvService.addCourse( this.DetailsCourse)
+        .subscribe(success => {
+          if (success) {
+            this.done = true ;
+          }
+          console.log(this.DetailsCourse);
+        });
   }
 }
