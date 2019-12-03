@@ -17,6 +17,24 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './services/TokenInterceptor';
+import { ReclamationComponent } from './reclamation/reclamation.component';
+import { ListReclamationComponent } from './reclamation/list-reclamation/list-reclamation.component';
+import { CreateReclamationComponent } from './reclamation/create-reclamation/create-reclamation.component';
+import { HelpComponent } from './reclamation/help/help.component';
+import { HelpListComponent } from './reclamation/help/help-list/help-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatFormFieldModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatInputModule,
+  MatButtonModule,
+  MatCardModule,
+  MatStepperModule,
+  MatExpansionModule, MatDialog, MatDialogModule
+} from '@angular/material';
+import { PackComponent } from './pack/pack.component';
+import { PaymentComponent } from './pack/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +44,26 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     ProfileComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    ReclamationComponent,
+    ListReclamationComponent,
+    CreateReclamationComponent,
+    HelpComponent,
+    HelpListComponent,
+    AppComponent,
+    SignupComponent,
+    LandingComponent,
+    ProfileComponent,
+    NavbarComponent,
+    FooterComponent,
+    LoginComponent,
+    ReclamationComponent,
+    ListReclamationComponent,
+    CreateReclamationComponent,
+    HelpComponent,
+    HelpListComponent,
+    PackComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +75,31 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     HttpClientModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatOptionModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatDialogModule,
+    BrowserModule,
+    NgbModule.forRoot(),
+    FormsModule,
+    RouterModule,
+    AppRoutingModule,
+    HomeModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatStepperModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [
     {
@@ -49,6 +110,7 @@ import {TokenInterceptor} from './services/TokenInterceptor';
     HttpClient,
     FormBuilder
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ReclamationComponent]
 })
 export class AppModule { }

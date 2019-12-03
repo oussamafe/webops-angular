@@ -1,0 +1,13 @@
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let rec of claims">
+    <mat-expansion-panel-header>
+    <h2> {{rec.sujet}}</h2>
+    </mat-expansion-panel-header>
+    <p><b>Ddate:</b> {{ rec.date | date}}</p>
+    <p><b>Reclamation:</b>{{ rec.message}}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

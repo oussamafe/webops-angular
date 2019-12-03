@@ -43,6 +43,19 @@
             <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
           </a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Aide et assistance</span>
+          </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/help']" class="dropdown-item">Page d'aide</a>
+            <a (click)="reclamationDialog()"  class="dropdown-item">Signaler un problème</a>
+            <a [routerLink]="['/login']" class="dropdown-item">Espace Assistance</a>
+            <a [routerLink]="['/register']" class="dropdown-item">Condition et règlements</a>
+
+          </div>
+        </li>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
@@ -59,6 +72,15 @@
               <i class="fa fa-user-plus mr-2"></i>
             </span>
             <span class="nav-link-inner--text">Register</span>
+          </a>
+
+        </li>
+        <li>
+          <a [routerLink]="['pay']" class="btn btn-warning">
+              <span class="btn-inner--icon">
+                <i class="fa fa-cc-stripe" aria-hidden="true"></i>
+              </span>
+            <span class="nav-link-inner--text">Premieum</span>
           </a>
         </li>
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="authService.isLoggedIn()">
