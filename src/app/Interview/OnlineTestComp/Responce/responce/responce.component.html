@@ -82,8 +82,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input class="form-control" placeholder="Search" type="text" (focus)="focus=true"
-                                   (blur)="focus=false">
+                            <input class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchR(thisInput.value)">
                         </div>
                     </div>
 

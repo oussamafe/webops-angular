@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="display-3  text-white">Online Tests
-                              &nbsp;  <button class="btn btn-1 btn-neutral" [routerLink]="['/AddOnlineTest']" type="button">Add Test</button>
+                              &nbsp;  <button class="btn btn-1 btn-neutral" (click)="open(addtest,'' , '')" [routerLink]="['/AddOnlineTest']" type="button">Add Test</button>
                                 <span>{{TESTSPANTITLE}}</span>
                             </h1>
                         </div>
@@ -74,14 +74,34 @@
         <!-- 1st Hero Variation -->
 
     </div>
+    <ng-template #addtest let-c="close" let-d="dismiss">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" >New Online Test</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
 
+            <div class="modal-body">
+                <p align="center"><strong>Two Simple Step Need To Follow </strong></p>
+                <p> <strong>First</strong> you need to select a candidate </p>
+                <p> <strong>then</strong> the test  will be created automatically</p>
+                <p> <strong>So</strong> All you need  is to affect some question and done</p>
+                <p style="color: darkred"> <strong> BE CAREFUL </strong> once it's created the following candidate will be able to take the test So <strong> no change</strong> can happen </p>
+            </div>
+
+            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+
+        </div>
+    </ng-template>
     <section class="section section-lg">
 
 
         <div class="container">
             <div class="no-data text-center" *ngIf="!listOnlinetest">
                 <p>There is no Online test added yet!</p>
-                <button class="btn btn-outline-primary" [routerLink]="['/AddOnlineTest']">Add Online Test</button>
+                <button class="btn btn-outline-primary" (click)="open(addtest,'' , '')" [routerLink]="['/AddOnlineTest']">Add Online Test</button>
             </div>
 
             <div *ngIf="listOnlinetest">

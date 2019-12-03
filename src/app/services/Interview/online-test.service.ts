@@ -21,18 +21,18 @@ export class OnlineTestService {
   //
 // add
   addQuestion(question) {
-    return this.http.post<Question>(this.URL + '/addTestQuestion', JSON.stringify(question), this.httpOptions);
+    return this.http.post<any>(this.URL + '/addTestQuestion', JSON.stringify(question), this.httpOptions);
   }
-  addOnlineTest(ot) {
-    return this.http.post<OnlineTest>(this.URL + '/AddOnlineTest', JSON.stringify(ot), this.httpOptions);
+  addOnlineTest() {
+    return this.http.post<any>(this.URL + '/AddOnlineTest', this.httpOptions);
   }
 
   // affect  /  unaffect
   addAndAffectResponce(qid, responce) {
     return this.http.put(this.URL + '/AddRepAndAffectToQuestion?qid=' + qid, JSON.stringify(responce), this.httpOptions);
   }
-  affectTestToAnCandidate(CandidateID, TestID, datet) {
-    return this.http.put(this.URL + '/affectCandidateTest?cid=' + CandidateID + '&otid=' + TestID + '&datet=' + datet, this.httpOptions);
+  affectTestToAnCandidate(CandidateID, TestID) {
+    return this.http.put(this.URL + '/affectCandidateTest?cid=' + CandidateID + '&otid=' + TestID , this.httpOptions);
   }
   AffectQuestionToAnOnlineTest(TestID, QuestionID) {
     return this.http.put(this.URL + '/affectQuestionTest?otid=' + TestID + '&qid=' + QuestionID, this.httpOptions);
@@ -100,6 +100,15 @@ export class OnlineTestService {
   getQuestionbyid(id) {
     return this.http.get<Question>(this.URL + '/getQuestionbyid?qid=' + id, this.httpOptions);
   }
+
+  ListQuestionNotAffectForTest(id) {
+    return this.http.get<Question[]>(this.URL + '/ListQuestionNotAffectForTest?otid=' + id, this.httpOptions);
+  }
+  ListQuestionByModuleNotAffectForTest( otid, module) {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Question[]>(this.URL + '/ListQuestionByModuleNotAffectForTest?otid=' + otid + '&module=' + module, this.httpOptions);
+  }
+
   getOnlineTestbyid(id) {
     return this.http.get<OnlineTest>(this.URL + '/getOnlineTestbyid?otid=' + id, this.httpOptions);
   }
@@ -127,9 +136,7 @@ export class OnlineTestService {
   ListQuestionByTest(otid) {
     return this.http.get<Question[]>(this.URL + '/ListQuestionByTest?otid=' + otid, this.httpOptions);
   }
-  serchByQuestion(question) {
-    return this.http.get<Question[]>(this.URL + '/serchByQuestion?question=' + question, this.httpOptions);
-  }
+
   GetOnlinetestResult(otid) {
     return this.http.get<string>(this.URL + '/GetOnlinetestResult?otid=' + otid, this.httpOptions);
   }
@@ -139,5 +146,12 @@ export class OnlineTestService {
 
   getStateResponcebyId(rid) {
     return this.http.get<any>(this.URL + '/getStateResponcebyId?rid=' + rid, this.httpOptions);
+  }
+
+  serchByQuestion(question) {
+    return this.http.get<Question[]>(this.URL + '/serchByQuestion?question=' + question, this.httpOptions);
+  }
+  serchByRespone(responce, qid) {
+    return this.http.get<Responce[]>(this.URL + '/serchByRespone?responce=' + responce + '&qid=' + qid , this.httpOptions);
   }
 }

@@ -17,8 +17,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h1 class="display-3  text-white">Add Responces</h1>
-                        <button class="btn btn-outline-primary" routerLink="/Responce/{{idq}}">Back to Responces
-                        </button>
+                        <button *ngIf="idq" class="btn btn-outline-primary" routerLink="/Responce/{{idq}}">Back to Responces</button>
                     </div>
                 </div>
             </div>
@@ -70,10 +69,6 @@
                         <input type="text" [(ngModel)]="res.reponce" class="form-control" placeholder="Responce">
                     </div>
 
-
-
-
-
                     <div class=" col-lg-3 col-sm-6 mt-4 mt-md-0" >
                         <div class="custom-control custom-radio mb-3">
                             <input class="custom-control-input" id="customRadio1" name="custom-radio-1" type="radio" checked=""  (click)="check(true)">
@@ -86,9 +81,22 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-1 btn-outline-primary" type="button" (click)="addResp()">Create
-                            Responce
-                        </button>
+                        <button *ngIf="idq" class="btn btn-1 btn-outline-primary" type="button" (click)="addResp()">Create Responce</button>
+                        <button *ngIf="qid && otid && cidd" class="btn btn-1 btn-outline-primary" type="button" (click)="addResp();open(classic)">Create Responce</button>
+                        <ng-template #classic let-c="close" let-d="dismiss">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" >Notification</h6>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want to add an other Responce
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="c('Close click');" routerLink="/AddResponce/{{cidd}}/{{otid}}/{{qid}}">YES</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="YES();c('Close click')" routerLink="/StepTwoTest/{{cidd}}/{{otid}}">NO</button>
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>

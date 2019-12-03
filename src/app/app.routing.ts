@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {Routes, RouterModule} from '@angular/router';
-
-import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import {SignupComponent} from './signup/signup.component';
 import {LandingComponent} from './landing/landing.component';
@@ -18,6 +16,7 @@ import {ApplicationsComponent} from './Interview/CandComp/applications/applicati
 import {ViewOnlineTestComponent} from './Interview/OnlineTestComp/OnlienTest/online-test/view-online-test/view-online-test.component';
 // tslint:disable-next-line:max-line-length
 import {ViewResponcesComponent} from './Interview/OnlineTestComp/OnlienTest/online-test/view-online-test/view-responces/view-responces.component';
+import {StepTwoTestComponent} from './Interview/OnlineTestComp/OnlienTest/step-two-test/step-two-test.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -31,10 +30,14 @@ const routes: Routes = [
     {path: 'Question', component: QuestionComponent},
     {path: 'ViewTest/:otid', component: ViewOnlineTestComponent},
     {path: 'ViewResp/:otid/:qid', component: ViewResponcesComponent},
+    {path: 'StepTwoTest/:cid/:otid', component: StepTwoTestComponent},
     {path: 'AddQuestion', component: AddQuestionComponent},
+    {path: 'AddQuestion/:cid/:otid', component: AddQuestionComponent},
     {path: 'Applications', component: ApplicationsComponent},
     {path: 'Responce/:idq', component: ResponceComponent},
+    {path: 'Responce/:idq/:r', component: ResponceComponent},
     {path: 'AddResponce/:idq', component: AddResponceComponent},
+    {path: 'AddResponce/:cid/:otid/:qid', component: AddResponceComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

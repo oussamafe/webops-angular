@@ -27,21 +27,32 @@ export class ResponceComponent implements OnInit {
     constructor(private modalService: NgbModal, private svc: OnlineTestService, private actRoute: ActivatedRoute, private router: Router) {
       this.alertSucc = {id: 1, type: 'success', strong: 'Updated !', message: '', icon: 'ni ni-like-2'};
     }
-
+    responce = this.actRoute.snapshot.params['r'];
     ngOnInit() {
         this.svc.getQuestionbyid(this.idq).subscribe(
             (data) => {
                 this.quest = data;
             }
         );
-        this.svc.ListResponceByQuestion(this.idq).subscribe(
+        if (!this.responce) {
+            this.svc.ListResponceByQuestion(this.idq).subscribe(
+                (data) => {
+                    this.listResponces = data;
+                    this.px = Math.trunc(this.listResponces.length / 10) + 1;
+                }
+            );
+        } else {
+            this.searchR(this.responce);
+        }
+    }
+    searchR(R) {
+        this.svc.serchByRespone(R, this.idq).subscribe(
             (data) => {
                 this.listResponces = data;
                 this.px = Math.trunc(this.listResponces.length / 10) + 1;
             }
         );
     }
-
     DeleteResponce(id) {
         if (window.confirm('Are you sure, you want to delete?')) {
             this.svc.DeleteResponce(id).subscribe(data => {

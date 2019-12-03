@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -34,6 +33,9 @@ import { ViewOnlineTestComponent } from './Interview/OnlineTestComp/OnlienTest/o
 import { ViewResponcesComponent } from './Interview/OnlineTestComp/OnlienTest/online-test/view-online-test/view-responces/view-responces.component';
 // tslint:disable-next-line:max-line-length
 import { ViewRespIsvalComponent } from './Interview/OnlineTestComp/OnlienTest/online-test/view-online-test/view-responces/view-resp-isval/view-resp-isval.component';
+import { InWaitComponent } from './Interview/CandComp/in-wait/in-wait.component';
+import { InfoComponent } from './Interview/CandComp/in-wait/info/info.component';
+import { StepTwoTestComponent } from './Interview/OnlineTestComp/OnlienTest/step-two-test/step-two-test.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,9 @@ import { ViewRespIsvalComponent } from './Interview/OnlineTestComp/OnlienTest/on
     ViewOnlineTestComponent,
     ViewResponcesComponent,
     ViewRespIsvalComponent,
+    InWaitComponent,
+    InfoComponent,
+    StepTwoTestComponent,
   ],
     imports: [
         BrowserModule,

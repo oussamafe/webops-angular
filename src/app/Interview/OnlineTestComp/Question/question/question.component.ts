@@ -33,7 +33,6 @@ export class QuestionComponent implements OnInit {
     QUESTSPANTITLE = 'All Questions';
     listQuestion: any[];
     ngOnInit() {
-        console.log(this.question);
         if (!this.question) {
             this.svc.getListAllQuestion().subscribe(
                 (data) => {

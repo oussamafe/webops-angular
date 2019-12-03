@@ -1,0 +1,68 @@
+<table class="table table-bordered">
+  <thead>
+  <tr style="text-align: center">
+    <th scope="col">First & LastName</th>
+    <th scope="col">Offre Title</th>
+    <th scope="col">Accepted Date</th>
+    <th scope="col" colspan="2">More Information</th>
+    <th scope="col" >Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cs of listapplicaion | paginate: { itemsPerPage: 10, currentPage: p }">
+    <td><app-info [cid]="cs.id.idCandiate"></app-info></td>
+    <td><app-info [jid]="cs.id.idJobOffer"></app-info></td>
+    <td style="text-align: center">{{cs.answerDate}}</td>
+    <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning"   (click)="openc(classicc, cs.id.idCandiate , '')">Candidate</a></td>
+    <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning"  (click)="openj(classicj, cs.id.idJobOffer , '')">Offer</a></td>
+    <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-info"  (click)="chooseC(cs.id.idCandiate)">choose</a></td>
+    <ng-template #classicc let-c="close" let-d="dismiss">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" >Candidate Information</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p align="center">{{candida.last_Name}}&emsp;{{candida.first_Name}}</p>
+          <p><strong>Profil Intro :</strong> {{candida.profilIntro}}</p>
+          <p><strong>Skills&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong>{{candida.skills}}</p>
+          <p><strong>Experiences  : </strong>{{candida.experiences}}</p>
+          <p><strong>Activities   :</strong> {{candida.activities}}</p>
+          <p><strong>Study Level  : </strong>{{candida.studyLevel}}</p>
+          <p><strong>Certif       :</strong> {{candida.certifications}}</p>
+        </div>
+
+        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+
+      </div>
+    </ng-template>
+    <ng-template #classicj let-c="close" let-d="dismiss">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" >Job Offer Information</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p align="center">{{job.job_title}}</p>
+          <p><strong>Type   :</strong> {{job.type}}</p>
+          <p><strong>Skills : </strong>{{job.skills}}</p>
+          <p><strong>Level  : </strong>{{job.level}}</p>
+          <p><strong>Description :</strong> {{job.description}}</p>
+
+        </div>
+        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+      </div>
+    </ng-template>
+  </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ngb-pagination [collectionSize]="px*10" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+    <ng-template ngbPaginationPrevious><i  class="fa fa-angle-left"></i></ng-template>
+    <ng-template ngbPaginationNext><i  class="fa fa-angle-right"></i></ng-template>
+  </ngb-pagination>
+</nav>

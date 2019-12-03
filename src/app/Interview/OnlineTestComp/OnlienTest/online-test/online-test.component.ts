@@ -4,6 +4,7 @@ import {OnlineTestService} from '../../../../services/Interview/online-test.serv
 import {Question} from '../../../../models/Interview/Question';
 import {AppliCandService} from '../../../../services/Interview/appli-cand.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-online-test',
@@ -11,12 +12,12 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./online-test.component.css']
 })
 export class OnlineTestComponent implements OnInit {
-
+  closeResult: string;
   focus;
   focus1;
     listOnlinetest: OnlineTest[];
    TESTSPANTITLE = 'All TESTS';
-  constructor(private svc: OnlineTestService, private actRoute: ActivatedRoute, private router: Router) { }
+  constructor(private svc: OnlineTestService, private actRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.svc.ListAlltest().subscribe(
@@ -56,5 +57,23 @@ export class OnlineTestComponent implements OnInit {
             (datao) => this.listOnlinetest = datao);
       });
     }
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  open(content, type, modalDimension) {
+    this.modalService.open(content, {  centered: true }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 }
