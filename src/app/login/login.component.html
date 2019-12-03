@@ -15,11 +15,9 @@
         <div class="col-lg-5">
           <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
-              <div class="card-header bg-white pb-5">
-                <div class="text-muted text-center mb-3">
-                  <h4 class="display-4 mb-0">Login</h4>
+                <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
+                    <span><strong>Sign in</strong></span>
                 </div>
-              </div>
               <div class="alert alert-danger" role="alert" *ngIf="errorLogin != null">
                 <span *ngIf="errorLogin == true"><strong>Wrong Email/Password.</strong></span>
                 <span *ngIf="errorLogin == false"><strong>Your account is inactive , Please check your Email and confirm your Account !</strong></span>

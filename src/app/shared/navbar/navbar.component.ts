@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public location: Location, private router: Router , private authService: AuthService) {
+    constructor(public location: Location, private router: Router , public authService: AuthService) {
     }
 
     ngOnInit() {
