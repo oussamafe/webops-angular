@@ -17,6 +17,9 @@ import {ViewOnlineTestComponent} from './Interview/OnlineTestComp/OnlienTest/onl
 // tslint:disable-next-line:max-line-length
 import {ViewResponcesComponent} from './Interview/OnlineTestComp/OnlienTest/online-test/view-online-test/view-responces/view-responces.component';
 import {StepTwoTestComponent} from './Interview/OnlineTestComp/OnlienTest/step-two-test/step-two-test.component';
+import {ExamenForCandidateComponent} from './Interview/OnlineTestComp/OnlienTest/examen-for-candidate/examen-for-candidate.component';
+import {ResultExamenComponent} from './Interview/OnlineTestComp/OnlienTest/result-examen/result-examen.component';
+import {AvabilityUserComponent} from './Interview/InterviewComp/Avaibility/avability-user/avability-user.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -38,6 +41,9 @@ const routes: Routes = [
     {path: 'Responce/:idq/:r', component: ResponceComponent},
     {path: 'AddResponce/:idq', component: AddResponceComponent},
     {path: 'AddResponce/:cid/:otid/:qid', component: AddResponceComponent},
+    {path: 'CandidateExamen/:cid', component: ExamenForCandidateComponent},
+    {path: 'ResultExamen/:cid', component: ResultExamenComponent},
+    {path: 'AvaibilityUser/:uid', component: AvabilityUserComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

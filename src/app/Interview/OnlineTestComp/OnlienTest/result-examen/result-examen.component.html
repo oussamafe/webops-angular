@@ -1,0 +1,76 @@
+<div class="position-relative">
+    <!-- shape Hero -->
+    <section class="section section-shaped ">
+        <div class="shape shape-style-1 shape-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container py-lg-md d-flex">
+            <div class="col px-0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="display-3  text-white">OnlineTest</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+
+    </section>
+    <!-- 1st Hero Variation -->
+
+  <div class="container" *ngIf="!testss">
+    <br><br>
+    <div class="card bg-gradient-warning shadow">
+      <div class="card-body p-lg-5" align="center">
+        <h3 class="mb-1">OOPS!!  there is no test for now </h3>
+      </div>
+    </div>
+  </div>
+
+    <div class="container" *ngIf="testss">
+      <br><br>
+        <div class="card bg-gradient-success shadow" *ngIf="testss.state === 'Valid' ">
+            <div class="card-body p-lg-5" align="center">
+              <h3 class="mb-1">WELL DONE !!</h3>
+              <h4 class="mb-1">Test : {{testss.state}}</h4>
+              <h4 class="mb-1">Note {{testss.note}}</h4>
+              <h5 class="mb-1">we will let you know the date of the interview as soon as possible </h5>
+              <h6 class="mb-1 " align="center" style="color: darkred">you must set your availability date otherwise we will choose a random date </h6>
+            </div>
+        </div>
+      <div class="card bg-gradient-danger shadow" *ngIf="testss.state === 'InValid' ">
+        <div class="card-body p-lg-5" align="center">
+          <h3 class="mb-1">Sorry For that !!</h3>
+          <h4 class="mb-1">Test : {{testss.state}}</h4>
+          <h4 class="mb-1">Note {{testss.note}}</h4>
+          <h5 class="mb-1">Good luck for the next time </h5>
+        </div>
+      </div>
+    </div>
+  <div class="card bg-gradient-primary shadow" *ngIf="testss.state === 'WaitForIt' ">
+    <div class="card-body p-lg-5" align="center">
+      <h3 class="mb-1">TAKE IT NOW !!</h3>
+      <button  class="btn  btn-neutral"  routerLink="/CandidateExamen/{{candidateid}}" type="button">
+        Take Test
+      </button>
+      <h5 class="mb-1">last day to take this exam  is : {{testss.date}} </h5>
+      <h6 class="mb-1 " align="center" style="color: darkred">if exceed  three days after last day this test will be automatically Invalid </h6>
+    </div>
+  </div>
+</div>
+
+

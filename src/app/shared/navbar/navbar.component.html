@@ -45,16 +45,23 @@
           </a>
           <div class="dropdown-menu">
             <a [routerLink]="['/Applications']" class="dropdown-item ">All Application</a>
-
           </div>
         </li>
 
         <li class="nav-item ">
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
+            <a routerLink="/ResultExamen/5" class="navbar-brand">test candidate</a>
           </a>
         </li>
+        <li class="nav-item ">
+          <a class="nav-link no-caret">
+            <i class="ni ni-collection d-lg-none"></i>
+            <a routerLink="/AvaibilityUser/5" class="navbar-brand">Avaibility</a>
+          </a>
+        </li>
+
+
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">

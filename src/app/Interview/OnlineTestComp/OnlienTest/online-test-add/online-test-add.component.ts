@@ -13,11 +13,7 @@ export class OnlineTestAddComponent implements OnInit {
   ngOnInit() {
   }
   addTest() {
-    this.svc.addOnlineTest(this.qss)
-        .subscribe(
-            (data) => console.log('id=' + data),
-            error => console.log(error),
-            () => console.log('Question add with success')
-        );
+    this.svc.addOnlineTest()
+        .subscribe();
   }
 }

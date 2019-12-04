@@ -36,6 +36,10 @@ import { ViewRespIsvalComponent } from './Interview/OnlineTestComp/OnlienTest/on
 import { InWaitComponent } from './Interview/CandComp/in-wait/in-wait.component';
 import { InfoComponent } from './Interview/CandComp/in-wait/info/info.component';
 import { StepTwoTestComponent } from './Interview/OnlineTestComp/OnlienTest/step-two-test/step-two-test.component';
+import { ExamenForCandidateComponent } from './Interview/OnlineTestComp/OnlienTest/examen-for-candidate/examen-for-candidate.component';
+import { ResultExamenComponent } from './Interview/OnlineTestComp/OnlienTest/result-examen/result-examen.component';
+import { AvabilityUserComponent } from './Interview/InterviewComp/Avaibility/avability-user/avability-user.component';
+import { SuitforavauserComponent } from './Interview/InterviewComp/Avaibility/avability-user/suitforavauser/suitforavauser.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,10 @@ import { StepTwoTestComponent } from './Interview/OnlineTestComp/OnlienTest/step
     InWaitComponent,
     InfoComponent,
     StepTwoTestComponent,
+    ExamenForCandidateComponent,
+    ResultExamenComponent,
+    AvabilityUserComponent,
+    SuitforavauserComponent,
   ],
     imports: [
         BrowserModule,

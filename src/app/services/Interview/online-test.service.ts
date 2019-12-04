@@ -124,6 +124,7 @@ export class OnlineTestService {
   ListModuleOfQuestion() {
     return this.http.get<string[]>(this.URL + '/ListModuleOfQuestion', this.httpOptions);
   }
+
   getOnlineTestCandidate(cid) {
     return this.http.get<OnlineTest>(this.URL + '/getOnlineTestCandidate?cid=' + cid, this.httpOptions);
   }

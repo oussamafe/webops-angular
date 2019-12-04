@@ -1,0 +1,8 @@
+<SELECT #op name="valid" size="1" (click)="onchange(op.value)"   class=" mb-4 " style="border: initial;color: #3545ef" *ngIf="ava.state == true">
+  <OPTION value="{{ava.state}}" style="color:#FF0000"> <p *ngIf="ava.state == true" >Available</p><p *ngIf="ava.state == false">Not Available</p>
+  <OPTION value="{{!ava.state}}" > <p *ngIf="ava.state == false">Available</p><p *ngIf="ava.state == true">Not Available</p>
+</SELECT>
+<SELECT #op name="valid" size="1" (click)="onchange(op.value)"   class=" mb-4 " style="border: initial;color: #de2b2b" *ngIf="ava.state == false">
+  <OPTION value="{{ava.state}}" style="color:#FF0000"> <p *ngIf="ava.state == true" >Available</p><p *ngIf="ava.state == false">Not Available</p>
+  <OPTION value="{{!ava.state}}" > <p *ngIf="ava.state == false">Available</p><p *ngIf="ava.state == true">Not Available</p>
+</SELECT>

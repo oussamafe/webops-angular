@@ -35,7 +35,9 @@ export class AppliCandService {
   ApplicationRejected() {
     return this.http.get<Application[]>(this.URL + '/ApplicationRejected', this.httpOptions);
   }
-
+  getuserType(uid) {
+    return this.http.get<any>(this.URL + '/getuserType?uid=' + uid, this.httpOptions);
+  }
   // update
   acceptApplication(id) {
     return this.http.put<Application>(this.URL + '/acceptApplication' , JSON.stringify(id), this.httpOptions);
