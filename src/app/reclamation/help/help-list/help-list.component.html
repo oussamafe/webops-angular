@@ -1,38 +1,25 @@
 <body>
-<div class="page-wrapper chiller-theme toggled">
-  <nav id="sidebar" class="sidebar-wrapper">
-    <div class="sidebar-content">
-      <div class="sidebar-brand">
 
-      </div>
-      <hr>
-      <!-- sidebar-header  -->
-      <mat-accordion multi="false">
-        <mat-expansion-panel *ngFor="let rec of sujet">
-          <mat-expansion-panel-header>
-            <b> {{rec.sujet}}</b>
-          </mat-expansion-panel-header>
-          <a><p>{{ rec.module}}</p></a>
+<ul>
+    <mat-accordion multi="false">
+        <mat-expansion-panel *ngFor="let rec of sujet" (click)="chargerlesmodule(rec)">
+            <mat-expansion-panel-header >
+                <h5> {{rec}}</h5>
+            </mat-expansion-panel-header>
+            <a class="btn" *ngFor="let mod of module" (click)="descriptionClick(mod.module,mod.description)"><p>{{ mod.module}}</p></a>
         </mat-expansion-panel>
-      </mat-accordion>
+    </mat-accordion>
 
-      <!-- sidebar-menu  -->
+</ul>
+
+<div style="margin-left:25%;padding:1px 16px;height:1000px;" >
+    <div *ngIf="titre">
+    <h2>{{titre}}</h2>
+   <p> {{description}}</p>
+    <hr>
+    <h3>Articles de WebJobs</h3>
     </div>
-    <!-- sidebar-content  -->
-  </nav>
-  <!-- sidebar-wrapper  -->
-  <main class="page-content">
-
-
-  </main>
-  <!-- page-content" -->
 </div>
-<!-- page-wrapper -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
 
 </body>
 

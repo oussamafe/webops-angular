@@ -1,26 +1,34 @@
-<h3>Signaler un problème</h3>
-<mat-card>
-  <form #form="ngForm" (ngSubmit)="add(form)">
-    <mat-form-field>
-      <mat-label>Où est le problème ?</mat-label>
-      <mat-select [formControl]="animalControl" required>
-        <mat-option>--</mat-option>
-        <mat-option value="company">
-          Problème avec le paiement
-        </mat-option>
-        <mat-option  value="company">
-          Quelque chose ne fonctionne pas
-        </mat-option>
-        <mat-option  value="company">
-          Contenu abusif
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
-      <mat-hint>Indiquer le type de l'erreur</mat-hint>
-    </mat-form-field>
+<main>
+  <div class="position-relative">
+    <!-- shape Hero -->
+    <section class="section section-lg section-shaped pb-250">
+      <div class="shape shape-style-1 shape-default">
+        <span></span>
+        <span></span>
+      </div>
+      <h3>Signaler un problème</h3>
+      <mat-card>
+        <form #form="ngForm" (ngSubmit)="add(form)">
+          <mat-form-field>
+            <mat-label>Où est le problème ?</mat-label>
+            <mat-select [formControl]="animalControl" required>
+              <mat-option>--</mat-option>
+              <mat-option value="company">
+                Problème avec le paiement
+              </mat-option>
+              <mat-option  value="company">
+                Quelque chose ne fonctionne pas
+              </mat-option>
+              <mat-option  value="company">
+                Contenu abusif
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+            <mat-hint>Indiquer le type de l'erreur</mat-hint>
+          </mat-form-field>
 
-    <div *ngIf="!animalControl.hasError('required')">
-    <mat-form-field>
+          <div *ngIf="!animalControl.hasError('required')">
+            <mat-form-field>
       <textarea
               placeholder="Expliquez brièvement le problème et les étapes que nous pouvons suivre pour le reproduire..."
               matInput
@@ -30,14 +38,17 @@
               required
               [(ngModel)]="reclamation.message"
               #message="ngModel"></textarea>
-      <mat-error *ngIf="message.invalid">Rédiger votre reclamation</mat-error>
-    </mat-form-field>
-    <button
-            mat-raised-button
-            color="accent"
-            type="submit">Envoyer</button>
-    </div>
-  </form>
-</mat-card>
+              <mat-error *ngIf="message.invalid">Rédiger votre reclamation</mat-error>
+            </mat-form-field>
+            <button
+                    mat-raised-button
+                    color="accent"
+                    type="submit">Envoyer</button>
+          </div>
+        </form>
+      </mat-card>
 
 
+    </section>
+  </div>
+</main>

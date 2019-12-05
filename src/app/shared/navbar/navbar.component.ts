@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit {
         dialogConfig.ariaLabel = 'reclamation';
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = '30%';
+        dialogConfig.width = '50%';
         dialogConfig.panelClass = 'dialog';
         this.dialog.open(ReclamationComponent, dialogConfig);
     }

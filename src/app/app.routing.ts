@@ -10,6 +10,9 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import {HelpComponent} from './reclamation/help/help.component';
 import {PaymentComponent} from './pack/payment/payment.component';
+import {DashboardComponent} from './admin/dashboard/dashboard.component';
+import {AdminComponent} from './admin/admin.component';
+import {ListReclamationComponent} from './reclamation/list-reclamation/list-reclamation.component';
 
 const routes: Routes =[
     { path: 'home',             component: LandingComponent },
@@ -19,7 +22,18 @@ const routes: Routes =[
     { path: 'login',          component: LoginComponent },
     { path: 'help',          component: HelpComponent },
     { path: 'pay',          component: PaymentComponent },
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    {path: 'reclamation', component: ListReclamationComponent},
+    {path: 'dashboard', component: DashboardComponent},
+    {
+        path: 'admin',          component: AdminComponent,
+        children: [
+            {path: 'dashboard', component: DashboardComponent},
+            {path: 'reclamation', component: ListReclamationComponent},
+            {path: '**', redirectTo: 'admin'}
+        ]
+    },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    {path: 'admin', redirectTo: 'admin'}
 ];
 
 @NgModule({

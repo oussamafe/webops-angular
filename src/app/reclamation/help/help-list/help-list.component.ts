@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HelpAide} from '../../model/help.model';
-import {Subscription} from 'rxjs';
 import {HelpService} from '../../services/help.service';
 
 @Component({
@@ -12,12 +11,23 @@ export class HelpListComponent implements OnInit {
 
   constructor(public helpService: HelpService) { }
   sujet: HelpAide[];
-  private sujetSub: Subscription;
-
+  module: HelpAide[];
+  description: string;
+  titre: string;
   ngOnInit() {
-    this.sujetSub = this.helpService.getListSujet().subscribe(
+    this.helpService.getListSujet().subscribe(
         (recl: HelpAide[]) => {this.sujet = recl;
         });
   }
-
+chargerlesmodule(sujet: string) {
+    this.module = [];
+  this.helpService.getListModule(sujet).subscribe(
+      (recl: HelpAide[]) => {this.module = recl;
+      });
+}
+descriptionClick(mod, rec){
+    console.log('hello ' + mod + rec);
+    this.titre = mod;
+    this.description = rec;
+}
 }

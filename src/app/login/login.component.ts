@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.username.value , this.f.password.value)
     .subscribe(success => {
       if (success) {
-        this.router.navigate(['/home']);
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/admin']);
+        } else { this.router.navigate(['/home']); }
       }
     });
   }

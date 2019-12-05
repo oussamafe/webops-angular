@@ -10,5 +10,6 @@ export class Reclamation {
     etat: string;
     claimtype: string;
     date;
+    dateDeTraitement;
      user: User;
 }

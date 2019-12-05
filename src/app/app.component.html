@@ -1,3 +1,13 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!admins()"></app-navbar>
+<div [class.row]="admins()">
+<div [class.col-md-3]="admins()" *ngIf="admins()">
+    <app-sidebar ></app-sidebar>
+</div>
+
+
+<div [class.col-md-7]="admins()">
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+</div>
+
+</div>
+<app-footer *ngIf="!admins()"></app-footer>

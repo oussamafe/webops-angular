@@ -1,13 +1,26 @@
-<mat-accordion multi="true">
-  <mat-expansion-panel *ngFor="let rec of claims">
-    <mat-expansion-panel-header>
-    <h2> {{rec.sujet}}</h2>
-    </mat-expansion-panel-header>
-    <p><b>Ddate:</b> {{ rec.date | date}}</p>
-    <p><b>Reclamation:</b>{{ rec.message}}</p>
-    <mat-action-row>
-      <button mat-button color="primary">EDIT</button>
-      <button mat-button color="warn">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
+<br>
+<h1>List des reclamation</h1>
+<br><br>
+<table>
+  <thead>
+  <th>Sujet</th>
+  <th>Message</th>
+  <th>Type</th>
+  <th>Date</th>
+  <th>Etat</th>
+  <th>Date de traitement</th>
+  <th>Action</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let rec of claims">
+    <td>{{ rec.sujet}}</td>
+    <td>{{ rec.message}}</td>
+    <td>{{ rec.claimtype}}</td>
+    <td>{{ rec.date | date}}</td>
+      <td  [ngStyle]="{color: rec.etat === 'En_Attent' ? '#ac9739' : 'green'}"><b>{{ rec.etat}}</b></td>
+      <td>{{ rec.dateDeTraitement | date}}</td>
+    <td> <button mat-button color="primary" (click)="reclamationDialog()">Repondre</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
