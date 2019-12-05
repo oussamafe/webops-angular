@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Application} from '../../../models/Interview/Application';
 import {AppliCandService} from '../../../services/Interview/appli-cand.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
     selector: 'app-applications',
@@ -13,8 +14,7 @@ export class ApplicationsComponent implements OnInit {
     focus1;
     listapplicaion: Application[];
     titleApp = 'Still Wait Applications';
-
-    constructor(private svc: AppliCandService, private actRoute: ActivatedRoute, private router: Router) {
+    constructor(private svc: AppliCandService, private actRoute: ActivatedRoute, private router: Router, private auth: AuthService) {
     }
 
     ngOnInit() {

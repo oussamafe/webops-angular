@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { Location, PopStateEvent } from '@angular/common';
-import { AuthService } from 'src/app/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationEnd, NavigationStart} from '@angular/router';
+import {Location, PopStateEvent} from '@angular/common';
+import {AuthService} from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public location: Location, private router: Router , private authService: AuthService) {
+    constructor(public location: Location, private router: Router, private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -38,21 +38,20 @@ export class NavbarComponent implements OnInit {
     }
 
     isHome() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
+        const titlee = this.location.prepareExternalUrl(this.location.path());
 
         if (titlee === '#/home') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
     isDocumentation() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
+        const titlee = this.location.prepareExternalUrl(this.location.path());
         if (titlee === '#/documentation') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

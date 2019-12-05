@@ -20,6 +20,10 @@ import {StepTwoTestComponent} from './Interview/OnlineTestComp/OnlienTest/step-t
 import {ExamenForCandidateComponent} from './Interview/OnlineTestComp/OnlienTest/examen-for-candidate/examen-for-candidate.component';
 import {ResultExamenComponent} from './Interview/OnlineTestComp/OnlienTest/result-examen/result-examen.component';
 import {AvabilityUserComponent} from './Interview/InterviewComp/Avaibility/avability-user/avability-user.component';
+import {InterviewTypeComponent} from './Interview/InterviewComp/InterviewType/interview-type/interview-type.component';
+import {InterviewComponent} from './Interview/InterviewComp/Interview/interview/interview.component';
+import {StatTestComponent} from './Interview/StatisticComp/TestStat/stat-test/stat-test.component';
+import {StatInterviewComponent} from './Interview/StatisticComp/InterStat/stat-interview/stat-interview.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -27,6 +31,7 @@ const routes: Routes = [
     {path: 'register', component: SignupComponent},
     {path: 'landing', component: LandingComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'logout', component: LoginComponent},
     {path: 'OnlineTest', component: OnlineTestComponent},
     {path: 'AddOnlineTest', component: OnlineTestAddComponent},
     {path: 'Question/:q', component: QuestionComponent},
@@ -44,6 +49,11 @@ const routes: Routes = [
     {path: 'CandidateExamen/:cid', component: ExamenForCandidateComponent},
     {path: 'ResultExamen/:cid', component: ResultExamenComponent},
     {path: 'AvaibilityUser/:uid', component: AvabilityUserComponent},
+    {path: 'InterviewType', component: InterviewTypeComponent},
+    {path: 'Interview', component: InterviewComponent},
+    {path: 'Interview/:uid', component: InterviewComponent},
+    {path: 'statTest', component: StatTestComponent},
+    {path: 'statinter', component: StatInterviewComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

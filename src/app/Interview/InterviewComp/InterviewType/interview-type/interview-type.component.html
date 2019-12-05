@@ -1,0 +1,183 @@
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-shaped ">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <div class="col px-0">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1 class="display-3  text-white">Interview Type
+                                &nbsp;
+                                <button class="btn btn-1 btn-neutral" type="button" (click)="openforadde(classicadd)">
+                                    Add Interview Type
+                                </button>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+
+        </section>
+        <!-- 1st Hero Variation -->
+
+    </div>
+
+    <div class="container custom-container-2">
+
+        <!-- Show it when there is no employee     -->
+        <div class="no-data text-center" *ngIf="!listtype">
+            <p>There is no Type added yet!</p>
+            <button class="btn btn-outline-primary" (click)="openforadde(classicadd)">Add Type</button>
+        </div>
+        <br>
+        <ng-template #classicadd let-c="close">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Add Interview Type</h6>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="type.type" class="form-control"
+                                       placeholder="interview Type">
+                            </div>
+
+
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="type.hours_number" class="form-control"
+                                       placeholder="hours number of this type of interview">
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <SELECT #op name="valid" size="1" class=" mb-4 " style="border: initial">
+                                    <OPTION value="Administrator" selected>Administrator
+                                    <OPTION value="Project_Manager">Project_Manager
+                                    <OPTION value="Human_Resources">Human_Resources
+                                    <OPTION value="Team_Leader">Team_Leader
+                                </SELECT>
+
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-1 btn-outline-success" type="button"
+                                        (click)="addtype(op.value);c('Close click')">Create Type
+                                </button>
+                                <button class="btn btn-1 btn-outline-danger" type="button" data-dismiss="modal"
+                                        (click)="c('Close click')">Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </ng-template>
+
+        <div *ngIf="listtype">
+            <div class="col-md-12">
+                <div class="form-group" [ngClass]="{'focused': focus===true}">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Search" type="text" #thisInput
+                               (keyup)="searchByT(thisInput.value)">
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr style="text-align: center">
+                        <th scope="col">Type</th>
+                        <th scope="col">Hours_number</th>
+                        <th scope="col">Role Of Employe</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let Quest of listtype | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td contenteditable="true"
+                            (blur)="updatetype(Quest.id,Quest ,'type', $event,'');open(classic2);">{{Quest.type}}</td>
+                        <td contenteditable="true"
+                            (blur)="updatetype(Quest.id,Quest ,'hours_number', $event,'');open(classic2);"
+                            style="text-align: center">{{Quest.hours_number}}</td>
+                        <td style="text-align: center">
+                            <SELECT #op name="valid" size="1"
+                                    (click)="updatetype(Quest.id,Quest ,'roleOfEmploye', $event,op.value)"
+                                    class=" mb-4 "
+                                    style="border: initial">
+                                <OPTION value="Administrator" *ngIf="Quest.roleOfEmploye === 'Administrator'" selected>
+                                    Administrator
+                                <OPTION value="Administrator" *ngIf="Quest.roleOfEmploye !== 'Administrator'">
+                                    Administrator
+
+                                <OPTION value="Project_Manager" *ngIf="Quest.roleOfEmploye === 'Project_Manager'"
+                                        selected>Project_Manager
+                                <OPTION value="Project_Manager" *ngIf="Quest.roleOfEmploye !== 'Project_Manager'">
+                                    Project_Manager
+
+                                <OPTION value="Human_Resources" *ngIf="Quest.roleOfEmploye === 'Human_Resources'"
+                                        selected>Human_Resources
+                                <OPTION value="Human_Resources" *ngIf="Quest.roleOfEmploye !== 'Human_Resources'">
+                                    Human_Resources
+
+                                <OPTION value="Team_Leader" *ngIf="Quest.roleOfEmploye === 'Team_Leader'" selected>
+                                    Team_Leader
+                                <OPTION value="Team_Leader" *ngIf="Quest.roleOfEmploye !== 'Team_Leader'">Team_Leader
+
+                            </SELECT>
+                        </td>
+                        <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning"
+                                                          (click)="Deletetype(Quest.id)">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #classic2 let-c="close" let-d="dismiss">
+                    <div style="background-color: #4fd69c;">
+                        <ngb-alert [type]="alertSucc.type" [dismissible]="true" (click)="c('Close click')">
+                            <i class="{{alertSucc.icon}} alert-inner--icon"></i> &nbsp;
+                            <strong class="alert-inner--text">{{alertSucc.strong}} </strong>
+                        </ngb-alert>
+                    </div>
+                </ng-template>
+
+                <nav aria-label="Page navigation example">
+                    <ngb-pagination [collectionSize]="px*10" [(page)]="p" (pageChange)="p = $event"
+                                    aria-label="Default pagination">
+                        <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+                        <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+                    </ngb-pagination>
+                </nav>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>

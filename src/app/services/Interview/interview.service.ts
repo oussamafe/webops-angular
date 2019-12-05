@@ -11,8 +11,7 @@ export class InterviewService {
   //
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.token.getJwtToken()
+      'Content-Type': 'application/json'
     })
   };
   //
@@ -57,7 +56,12 @@ export class InterviewService {
   AffectInterviewTypeToInterview(iid, itid) {
     return this.http.put(this.URL + '/AffectInterviewToCandidate?iid=' + iid + '&itid=' + itid, this.httpOptions);
   }
-
+  setInterviewOnline(iid) {
+    return this.http.put(this.URL + '/setInterviewOnline?iid=' + iid, this.httpOptions);
+  }
+  setInterviewNotOnline(iid) {
+    return this.http.put(this.URL + '/setInterviewNotOnline?iid=' + iid, this.httpOptions);
+  }
 
 // delete
   DeleteInterviewType(itid) {
@@ -87,5 +91,7 @@ export class InterviewService {
   ListAllInterviewType() {
     return this.http.get<InterviewType[]>(this.URL + '/ListAllInterviewType', this.httpOptions);
   }
-
+  ListAllInterviewTypeByType(type) {
+    return this.http.get<InterviewType[]>(this.URL + '/ListAllInterviewTypeByType?type=' + type, this.httpOptions);
+  }
 }

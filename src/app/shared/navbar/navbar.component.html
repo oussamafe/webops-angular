@@ -26,7 +26,7 @@
       </div>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="authService.isAdmin()">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/OnlineTest']">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text navbar-brand">OnlineTest</span>
@@ -38,7 +38,7 @@
         </li>
 
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown"  *ngIf="authService.isAdmin()">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/Applications']">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text navbar-brand">Applications</span>
@@ -48,20 +48,41 @@
           </div>
         </li>
 
-        <li class="nav-item ">
+        <li class="nav-item " *ngIf="authService.isCandidate()">
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
-            <a routerLink="/ResultExamen/5" class="navbar-brand">test candidate</a>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link no-caret">
-            <i class="ni ni-collection d-lg-none"></i>
-            <a routerLink="/AvaibilityUser/5" class="navbar-brand">Avaibility</a>
+            <a routerLink="/ResultExamen/{{authService.getUserID()}}" class="navbar-brand" >test candidate</a>
           </a>
         </li>
 
+        <li class="nav-item " >
+          <a class="nav-link no-caret">
+            <i class="ni ni-collection d-lg-none"></i>
+            <a *ngIf="authService.isLoggedIn()" routerLink="/AvaibilityUser/{{authService.getUserID()}}" class="navbar-brand">Avaibility</a>
+            <a *ngIf="!authService.isLoggedIn()" routerLink="/login" class="navbar-brand">Avaibility</a>
+          </a>
+        </li>
 
+        <li class="nav-item dropdown"  *ngIf="authService.isLoggedIn()">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" routerLink="/Interview/{{authService.getUserID()}}">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text navbar-brand">Interview</span>
+          </a>
+          <div class="dropdown-menu" *ngIf="!authService.isCandidate()">
+            <a [routerLink]="['/Interview']" class="dropdown-item " *ngIf="authService.isAdmin()">All Interview</a>
+            <a [routerLink]="['/InterviewType']" class="dropdown-item ">InterviewType</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown"  >
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" >
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text navbar-brand">Statistic</span>
+          </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/statTest']" class="dropdown-item ">Online Test</a>
+            <a [routerLink]="['/statinter']" class="dropdown-item ">Interview</a>
+          </div>
+        </li>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
@@ -70,6 +91,14 @@
               <i class="fa fa-sign-in mr-2"></i>
             </span>
             <span class="nav-link-inner--text">Login</span>
+          </a>
+        </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="authService.isLoggedIn()" >
+          <a [routerLink]="['/logout']" class="btn btn-success" (click)="authService.logout()">
+            <span class="btn-inner--icon">
+              <i class="fa fa-sign-in mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">LogOut</span>
           </a>
         </li>
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">

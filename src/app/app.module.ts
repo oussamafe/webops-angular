@@ -40,6 +40,10 @@ import { ExamenForCandidateComponent } from './Interview/OnlineTestComp/OnlienTe
 import { ResultExamenComponent } from './Interview/OnlineTestComp/OnlienTest/result-examen/result-examen.component';
 import { AvabilityUserComponent } from './Interview/InterviewComp/Avaibility/avability-user/avability-user.component';
 import { SuitforavauserComponent } from './Interview/InterviewComp/Avaibility/avability-user/suitforavauser/suitforavauser.component';
+import { InterviewTypeComponent } from './Interview/InterviewComp/InterviewType/interview-type/interview-type.component';
+import { InterviewComponent } from './Interview/InterviewComp/Interview/interview/interview.component';
+import { StatInterviewComponent } from './Interview/StatisticComp/InterStat/stat-interview/stat-interview.component';
+import { StatTestComponent } from './Interview/StatisticComp/TestStat/stat-test/stat-test.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +74,10 @@ import { SuitforavauserComponent } from './Interview/InterviewComp/Avaibility/av
     ResultExamenComponent,
     AvabilityUserComponent,
     SuitforavauserComponent,
+    InterviewTypeComponent,
+    InterviewComponent,
+    StatInterviewComponent,
+    StatTestComponent,
   ],
     imports: [
         BrowserModule,

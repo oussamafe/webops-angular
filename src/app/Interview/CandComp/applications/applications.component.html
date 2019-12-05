@@ -78,11 +78,6 @@
 
 
         <div class="container">
-            <div class="no-data text-center" *ngIf="!listapplicaion">
-                <p>There is no Online test added yet!</p>
-                <button class="btn btn-outline-primary" [routerLink]="['/AddOnlineTest']">Add Online Test</button>
-            </div>
-
             <div *ngIf="listapplicaion">
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                     <div class="input-group mb-4">

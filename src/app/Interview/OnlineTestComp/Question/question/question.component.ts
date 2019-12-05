@@ -43,7 +43,6 @@ export class QuestionComponent implements OnInit {
         } else {
             this.searchQ(this.question);
         }
-
     }
 
     searchQ(Q) {

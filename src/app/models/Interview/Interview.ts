@@ -1,6 +1,7 @@
 export class Interview {
     id: number;
-    startHour: number ;
-    date: string ;
-    state: string ;
+    startHour: number;
+    date: string;
+    state: string;
+    interonligne: boolean;
 }
