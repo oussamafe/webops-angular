@@ -1,0 +1,51 @@
+<main class="profile-page">
+  <section class="section-profile-cover section-shaped my-0">
+    <!-- Circles background -->
+    <div class="shape shape-style-1 shape-primary alpha-4">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- SVG separator -->
+    <div class="separator separator-bottom separator-skew">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="card card-profile shadow mt--300">
+        <div class="px-5">
+          <div >
+            <br>
+
+            <div  class="form-group"><div  class="input-group input-group-alternative mb-4"><div  class="input-group-prepend"><span  class="input-group-text"><i  class="ni ni-zoom-split-in"></i></span></div><input  #input class="form-control" placeholder="Search" type="text" (keyup)="getCandidates(input.value)" ></div></div>
+
+            <div class="row" >
+              <div  class="col-sm-3 col-6" *ngFor=" let C of Candidates " >
+
+                <small class="d-block text-uppercase font-weight-bold mb-4"> {{C.first_Name}} {{C.last_Name}}</small>
+                <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/theme/User.jpeg" style="width: 150px;">
+                <br><br>
+                <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest()" >Send Friend Request </button>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </section>
+</main>

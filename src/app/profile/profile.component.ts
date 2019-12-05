@@ -8,6 +8,7 @@ import {ProfessionalExperience} from '../models/ProfessionalExperience';
 import {Course} from '../models/Course';
 import {Skill} from '../models/Skill';
 import {CVService} from '../services/cv.service';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class ProfileComponent implements OnInit {
     Course: Course [] = [] ;
 
     // tslint:disable-next-line:max-line-length
-    constructor( private http: HttpClient, public candidateService: CandidateService, public cvService: CVService,  private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
+    constructor( private http: HttpClient, public candidateService: CandidateService, public cvService: CVService, public auto: AuthService,  private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
         this.loadCandidate();
         this.getProfExp();
         this.getCourse();
@@ -33,7 +34,7 @@ export class ProfileComponent implements OnInit {
         config.backdrop = 'static';
         config.keyboard = false;
     }
-    loadCandidate() { this.candidateService.getCandidate().subscribe((data) => {
+    loadCandidate() { this.candidateService.getCandidate(this.auto.getUserID()).subscribe((data) => {
         this.DetailsCandidate = data;
      });
 
@@ -84,7 +85,7 @@ export class ProfileComponent implements OnInit {
                 this.closeResult = 'Dismissed $this.getDismissReason(reason)';
             });
         } else {
-            this.modalService.open(content,{ centered: true }).result.then((result) => {
+            this.modalService.open(content, { centered: true }).result.then((result) => {
                 this.closeResult = 'Closed with: $result';
             }, (reason) => {
                 this.closeResult = 'Dismissed $this.getDismissReason(reason)' ;

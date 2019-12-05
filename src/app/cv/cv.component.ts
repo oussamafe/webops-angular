@@ -74,6 +74,7 @@ export class CVComponent implements OnInit {
     getSkills() {
         this.cvService.getSkill().subscribe((data) => {
             this.Skills = data;
+
         });
     }
     addSkill() {

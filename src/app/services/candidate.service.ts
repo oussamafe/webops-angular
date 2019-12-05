@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Candidate} from '../models/Candidate';
 import {config} from '../models/config';
+import {Skill} from '../models/Skill';
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +51,8 @@ export class CandidateService {
   }
 
 
-  getCandidate(): Observable<Candidate> {
-    return this.http.get<Candidate>(`${config.apiUrl}/Candidate/profileCandidate`, this.httpOptions )
+  getCandidate(idC): Observable<Candidate> {
+    return this.http.get<Candidate>(`${config.apiUrl}/Candidate/profileCandidate?idC=` + idC, this.httpOptions )
         .pipe(
             retry(1),
             catchError(this.handleError)
@@ -59,6 +60,13 @@ export class CandidateService {
   }
   updateCandidate(candidate): Observable<Candidate> {
     return this.http.put<Candidate>(`${config.apiUrl}/Candidate/updateCandidate`, JSON.stringify(candidate), this.httpOptions)
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+  getAllCandidate(str): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${config.apiUrl}/Candidate/RechercheCantact?Search=`+str, this.httpOptions )
         .pipe(
             retry(1),
             catchError(this.handleError)

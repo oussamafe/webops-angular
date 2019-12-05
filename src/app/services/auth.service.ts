@@ -4,6 +4,7 @@ import { of, Observable } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { config } from '../models/config';
 import { Tokens } from '../models/tokens';
+import {JwtToken} from './token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,5 +94,40 @@ export class AuthService {
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+
+  private getJwtTokens(): JwtToken {
+    const decodedJwtJsonData = window.atob(this.getRefreshToken().split('.')[1]);
+    console.log('jwtoken: ' + decodedJwtJsonData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData) as JwtToken;
+
+    decodedJwtData.exp = decodedJwtData.exp * 1000;
+    decodedJwtData.iat = decodedJwtData.iat * 1000;
+    console.log('decoded jwtoken: ' + decodedJwtData.Role);
+    return decodedJwtData;
+  }
+  roleMatch(allowedRoles: string[]): boolean {
+    let isMatch = false;
+    const userRoles: string[] = this.getJwtTokens().Role;
+    console.log('user role: ' + userRoles + allowedRoles);
+    allowedRoles.forEach(element => {
+          console.log('elements : ' + element + allowedRoles);
+          if (userRoles.indexOf(element) > -1) {
+            isMatch = true;
+
+            return false;
+          }
+        }
+    );
+    return isMatch;
+
+  }
+  public isAdmin(): boolean {
+    return this.isLoggedIn() && this.roleMatch(['Administrator']);
+  }
+  getUserID(): string {
+    const idu: string = this.getJwtTokens().sub;
+    return idu;
   }
 }
