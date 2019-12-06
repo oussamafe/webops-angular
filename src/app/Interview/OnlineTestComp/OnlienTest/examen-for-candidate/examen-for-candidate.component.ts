@@ -14,7 +14,9 @@ export class ExamenForCandidateComponent implements OnInit {
     constructor(private svc: OnlineTestService, private actRoute: ActivatedRoute, private router: Router) {
     }
 
-
+    tiimm: any;
+    munitttt = 0;
+    timeerr = 0;
     starq = false;
     testss: { id: number; date: string; state: string, note: any } = {id: null, date: '', state: '', note: null};
     candidateid = this.actRoute.snapshot.params['cid'];
@@ -43,8 +45,35 @@ export class ExamenForCandidateComponent implements OnInit {
         this.svc.ListResponceByQuestion(this.quest.id).subscribe(
             (data) => {
                 this.listResponces = data;
+                this.startTimer(this.quest.estimated_Time);
             }
         );
+    }
+
+    startTimer(t) {
+        this.timeerr = t * 60;
+        this.timedCount();
+    }
+
+    stopCount() {
+        clearTimeout(this.tiimm);
+        this.timeerr = 0;
+    }
+
+    timedCount() {
+        if (this.timeerr === 0) {
+            if (this.listQuestion.length === 0) {
+                this.endtest();
+            } else {
+                this.nextques();
+            }
+        } else {
+            this.tiimm = setTimeout(() => {
+                this.timeerr = this.timeerr - 1;
+                this.munitttt = Math.trunc(this.timeerr / 60);
+                this.timedCount();
+            }, 100);
+        }
     }
 
     onboxcheck(id) {
@@ -56,12 +85,14 @@ export class ExamenForCandidateComponent implements OnInit {
     }
 
     nextques() {
+        this.stopCount();
         this.svc.setTestNoteByQuestion(this.testss.id, this.quest.id, this.listResid).subscribe();
         this.quest = this.listQuestion.pop();
         this.svc.ListResponceByQuestion(this.quest.id).subscribe(
             (data) => {
                 this.listResponces = data;
                 this.listResid = new Array();
+                this.startTimer(this.quest.estimated_Time);
             }
         );
     }

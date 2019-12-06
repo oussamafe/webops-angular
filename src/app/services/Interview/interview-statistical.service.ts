@@ -22,26 +22,26 @@ export class InterviewStatisticalService {
 
 
     AcceptedInterviewPerYear(year) {
-        return this.http.get<any[]>(this.URL + '/AcceptedInterviewPerYear?year=' + year, this.httpOptions);
+        return this.http.get<any>(this.URL + '/AcceptedInterviewPerYear?year=' + year, this.httpOptions);
     }
 
     RejectedInterviewPerYear(year) {
-        return this.http.get<any[]>(this.URL + '/RejectedInterviewPerYear?year=' + year, this.httpOptions);
+        return this.http.get<any>(this.URL + '/RejectedInterviewPerYear?year=' + year, this.httpOptions);
     }
 
     NbInterviewPerYear(year) {
-        return this.http.get<any[]>(this.URL + '/NbInterviewPerYear?year=' + year, this.httpOptions);
+        return this.http.get<any>(this.URL + '/NbInterviewPerYear?year=' + year, this.httpOptions);
     }
 
     NbInterviewPerMonth(year, month) {
-        return this.http.get<any[]>(this.URL + '/NbInterviewPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+        return this.http.get<any>(this.URL + '/NbInterviewPerMonth?year=' + year + '&month=' + month, this.httpOptions);
     }
 
-    AcceptedInterviewPerMonth(year, month) {
-        return this.http.get<any[]>(this.URL + '/AcceptedInterviewPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+    AcceptedInterviewPerMonth(year) {
+        return this.http.get<any[]>(this.URL + '/AcceptedInterviewPerMonth?year=' + year , this.httpOptions);
     }
 
-    RejectedInterviewPerMonth(year, month) {
-        return this.http.get<any[]>(this.URL + '/RejectedInterviewPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+    RejectedInterviewPerMonth(year) {
+        return this.http.get<any[]>(this.URL + '/RejectedInterviewPerMonth?year=' + year , this.httpOptions);
     }
 }

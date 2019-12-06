@@ -19,27 +19,27 @@ export class OnlineTestStatisticalService {
 
 
   AcceptedTestPerYear(year) {
-    return this.http.get<any[]>(this.URL + '/AcceptedTestPerYear?year=' + year, this.httpOptions);
+    return this.http.get<any>(this.URL + '/AcceptedTestPerYear?year=' + year, this.httpOptions);
   }
 
   RejectedTestPerYear(year) {
-    return this.http.get<any[]>(this.URL + '/RejectedTestPerYear?year=' + year, this.httpOptions);
+    return this.http.get<any>(this.URL + '/RejectedTestPerYear?year=' + year, this.httpOptions);
   }
 
   NbTestPerYear(year) {
-    return this.http.get<any[]>(this.URL + '/NbTestPerYear?year=' + year, this.httpOptions);
+    return this.http.get<any>(this.URL + '/NbTestPerYear?year=' + year, this.httpOptions);
   }
 
   NbTestPerMonth(year, month) {
-    return this.http.get<any[]>(this.URL + '/NbTestPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+    return this.http.get<any>(this.URL + '/NbTestPerMonth?year=' + year + '&month=' + month, this.httpOptions);
   }
 
-  AcceptedTestPerMonth(year, month) {
-    return this.http.get<any[]>(this.URL + '/AcceptedTestPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+  AcceptedTestPerMonth(year) {
+    return this.http.get<any[]>(this.URL + '/AcceptedTestPerMonth?year=' + year, this.httpOptions);
   }
 
-  RejectedTestPerMonth(year, month) {
-    return this.http.get<any[]>(this.URL + '/RejectedTestPerMonth?year=' + year + '&month=' + month, this.httpOptions);
+  RejectedTestPerMonth(year) {
+    return this.http.get<any[]>(this.URL + '/RejectedTestPerMonth?year=' + year, this.httpOptions);
   }
 
 }
