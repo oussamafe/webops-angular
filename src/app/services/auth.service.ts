@@ -99,20 +99,20 @@ export class AuthService {
 
   private getJwtTokens(): JwtToken {
     const decodedJwtJsonData = window.atob(this.getRefreshToken().split('.')[1]);
-    console.log('jwtoken: ' + decodedJwtJsonData);
+   // console.log('jwtoken: ' + decodedJwtJsonData);
     const decodedJwtData = JSON.parse(decodedJwtJsonData) as JwtToken;
 
     decodedJwtData.exp = decodedJwtData.exp * 1000;
     decodedJwtData.iat = decodedJwtData.iat * 1000;
-    console.log('decoded jwtoken: ' + decodedJwtData.Role);
+   // console.log('decoded jwtoken: ' + decodedJwtData.Role);
     return decodedJwtData;
   }
   roleMatch(allowedRoles: string[]): boolean {
     let isMatch = false;
     const userRoles: string[] = this.getJwtTokens().Role;
-    console.log('user role: ' + userRoles + allowedRoles);
+   // console.log('user role: ' + userRoles + allowedRoles);
     allowedRoles.forEach(element => {
-          console.log('elements : ' + element + allowedRoles);
+       //   console.log('elements : ' + element + allowedRoles);
           if (userRoles.indexOf(element) > -1) {
             isMatch = true;
 

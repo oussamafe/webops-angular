@@ -34,9 +34,9 @@
               <div class="card-profile-actions py-4 mt-lg-0">
 
                 <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " [routerLink]="['/EditCV']" >Edit My CV </a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " [routerLink]="['/EditCV']" *ngIf="userID===auto.getUserID()">Edit My CV </a>
 </div>
-              <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right " (click)="open1(classic1, 'modal_large', 'sm')" >Edit My Profile </a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right " (click)="open1(classic1, 'modal_large', 'sm')" *ngIf="userID===auto.getUserID()" >Edit My Profile </a>
             </div>
             <div class="col-lg-4 order-lg-1">
               <div class="card-profile-stats d-flex justify-content-center">
@@ -101,7 +101,9 @@
         <div class="col-sm-10"><h4 class="text-warning text-uppercase" >Courses</h4></div>
         <br>
         <div *ngFor=" let C of Course " class="col-lg-4"  >
+
           <div class="card card-lift shadow border-0">
+
             <div class="card-body py-5">
               <h6 class="text-warning text-uppercase">{{C.diploma}}</h6>
               <p class="description mt-3">{{C.institution}}</p>
@@ -112,6 +114,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <br>
 

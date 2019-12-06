@@ -34,7 +34,7 @@
         <li class="nav-item ">
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/Friends']" class="navbar-brand">Search New Friends</a>
+            <a class="navbar-brand">Page 2</a>
           </a>
         </li>
         <li class="nav-item ">
@@ -42,6 +42,24 @@
             <i class="ni ni-collection d-lg-none"></i>
             <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
           </a>
+        </li>
+        <li _ngcontent-c1="" class="nav-item dropdown">
+          <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i _ngcontent-c1="" class="ni ni-collection d-lg-none"></i>
+            <span _ngcontent-c1="" class="nav-link-inner--text">Friends</span></a>
+          <div _ngcontent-c1="" class="dropdown-menu">
+            <a _ngcontent-c1="" class="dropdown-item"  [routerLink]="['/Friends']"  >Search for Contacts </a>
+
+          </div>
+        </li>
+        <li _ngcontent-c1="" class="nav-item dropdown"  >
+          <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button" >
+            <i class="ni ni-notification-70"></i>
+            <span _ngcontent-c1="" class="nav-link-inner--text"></span></a>
+            <div _ngcontent-c1="" class="dropdown-menu"
+           >
+              <a _ngcontent-c1="" class="dropdown-item"  [routerLink]="['/Friends']"  *ngFor=" let F of FriendsRequest" >{{F.first_Name}} {{F.last_Name}} want to be your friend   <a href="javascript:void(0)" class="badge badge-success">Accept</a> <a href="javascript:void(0)" class="badge badge-danger">Reject</a></a>
+            </div>
         </li>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -61,8 +79,9 @@
             <span class="nav-link-inner--text">Register</span>
           </a>
         </li>
+
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="authService.isLoggedIn()">
-            <a [routerLink]="['/user-profile']" class="btn btn-white">
+            <a routerLink="/user-profile/{{authService.getUserID()}}" class="btn btn-white">
               <span class="btn-inner--icon">
                 <i class="fa fa-user mr-2"></i>
               </span>

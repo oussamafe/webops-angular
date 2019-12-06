@@ -28,16 +28,14 @@
             <div  class="form-group"><div  class="input-group input-group-alternative mb-4"><div  class="input-group-prepend"><span  class="input-group-text"><i  class="ni ni-zoom-split-in"></i></span></div><input  #input class="form-control" placeholder="Search" type="text" (keyup)="getCandidates(input.value)" ></div></div>
 
             <div class="row" >
-              <div  class="col-sm-3 col-6" *ngFor=" let C of Candidates " >
+              <div  class="col-sm-3 col-6" *ngFor=" let C of Candidates "  >
 
-                <small class="d-block text-uppercase font-weight-bold mb-4"> {{C.first_Name}} {{C.last_Name}}</small>
+                <a class="d-block text-uppercase font-weight-bold mb-4"  routerLink="/user-profile/{{C.id}}">  {{C.first_Name}} {{C.last_Name}}</a>
                 <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/theme/User.jpeg" style="width: 150px;">
                 <br><br>
-                <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest()" >Send Friend Request </button>
+                <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest(C.id)">Send Friend Request </button>
               </div>
-
             </div>
-
           </div>
 
 

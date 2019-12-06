@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Candidate} from '../models/Candidate';
 import {HttpClient} from '@angular/common/http';
 import {CandidateService} from '../services/candidate.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ProfessionalExperience} from '../models/ProfessionalExperience';
 import {Course} from '../models/Course';
@@ -20,21 +20,23 @@ import {AuthService} from '../services/auth.service';
 
 export class ProfileComponent implements OnInit {
     closeResult: string;
-    DetailsCandidate: Candidate ;
+    DetailsCandidate: Candidate  ;
     ProfExp: ProfessionalExperience [] = [] ;
     skill: Skill [] = [] ;
     Course: Course [] = [] ;
-
+    userID = this.Actrouter.snapshot.params['uid'];
     // tslint:disable-next-line:max-line-length
-    constructor( private http: HttpClient, public candidateService: CandidateService, public cvService: CVService, public auto: AuthService,  private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
-        this.loadCandidate();
-        this.getProfExp();
-        this.getCourse();
-        this.getSkill();
+    constructor( private http: HttpClient, public candidateService: CandidateService, public cvService: CVService, public auto: AuthService,  private Actrouter: ActivatedRoute, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
+
+       this.loadCandidate();
+      this.getProfExp();
+       this.getCourse();
+      this.getSkill();
         config.backdrop = 'static';
         config.keyboard = false;
     }
-    loadCandidate() { this.candidateService.getCandidate(this.auto.getUserID()).subscribe((data) => {
+    loadCandidate() {
+        this.candidateService.getCandidate(this.userID).subscribe((data) => {
         this.DetailsCandidate = data;
      });
 
@@ -42,28 +44,27 @@ export class ProfileComponent implements OnInit {
     updateCandidate() {
         this.candidateService.updateCandidate(this.DetailsCandidate).subscribe((data) => {
             this.modalService.dismissAll();
-            this.router.navigate(['/user-profile']);
+            this.router.navigate(['/user-profile/' + this.userID]);
         });
     }
     getProfExp() {
-        this.cvService.getProfessionalExperiences().subscribe((data) => {
+        this.cvService.getProfessionalExperiences(this.userID).subscribe((data) => {
             this.ProfExp = data;
         });
     }
     getCourse() {
-        this.cvService.getCourses().subscribe((data) => {
+        this.cvService.getCourses(this.userID).subscribe((data) => {
             this.Course = data;
             console.log(this.Course );
         });
     }
     getSkill() {
-        this.cvService.getSkills().subscribe((data) => {
+        this.cvService.getSkills(this.userID).subscribe((data) => {
             this.skill = data;
 
         }); }
 
     ngOnInit() {
-
 
     }
 

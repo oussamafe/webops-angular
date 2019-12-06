@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ProfessionalExperience} from '../models/ProfessionalExperience';
 import {Candidate} from '../models/Candidate';
 import {CandidateService} from '../services/candidate.service';
+import {CVService} from '../services/cv.service';
+import {AuthService} from '../services/auth.service';
+import {FriendsService} from '../services/friends.service';
 
 @Component({
   selector: 'app-friends',
@@ -10,10 +13,12 @@ import {CandidateService} from '../services/candidate.service';
 })
 export class FriendsComponent implements OnInit {
   Candidates: Candidate [] = [] ;
+  private send: boolean;
 
-  constructor( public candidateService: CandidateService) { }
 
-  ngOnInit() {
+  constructor(public auto: AuthService, public candidateService: CandidateService, public friendS: FriendsService) { }
+
+  ngOnInit() {  this.send = false ;
   }
   getCandidates(str) {
     if (str.length !== 0) {
@@ -25,6 +30,9 @@ export class FriendsComponent implements OnInit {
     }
   }
 
-  SendFriendRequest() {
+  SendFriendRequest(idReciever) {this.friendS.SendFriendsRequest(this.auto.getUserID(), idReciever).subscribe(success => {
+    if (success) {
+      this.send = true ;
+    }});
   }
 }

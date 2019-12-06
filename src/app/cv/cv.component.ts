@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {formatDate} from '@angular/common';
 import {CandidateService} from '../services/candidate.service';
 import {Skill} from '../models/Skill';
+import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
@@ -26,6 +27,7 @@ export class CVComponent implements OnInit {
     @Input() DetailsCandidate = {certifications: ' ' , activity: ''} ;
     selectedValue: Skill;
     Skills: Skill [] = [];
+    //userID = this.Actrouter.snapshot.params['uid'];
   constructor(public cvService: CVService ) { this.getSkills();   }
 
   ngOnInit() {
@@ -72,7 +74,7 @@ export class CVComponent implements OnInit {
         console.log(this.DetailsCandidate.activity);
     }
     getSkills() {
-        this.cvService.getSkill().subscribe((data) => {
+        this.cvService.getSkillnotAffected().subscribe((data) => {
             this.Skills = data;
 
         });
