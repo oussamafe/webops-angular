@@ -79,7 +79,7 @@
           <td>{{c.place}}</td>
           <td>{{c.startDate}}</td>
           <td>{{c.endDate}}</td>
-          <td><button  type="button" class="btn btn-outline-danger" >Delete</button></td>
+          <td><button  type="button" class="btn btn-outline-danger" (click)="deleteProfExp(c.id)">Delete</button></td>
         </tr>
         </tbody>
       </table>
@@ -98,9 +98,9 @@
         <tbody  >
         <tr>
 
-          <td>{{DetailsCandidates.certifications}}</td>
-
+          <td>{{Candidates.certifications}}</td>
         </tr>
+
         </tbody>
       </table>
     </div>
@@ -116,7 +116,7 @@
         </thead>
         <tbody  >
         <tr>
-          <td>{{DetailsCandidates.activities}}</td>
+          <td>{{Candidates.activities}}</td>
 
 
         </tr>
@@ -283,8 +283,8 @@
   </div>
   <div class="modal-body">
     <div class="form-group mb-4">
-      <textarea class="form-control form-control-alternative"rows="4" cols="80" [(ngModel)]="DetailsCandidate.certifications" name="certification"  placeholder="Type a description....">
-          {{DetailsCandidates.certifications}}
+      <textarea class="form-control form-control-alternative"rows="4" cols="80" [(ngModel)]="Candidates.certifications" name="certification"  placeholder="Type a description....">
+
       </textarea>
     </div>
 
@@ -292,7 +292,7 @@
   </div>
   <div class="modal-footer">
 
-      <button type="button" class="btn btn-success btn-round btn-block btn-lg" (click)="addCertification()">Add Certifications to your CV</button>
+      <button type="button" class="btn btn-success btn-round btn-block btn-lg" (click)="addCertification()">Add to your CV</button>
 
   </div>
 
@@ -312,8 +312,10 @@
   </div>
   <div class="modal-body">
     <div class="form-group mb-4">
-      <textarea class="form-control form-control-alternative" [(ngModel)]="DetailsCandidate.activity"  name="activity" rows="4" cols="80" placeholder="Type a description....">
-           {{DetailsCandidates.activities}}
+      <textarea class="form-control form-control-alternative" [(ngModel)]="Candidates.activities"  name="activity" rows="4" cols="80" placeholder="Type a description....">
+
+
+
       </textarea>
     </div>
 

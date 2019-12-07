@@ -25,10 +25,10 @@ export class CVComponent implements OnInit {
     done1 = false ;
   @Input() DetailsCourse = {diploma: ' ', institution: ' ', endDate: ' ' , startDate: ' '} ;
     @Input() DetailsProfExp = {description: ' ', company: ' ', endDate: ' ' , startDate: ' ', place: ''} ;
-    @Input() DetailsCandidate = {certifications: ' ' , activity: ''} ;
+   // @Input() DetailsCandidates = {certifications: ' ', activities: ' '} ;
     selectedValue: Skill;
     Skills: Skill [] = [];
-    DetailsCandidates: Candidate  ;
+    Candidates: Candidate;
     ProfExp: ProfessionalExperience [] = [] ;
     skill: Skill [] = [] ;
     Course: Course [] = [] ;
@@ -82,17 +82,18 @@ export class CVComponent implements OnInit {
                  }); });
     }
     addCertification() {
-        this.cvService.AddCertif(this.DetailsCandidate.certifications).subscribe(dataa => {
+        this.cvService.AddCertif(this.Candidates.certifications).subscribe(dataa => {
             this.candidateService.getCandidate(this.userID).subscribe((data) => {
-                this.DetailsCandidates = data;
+                this.Candidates = data;
                 this.modalService.dismissAll();
                 this.router.navigate(['/EditCV/' + this.userID]);
             }); });
     }
     addActivity() {
-        this.cvService.AddActivity(this.DetailsCandidate.activity).subscribe(dataa => {
+        this.cvService.AddActivity(this.Candidates
+            .activities).subscribe(dataa => {
             this.candidateService.getCandidate(this.userID).subscribe((data) => {
-                this.DetailsCandidates = data;
+                this.Candidates = data;
                 this.modalService.dismissAll();
                 this.router.navigate(['/EditCV/' + this.userID]);
             }); });
@@ -125,7 +126,7 @@ export class CVComponent implements OnInit {
     }
     loadCandidate() {
         this.candidateService.getCandidate(this.userID).subscribe((data) => {
-            this.DetailsCandidates = data;
+            this.Candidates = data;
         });
 
     }
@@ -153,10 +154,20 @@ export class CVComponent implements OnInit {
         if (window.confirm('Are you sure, you want to delete?')) {
             this.cvService.supprimerCourse(id).subscribe(data => {
                 this.loadCandidate();
-                this.cvService.getCourses(this.userID).subscribe((data) => {
-                    this.Course = data;
+                this.cvService.getCourses(this.userID).subscribe((dataa) => {
+                    this.Course = dataa;
 
 
+                });
+            });
+        }
+    }
+    deleteProfExp(id) {
+        if (window.confirm('Are you sure, you want to delete?')) {
+            this.cvService.supprimerProfExp(id).subscribe(data => {
+                this.loadCandidate();
+                this.cvService.getProfessionalExperiences(this.userID).subscribe((dataa) => {
+                    this.ProfExp = dataa;
                 });
             });
         }

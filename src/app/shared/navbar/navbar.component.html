@@ -43,7 +43,7 @@
             <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
           </a>
         </li>
-        <li _ngcontent-c1="" class="nav-item dropdown">
+        <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()" >
           <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i _ngcontent-c1="" class="ni ni-collection d-lg-none"></i>
             <span _ngcontent-c1="" class="nav-link-inner--text">Friends</span></a>
@@ -57,8 +57,9 @@
             <i class="ni ni-notification-70"></i>
             <span _ngcontent-c1="" class="nav-link-inner--text"></span></a>
             <div _ngcontent-c1="" class="dropdown-menu"
-           >
-              <a _ngcontent-c1="" class="dropdown-item"  [routerLink]="['/Friends']"  *ngFor=" let F of FriendsRequest" >{{F.first_Name}} {{F.last_Name}} want to be your friend   <a href="javascript:void(0)" class="badge badge-success">Accept</a> <a href="javascript:void(0)" class="badge badge-danger">Reject</a></a>
+                 >
+              <a ngcontent-c1="" class="dropdown-item"  *ngIf="FriendsRequest.length === 0 "  > You dont have Friends Requests</a>
+              <a _ngcontent-c1="" class="dropdown-item"   *ngFor=" let F of FriendsRequest" routerLink="/user-profile/{{F.id}}"  >{{F.first_Name}} {{F.last_Name}} want to be your friend   <a id="Accept" href="javascript:void(0)" class="badge badge-success" (click)="AcceptFriend(F.id ,authService.getUserID())">Accept</a> <a id="Reject" href="javascript:void(0)" class="badge badge-danger" (click)="RejectFriend(F.id,authService.getUserID())">Reject</a></a>
             </div>
         </li>
       </ul>

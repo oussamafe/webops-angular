@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import {FriendsService} from '../../services/friends.service';
@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
     FriendsRequest: Candidate  [] = [];
-    constructor(public location: Location, private router: Router , private authService: AuthService, private friend: FriendsService) {
+    userID = this.Actrouter.snapshot.params['uid'];
+    constructor(public location: Location, private router: Router , private authService: AuthService, private friend: FriendsService , private Actrouter: ActivatedRoute) {
     this.getCandidates();
     }
 
@@ -65,6 +66,18 @@ export class NavbarComponent implements OnInit {
 
             }); }
 
-
-
+    AcceptFriend(idSender, idReciever) {
+        this.friend.AcceptFriendsRequest(idSender, idReciever).subscribe(data => {
+            this.friend.getFriendsRequest().subscribe((dataa) => {
+                this.FriendsRequest = dataa;
+                document.getElementById('Accept').hidden = true;
+             }); });
+    }
+    RejectFriend(idSender, idReciever) {
+        this.friend.RejectFriendsRequest(idSender, idReciever).subscribe(data => {
+            this.friend.getFriendsRequest().subscribe((dataa) => {
+                this.FriendsRequest = dataa;
+                document.getElementById('Reject').hidden = true;
+            }); });
+    }
 }

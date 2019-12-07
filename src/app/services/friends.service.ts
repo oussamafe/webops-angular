@@ -61,4 +61,19 @@ export class FriendsService {
             catchError(this.handleError)
         );
   }
+
+  AcceptFriendsRequest(idSender, idReciever): Observable<Friend> {
+    return this.http.put<Friend>(`${config.apiUrl}/Contacts/TraiteFriendRequest/Accept?idSender=` + idSender + `&idReciever=` + idReciever, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+  RejectFriendsRequest(idSender, idReciever): Observable<Friend> {
+    return this.http.delete<Friend>(`${config.apiUrl}/Contacts/TraiteFriendRequest/Refuse?idSender=` + idSender + `&idReciever=` + idReciever, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
 }

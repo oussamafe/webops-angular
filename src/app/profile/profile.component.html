@@ -36,7 +36,7 @@
                 <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
                 <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " routerLink="/EditCV/{{auto.getUserID()}}" *ngIf="userID===auto.getUserID()">Edit My CV </a>
 </div>
-              <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right " (click)="open1(classic1, 'modal_large', 'sm')" *ngIf="userID===auto.getUserID()" >Edit My Profile </a>
+
             </div>
             <div class="col-lg-4 order-lg-1">
               <div class="card-profile-stats d-flex justify-content-center">
@@ -67,7 +67,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-9">
                 <p>{{DetailsCandidate.profilIntro}}</p>
-                <a href="javascript:void(0)">Show more</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-danger float-center " (click)="open1(classic1, 'modal_large', 'sm')" *ngIf="userID===auto.getUserID()" >Edit My Profile </a>
               </div>
             </div>
           </div>
