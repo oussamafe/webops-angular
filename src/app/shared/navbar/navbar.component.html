@@ -52,7 +52,7 @@
 
           </div>
         </li>
-        <li _ngcontent-c1="" class="nav-item dropdown"  >
+        <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()">
           <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button" >
             <i class="ni ni-notification-70"></i>
             <span _ngcontent-c1="" class="nav-link-inner--text"></span></a>

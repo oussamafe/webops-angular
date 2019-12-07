@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'register',           component: SignupComponent },
     { path: 'landing',          component: LandingComponent },
     { path: 'login',          component: LoginComponent },
-    { path: 'EditCV',          component: CVComponent },
+    { path: 'EditCV/:uid',          component: CVComponent },
     {path: 'Friends'  ,          component: FriendsComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
