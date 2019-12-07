@@ -38,7 +38,7 @@ import {
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule, MatIconModule, MatBadgeModule
 } from '@angular/material';
 import { PackComponent } from './pack/pack.component';
 import { PaymentComponent } from './pack/payment/payment.component';
@@ -47,6 +47,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import {ComponentsModule} from './admin/admin.module';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { SendReclamationComponent } from './reclamation/send-reclamation/send-reclamation.component';
+import { PackCreateComponent } from './pack/pack-create/pack-create.component';
+import { PackListComponent } from './pack/pack-list/pack-list.component';
+import { PackEditComponent } from './pack/pack-edit/pack-edit.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,9 @@ import { SendReclamationComponent } from './reclamation/send-reclamation/send-re
     DashboardComponent,
     SidebarComponent,
     SendReclamationComponent,
+    PackCreateComponent,
+    PackListComponent,
+    PackEditComponent,
   ],
     imports: [
         BrowserModule,
@@ -121,7 +127,9 @@ import { SendReclamationComponent } from './reclamation/send-reclamation/send-re
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatIconModule,
+        MatBadgeModule
     ],
   providers: [
     {
@@ -133,6 +141,6 @@ import { SendReclamationComponent } from './reclamation/send-reclamation/send-re
     FormBuilder
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ReclamationComponent]
+  entryComponents: [ReclamationComponent, SendReclamationComponent, PackCreateComponent, PackEditComponent]
 })
 export class AppModule { }

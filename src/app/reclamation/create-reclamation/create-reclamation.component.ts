@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ReclamationService} from '../services/reclamation.service';
 import {Reclamation} from '../model/reclamtion.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -12,15 +12,22 @@ import Swal from 'sweetalert2';
 export class CreateReclamationComponent implements OnInit {
 
   constructor(public reclamationService: ReclamationService, private modalService: NgbModal) { }
-
+    imagePreview: string | ArrayBuffer;
+    form: FormGroup;
     reclamation: Reclamation = new Reclamation();
-    animalControl = new FormControl('', [Validators.required]);
+
   ngOnInit() {
+      this.form = new FormGroup({
+          sujet: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+          }),
+          message: new FormControl(null, { validators: [Validators.required] }),
+          image: new FormControl(null)
+      });
   }
 
-private add (form: NgForm) {
-    console.log(this.reclamation);
-    if (form.valid) {
+private add () {
+if (this.form.valid) {
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -28,11 +35,30 @@ private add (form: NgForm) {
             showConfirmButton: true,
             timer: 1500
         });
-    return this.reclamationService.addReclamation(this.reclamation)
+    /* this.reclamationService.addReclamation(this.reclamation)
         .subscribe( (resp) => {
-      console.log('successss' + resp);
-      form.reset();
+      this.form.reset();
+    });*/
+} else {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Verifiez les champs',
+        showConfirmButton: true,
+        timer: 1500
     });
-    }
 }
+
+}
+    onImagePicked(event: Event) {
+        const file = (event.target as HTMLInputElement).files[0];
+        this.form.patchValue({ image: file });
+        this.form.get('image').updateValueAndValidity();
+        const reader = new FileReader();
+        reader.onload = () => {
+            this.imagePreview = reader.result;
+        };
+        reader.readAsDataURL(file);
+        console.log(this.form.value.image);
+    }
 }

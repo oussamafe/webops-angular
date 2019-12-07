@@ -1,8 +1,8 @@
 <br>
 <h1>List des reclamation</h1>
 <br><br>
-<table>
-  <thead>
+<table id="customers">
+  <thead style="text-align: center;" width="100">
   <th>Sujet</th>
   <th>Message</th>
   <th>Type</th>
@@ -11,7 +11,7 @@
   <th>Date de traitement</th>
   <th>Action</th>
   </thead>
-  <tbody>
+  <tbody style="text-align: left;" width="100">
   <tr *ngFor="let rec of claims">
     <td>{{ rec.sujet}}</td>
     <td>{{ rec.message}}</td>
@@ -19,7 +19,7 @@
     <td>{{ rec.date | date}}</td>
       <td  [ngStyle]="{color: rec.etat === 'En_Attent' ? '#ac9739' : 'green'}"><b>{{ rec.etat}}</b></td>
       <td>{{ rec.dateDeTraitement | date}}</td>
-    <td> <button mat-button color="primary" (click)="reclamationDialog()">Repondre</button>
+    <td> <button mat-button color="primary" (click)="reclamationDialog(rec)">Repondre</button>
     </td>
   </tr>
   </tbody>

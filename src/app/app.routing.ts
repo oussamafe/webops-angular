@@ -13,6 +13,8 @@ import {PaymentComponent} from './pack/payment/payment.component';
 import {DashboardComponent} from './admin/dashboard/dashboard.component';
 import {AdminComponent} from './admin/admin.component';
 import {ListReclamationComponent} from './reclamation/list-reclamation/list-reclamation.component';
+import {PackCreateComponent} from './pack/pack-create/pack-create.component';
+import {PackListComponent} from './pack/pack-list/pack-list.component';
 
 const routes: Routes =[
     { path: 'home',             component: LandingComponent },
@@ -24,6 +26,8 @@ const routes: Routes =[
     { path: 'pay',          component: PaymentComponent },
     {path: 'reclamation', component: ListReclamationComponent},
     {path: 'dashboard', component: DashboardComponent},
+    {path: 'packs', component: PackCreateComponent},
+    {path: 'packslist', component: PackListComponent},
     {
         path: 'admin',          component: AdminComponent,
         children: [

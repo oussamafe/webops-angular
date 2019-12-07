@@ -1,8 +1,6 @@
 import {User} from './user.model';
 
 export class Reclamation {
-    title: string;
-    content: string;
     id: number;
     sujet: string;
     libelle: string;
@@ -11,5 +9,6 @@ export class Reclamation {
     claimtype: string;
     date;
     dateDeTraitement;
+    reponse: string;
      user: User;
 }
