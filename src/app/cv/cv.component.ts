@@ -40,7 +40,7 @@ export class CVComponent implements OnInit {
       this.getProfExp(); this.loadCandidate(); this.getSkill();
   }
 
-  ngOnInit() {
+  ngOnInit() {this.loadCandidate();
   }
 
 
@@ -82,12 +82,20 @@ export class CVComponent implements OnInit {
                  }); });
     }
     addCertification() {
-        this.cvService.AddCertif(this.DetailsCandidate.certifications).subscribe();
-        console.log(this.DetailsCandidate.certifications);
+        this.cvService.AddCertif(this.DetailsCandidate.certifications).subscribe(dataa => {
+            this.candidateService.getCandidate(this.userID).subscribe((data) => {
+                this.DetailsCandidates = data;
+                this.modalService.dismissAll();
+                this.router.navigate(['/EditCV/' + this.userID]);
+            }); });
     }
     addActivity() {
-        this.cvService.AddActivity(this.DetailsCandidate.activity).subscribe();
-        console.log(this.DetailsCandidate.activity);
+        this.cvService.AddActivity(this.DetailsCandidate.activity).subscribe(dataa => {
+            this.candidateService.getCandidate(this.userID).subscribe((data) => {
+                this.DetailsCandidates = data;
+                this.modalService.dismissAll();
+                this.router.navigate(['/EditCV/' + this.userID]);
+            }); });
     }
     getSkills() {
         this.cvService.getSkillnotAffected().subscribe((data) => {
