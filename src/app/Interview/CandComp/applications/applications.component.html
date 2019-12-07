@@ -98,7 +98,7 @@
                                             <app-candidate-offer-information [cid]="t.id.idCandiate" [jid]="t.id.idJobOffer"></app-candidate-offer-information>
                                             <br><br>
                                             <a href="javascript:void(0)"
-                                               class="btn btn-outline-success mt-sm-3" [routerLink]="['/Applications']" (click)=" open(classic,'' , '')">Accept</a>
+                                               class="btn btn-outline-success mt-sm-3" [routerLink]="['/Applications']" (click)="acceptcand(t); open(classic,'' , '')">Accept</a>
                                             <a href="javascript:void(0)"
                                                class="btn btn-outline-danger mt-sm-3" [routerLink]="['/Applications']" (click)="rejectcand(t)">Reject</a><!--acceptcand(t);-->
                                         </div>
