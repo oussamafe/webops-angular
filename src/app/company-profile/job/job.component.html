@@ -1,0 +1,102 @@
+<main>
+    <section class="section section-shaped section-lg">
+      <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="container pt-lg-md">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-body px-lg-5 py-lg-5">
+                <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
+                  <span><strong>Submit a job</strong></span>
+                </div>
+                <form role="form" [formGroup]="jobForm" (ngSubmit)="addJob()">
+                    <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                        </div>
+                        <input class="form-control" formControlName="description"
+                          placeholder="Description" type="text" (focus)="focus1 = true"
+                          (blur)="focus1 = false" />
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ focused: focus2 === true  }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-address-book-o"></i></span>
+                        </div>
+                        <input class="form-control" formControlName="job_title" placeholder="Job Title"
+                          type="text" (focus)="focus2 = true" (blur)="focus2 = false" />
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ focused: focus3 === true }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-list-alt"></i></span>
+                        </div>
+                        <input class="form-control" formControlName="type" placeholder="Type" type="text"
+                          (focus)="focus3 = true" (blur)="focus3 = false" />
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ focused: focus === true  }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-bold-up"></i></span>
+                        </div>
+                        <input class="form-control" formControlName="level" placeholder="Level"
+                          type="text" (focus)="focus = true" (blur)="focus = false" />
+                      </div>
+                    </div>
+                    <div></div>
+                    <div class="form-group"
+                      [ngClass]="{ focused: focus4 === true  }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
+                        </div>
+                        <input class="form-control" [ngbTypeahead]="searchPlace" (selectItem)="selectPlace($event)" [resultFormatter]="formatter" formControlName="location" placeholder="Skills"
+                          type="text" (focus)="focus5 = true" (blur)="focus5 = false" />
+                          <div class="input-group-append" >
+                            <div>
+                                <button type="button" class="btn btn-icon btn-2 btn-primary" *ngIf="searching"><span class="btn-inner--icon"><i class="fa"></i> <ngx-spinner [name]="spinnerPlaces"></ngx-spinner> </span></button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ focused: focus5 === true }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-settings-gear-65"></i></span>
+                        </div>
+                        <input class="form-control" [ngbTypeahead]="search" (selectItem)="selectSkill($event)" [resultFormatter]="formatter" formControlName="skills" placeholder="Skills"
+                          type="text" (focus)="focus5 = true" (blur)="focus5 = false" />
+                          <div class="input-group-append" >
+                            <div>
+                                <button type="button" class="btn btn-icon btn-2 btn-primary" *ngIf="searching"><span class="btn-inner--icon"><i class="fa"></i> <ngx-spinner [name]="spinnerSkills"></ngx-spinner> </span></button>
+                              
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button class="btn btn-primary my-4" (click)="showList()">
+                        Add
+                      </button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

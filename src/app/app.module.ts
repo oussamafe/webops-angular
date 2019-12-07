@@ -4,7 +4,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogModule,MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatButtonModule, MatProgressSpinnerModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
@@ -20,6 +20,14 @@ import {TokenInterceptor} from './services/TokenInterceptor';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search/search.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { SkillsComponent } from './skills/skills.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { JobComponent } from './company-profile/job/job.component';
+import { EventComponent } from './company-profile/event/event.component';
+import { EmployeeComponent } from './company-profile/employee/employee.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +39,12 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     LoginComponent,
     LoginDialogComponent,
-    SearchComponent
+    SearchComponent,
+    CompanyProfileComponent,
+    SkillsComponent,
+    JobComponent,
+    EventComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +58,14 @@ import { SearchComponent } from './search/search.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
+    GooglePlaceModule
   ],
   entryComponents:[
     LoginDialogComponent

@@ -1,7 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { of, Observable, throwError } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, mapTo, tap, map } from 'rxjs/operators';
 import { config } from '../models/config';
 import { Tokens } from '../models/tokens';
 import {MatDialog} from '@angular/material/dialog';
@@ -20,6 +20,7 @@ export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string;
+  progress ;
 
   constructor(private http: HttpClient , public dialog: MatDialog) {}
 
@@ -27,7 +28,6 @@ export class AuthService {
     const body = new HttpParams()
     .set('username', username)
     .set('password', password);
-    
     return this.http.post<any>(`${config.apiUrl}/login`, body.toString(), {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
