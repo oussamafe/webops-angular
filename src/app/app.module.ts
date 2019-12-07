@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './services/TokenInterceptor';
 import { CVComponent } from './cv/cv.component';
 import { FriendsComponent } from './friends/friends.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 
 
@@ -33,6 +35,7 @@ import { FriendsComponent } from './friends/friends.component';
     LoginComponent,
     CVComponent,
     FriendsComponent,
+    DashboardComponent,
 
   ],
   imports: [

@@ -13,13 +13,12 @@ import {FriendsService} from '../services/friends.service';
 })
 export class FriendsComponent implements OnInit {
   Candidates: Candidate [] = [] ;
-  private send: boolean;
+
 
 
   constructor(public auto: AuthService, public candidateService: CandidateService, public friendS: FriendsService) { }
 
-  ngOnInit() {  this.send = false ;
-  }
+  ngOnInit() {}
   getCandidates(str) {
     if (str.length !== 0) {
     this.candidateService.getAllCandidate(str).subscribe((data) => {
@@ -32,7 +31,7 @@ export class FriendsComponent implements OnInit {
 
   SendFriendRequest(idReciever) {this.friendS.SendFriendsRequest(this.auto.getUserID(), idReciever).subscribe(success => {
     if (success) {
-      this.send = true ;
+     document.getElementById('Send').hidden = true ;
     }});
   }
 }

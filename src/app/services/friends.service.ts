@@ -76,4 +76,35 @@ export class FriendsService {
             catchError(this.handleError)
         );
   }
+  follow(idCand, idSub): Observable<Candidate> {
+    return this.http.put<Candidate>(`${config.apiUrl}/Contacts/CandidateSub?idCand=` + idCand + `&idSub=` + idSub, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+}
+  unfollow(idCand, idSub): Observable<Candidate> {
+    return this.http.put<Candidate>(`${config.apiUrl}/Contacts/CandidateRemoveSub?idCand=` + idCand + `&idSub=` + idSub, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+  getAllMySubscribers(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${config.apiUrl}/Contacts/AllMyFriendsRequests`, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+  getMySubSribtions(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${config.apiUrl}/Contacts/AllMyFriendsRequests`, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+
+
+
 }

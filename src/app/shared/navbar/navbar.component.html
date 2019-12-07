@@ -46,6 +46,15 @@
         <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()" >
           <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i _ngcontent-c1="" class="ni ni-collection d-lg-none"></i>
+            <span _ngcontent-c1="" class="nav-link-inner--text">Dashboard</span></a>
+          <div _ngcontent-c1="" class="dropdown-menu">
+            <a _ngcontent-c1="" class="dropdown-item"  [routerLink]="['/Stat']"  >Consult My statistics Dashboard  </a>
+
+          </div>
+        </li>
+        <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()" >
+          <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i _ngcontent-c1="" class="ni ni-collection d-lg-none"></i>
             <span _ngcontent-c1="" class="nav-link-inner--text">Friends</span></a>
           <div _ngcontent-c1="" class="dropdown-menu">
             <a _ngcontent-c1="" class="dropdown-item"  [routerLink]="['/Friends']"  >Search for Contacts </a>

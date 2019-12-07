@@ -10,6 +10,7 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { CVComponent } from './cv/cv.component';
 import {FriendsComponent} from './friends/friends.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 const routes: Routes = [
     { path: 'home',             component: LandingComponent },
     { path: 'user-profile',     component: ProfileComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'login',          component: LoginComponent },
     { path: 'EditCV/:uid',          component: CVComponent },
     {path: 'Friends'  ,          component: FriendsComponent },
+    {path: 'Stat'  ,          component: DashboardComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

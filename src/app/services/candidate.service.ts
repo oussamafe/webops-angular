@@ -72,4 +72,12 @@ export class CandidateService {
             catchError(this.handleError)
         );
   }
+  getStatCandidate(): Observable<number[]> {
+    return this.http.get<number[]>(`${config.apiUrl}/StatCandidate/StatApplication`, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
+
 }
