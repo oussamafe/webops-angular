@@ -19,18 +19,17 @@ export class QuestionComponent implements OnInit {
 
     private alertSucc: IAlert;
     question = this.actRoute.snapshot.params['q'];
+    otidd = this.actRoute.snapshot.params['otid'];
     constructor(private modalService: NgbModal, private svc: OnlineTestService, private actRoute: ActivatedRoute, private router: Router) {
         this.alertSucc = {id: 1, type: 'success', strong: 'Updated !', message: '', icon: 'ni ni-like-2'};
 
     }
 
 // npm install ngx-pagination --save
-    // npm install sweetalert2
     qss: Question;
 //  id: number ;
     p = 1;
     px: number;
-    QUESTSPANTITLE = 'All Questions';
     listQuestion: any[];
     ngOnInit() {
         if (!this.question) {

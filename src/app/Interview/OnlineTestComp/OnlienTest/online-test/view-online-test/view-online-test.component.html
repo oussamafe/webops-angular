@@ -17,7 +17,7 @@
         <div class="col px-0">
           <div class="row">
             <div class="col-lg-6">
-              <h1 class="display-3  text-white">Online Test Information
+              <h1 class="display-3  text-white">Online Test Information <span>Questions</span>
               </h1>
               <button class="btn btn-1 btn-neutral" [routerLink]="['/OnlineTest']" type="button">
                 Back
@@ -78,7 +78,7 @@
             <td >{{Quest.question}}</td>
             <td  style="text-align: center">{{Quest.module}}</td>
             <td  style="text-align: center">{{Quest.estimated_Time}}</td>
-            <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" routerLink="/Question/{{Quest.question}}" >Edit</a></td>
+            <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" routerLink="/Question/{{Quest.question}}/{{otid}}" >Edit</a></td>
             <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-info" routerLink="/ViewResp/{{otid}}/{{Quest.id}}" >Responces</a></td>
           </tr>
           </tbody>

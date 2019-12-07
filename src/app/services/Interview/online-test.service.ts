@@ -88,6 +88,10 @@ export class OnlineTestService {
   getListAllQuestion() {
     return this.http.get<Question[]>(this.URL + '/ListQuestion', this.httpOptions);
   }
+
+  ListStillWaittest() {
+    return this.http.get<OnlineTest[]>(this.URL + '/ListStillWaittest', this.httpOptions);
+  }
   ListAlltest() {
     return this.http.get<OnlineTest[]>(this.URL + '/ListAlltest', this.httpOptions);
   }

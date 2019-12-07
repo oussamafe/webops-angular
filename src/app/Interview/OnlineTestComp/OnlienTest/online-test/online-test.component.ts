@@ -26,8 +26,8 @@ export class OnlineTestComponent implements OnInit {
   }
 
   showstill() {
-    this.svc.ListAlltest().subscribe((data) => {
-      this.TESTSPANTITLE = 'All TESTS';
+    this.svc.ListStillWaittest().subscribe((data) => {
+      this.TESTSPANTITLE = 'Still In Wait';
       this.listOnlinetest = data;
       this.router.navigate(['/OnlineTest']);
     });

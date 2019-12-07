@@ -17,12 +17,13 @@
         <div class="col px-0">
           <div class="row">
             <div class="col-lg-6">
-              <h1 class="display-3  text-white">Online Test Information
+              <h1 class="display-3  text-white">Online Test Information <span>Responces</span>
               </h1>
               <button class="btn btn-1 btn-neutral" routerLink="/ViewTest/{{otid}}" type="button">
                 Back
               </button>
             </div>
+
           </div>
         </div>
       </div>
@@ -70,6 +71,7 @@
           <tr style="text-align: center">
             <th scope="col">reponce</th>
             <th scope="col">IsValid</th>
+      <!--      <th scope="col">edit</th>-->
           </tr>
           </thead>
           <tbody>
@@ -78,6 +80,7 @@
             <td style="text-align: center">
               <app-view-resp-isval  [rid]="Resp.id" ></app-view-resp-isval>
             </td>
+      <!--      <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" routerLink="/Responce/{{qid}}/{{Resp.reponce}}/{{otid}}" >Edit</a></td>-->
           </tr>
           </tbody>
         </table>

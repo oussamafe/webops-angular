@@ -15,7 +15,7 @@ export class ResponceComponent implements OnInit {
     px: number;
     p = 1;
     idq = this.actRoute.snapshot.params['idq'];
-    RespSPANTITLE = 'ALL RESPONCES';
+    otid = this.actRoute.snapshot.params['otid'];
     quest: { estimated_Time: number; question: string; module: string } = {question: '', module: '', estimated_Time: 2};
     listResponces: Responce[];
     res: Responce;

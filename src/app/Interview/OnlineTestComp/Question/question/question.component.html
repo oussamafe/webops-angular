@@ -18,13 +18,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="display-3  text-white">Questions
-                                &nbsp;
                                 <button class="btn btn-1 btn-neutral" [routerLink]="['/AddQuestion']" type="button">
                                     Add Question
                                 </button>
-                                <span>{{QUESTSPANTITLE}}</span>
                             </h1>
+
                         </div>
+                        <button *ngIf="otidd" class="btn btn-1 btn-neutral" routerLink="/ViewTest/{{otidd}}" type="button">
+                            back to online test
+                        </button>
+                        <button *ngIf="question" class="btn btn-1 btn-neutral" [routerLink]="['/Question']" type="button">
+                            All Question
+                        </button>
                     </div>
                 </div>
             </div>
@@ -57,7 +62,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchQ(thisInput.value)">
+                        <input *ngIf="question" class="form-control" placeholder="Search" type="text" #thisInput value="{{question}}"  (keyup)="searchQ(thisInput.value)">
+                        <input *ngIf="!question" class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchQ(thisInput.value)">
                     </div>
                 </div>
 
@@ -76,7 +82,8 @@
                         <td contenteditable="true" (blur)="updateQuestion(Quest.id,Quest ,'module', $event);open(classic2, 'Notification', '');" style="text-align: center">{{Quest.module}}</td>
                         <td contenteditable="true" (blur)="updateQuestion(Quest.id,Quest ,'estimated', $event);open(classic2, 'Notification', '');" style="text-align: center">{{Quest.estimated_Time}}</td>
                         <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-warning" [routerLink]="['/Question']" (click)="DeleteQuestion(Quest.id)">Delete</a></td>
-                        <td style="text-align: center"><a href="javascript:void(0)" class="btn btn-link text-info" routerLink="/Responce/{{Quest.id}}" >Responces</a></td>
+                        <td  *ngIf="otidd"  style="text-align: center"><a  href="javascript:void(0)" class="btn btn-link text-info" routerLink="/Responce/{{Quest.id}}/{{otidd}}" >Responces</a></td>
+                        <td  *ngIf="!otidd"  style="text-align: center"><a  href="javascript:void(0)" class="btn btn-link text-info" routerLink="/Responce/{{Quest.id}}" >Responces</a></td>
                     </tr>
                     </tbody>
                 </table>

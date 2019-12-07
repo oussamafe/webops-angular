@@ -22,9 +22,14 @@
                                 <button class="btn btn-1 btn-neutral" routerLink="/AddResponce/{{idq}}" type="button">
                                     Add Responce
                                 </button>
-                                <span>{{RespSPANTITLE}}</span>
                             </h1>
                         </div>
+                        <button *ngIf="otid" class="btn btn-1 btn-neutral" routerLink="/ViewTest/{{otid}}" type="button">
+                            Back to online test
+                        </button>
+                        <button *ngIf="!otid" class="btn btn-1 btn-neutral" routerLink="/Question/{{quest.question}}" type="button">
+                            Back To Related Question
+                        </button>
                     </div>
                 </div>
             </div>
@@ -82,7 +87,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <input class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchR(thisInput.value)">
+                            <input *ngIf="responce" class="form-control" placeholder="Search" type="text" #thisInput value="{{responce}}" (keyup)="searchR(thisInput.value) ">
+                            <input *ngIf="!responce" class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchR(thisInput.value)">
                         </div>
                     </div>
 

@@ -40,6 +40,14 @@
         <ngb-tabset [justify]="'center'" class="custom-tab-content flex-column flex-md-row" type="pills">
             <ngb-tab title="Not Affected Question">
                 <ng-template ngbTabContent>
+                    <div class="form-group" [ngClass]="{'focused': focus===true}">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Search Bt" type="text" #thisInput (keyup)="searchM(thisInput.value)">
+                        </div>
+                    </div>
                     <table class="table table-bordered">
                         <thead>
                         <tr style="text-align: center">

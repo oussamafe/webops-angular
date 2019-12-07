@@ -10,6 +10,8 @@ import {Question} from '../../../../models/Interview/Question';
 })
 export class StepTwoTestComponent implements OnInit {
 
+    focus;
+    focus1;
     time: any;
     otid = this.actRoute.snapshot.params['otid'];
     cid = this.actRoute.snapshot.params['cid'];
@@ -57,5 +59,15 @@ export class StepTwoTestComponent implements OnInit {
 
     affecttesttocandidate() {
         this.svc.affectTestToAnCandidate(this.cid, this.otid).subscribe(() => this.router.navigate(['/OnlineTest']));
+    }
+
+
+    searchM(module) {
+        this.svc.ListQuestionByModuleNotAffectForTest(this.otid, module).subscribe(
+            (data) => {
+                this.listNotAffect = data;
+                this.px1 = Math.trunc(this.listNotAffect.length / 10) + 1;
+            }
+        );
     }
 }
