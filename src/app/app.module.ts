@@ -44,6 +44,9 @@ import { InterviewTypeComponent } from './Interview/InterviewComp/InterviewType/
 import { InterviewComponent } from './Interview/InterviewComp/Interview/interview/interview.component';
 import { StatInterviewComponent } from './Interview/StatisticComp/InterStat/stat-interview/stat-interview.component';
 import { StatTestComponent } from './Interview/StatisticComp/TestStat/stat-test/stat-test.component';
+import { environment } from 'src/environments/environment';
+import { NgxAgoraModule } from 'ngx-agora';
+import { VedioCallComponent } from './Interview/InterviewComp/Interview/vedio-call/vedio-call.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ import { StatTestComponent } from './Interview/StatisticComp/TestStat/stat-test/
     InterviewComponent,
     StatInterviewComponent,
     StatTestComponent,
+    VedioCallComponent,
   ],
     imports: [
         BrowserModule,
@@ -90,7 +94,8 @@ import { StatTestComponent } from './Interview/StatisticComp/TestStat/stat-test/
         FormsModule,
         HttpClientModule,
         ReactiveFormsModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
     ],
   providers: [
     {

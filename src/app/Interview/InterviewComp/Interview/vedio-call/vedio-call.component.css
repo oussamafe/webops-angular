@@ -1,0 +1,18 @@
+.local {
+    position: fixed;
+    right: 1rem;
+    top: 5rem;
+    width: 15vw;
+    height: 20vh;
+    border-radius: 20px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.remote {
+    position: initial;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 70vh;
+}

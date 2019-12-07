@@ -3,6 +3,7 @@ import {AuthService} from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Interview} from '../../models/Interview/Interview';
 import {InterviewType} from '../../models/Interview/InterviewType';
+import {Candidate} from '../../models/Interview/Candidate';
 @Injectable({
   providedIn: 'root'
 })
@@ -94,4 +95,20 @@ export class InterviewService {
   ListAllInterviewTypeByType(type) {
     return this.http.get<InterviewType[]>(this.URL + '/ListAllInterviewTypeByType?type=' + type, this.httpOptions);
   }
+  getTypeByid(itid) {
+    return this.http.get<InterviewType>(this.URL + '/getTypeByid?itid=' + itid, this.httpOptions);
+  }
+  getInterviewByid(iid) {
+    return this.http.get<Interview>(this.URL + '/getInterviewByid?iid=' + iid, this.httpOptions);
+  }
+  getTypeByidInterview(iid) {
+    return this.http.get<InterviewType>(this.URL + '/getTypeByidInterview?iid=' + iid, this.httpOptions);
+  }
+  getCandidateByidInterview(iid) {
+    return this.http.get<Candidate>(this.URL + '/getCandidateByidInterview?iid=' + iid, this.httpOptions);
+  }
+  getEmployeByidInterview(iid) {
+    return this.http.get<any>(this.URL + '/getEmployeByidInterview?iid=' + iid, this.httpOptions);
+  }
+
 }

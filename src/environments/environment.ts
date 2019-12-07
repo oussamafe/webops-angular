@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  agora: {
+    appId: '2522634f7ed146b68a6eafc8218cb192'
+  }
 };
 
 /*

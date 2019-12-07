@@ -66,11 +66,38 @@ export class InterviewComponent implements OnInit {
     }
 
     compare(d) {
+        return Date.parse(d) > this.myDate.getTime();
+    }
+
+    afterdate(d) {
         if (Date.parse(d) > this.myDate.getTime()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    befordate(d) {
+        // tslint:disable-next-line:prefer-const
+        let tdn = new Date(Date.parse(d));
+        if (Date.parse(d) < this.myDate.getTime() && tdn.getDate() < this.myDate.getDate()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    today(d) {
+        // tslint:disable-next-line:prefer-const
+        let tdn = new Date(Date.parse(d));
+        // tslint:disable-next-line:max-line-length
+        return tdn.getFullYear() === this.myDate.getFullYear() && tdn.getMonth() === this.myDate.getMonth() && tdn.getDate() === this.myDate.getDate(); // && tdn.getHours() === this.myDate.getHours();
+    }
+
+    sillOnline(startHour, iid) {
+        let x: number;
+        this.svc.getTypeByidInterview(iid).subscribe((data) => x = data.hours_number);
+        return startHour + x > this.myDate.getHours();
     }
 
     setNotonline(iid) {

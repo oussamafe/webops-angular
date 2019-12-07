@@ -1,0 +1,45 @@
+<main>
+    <section class="section section-shaped ">
+        <div class="shape shape-style-1 shape-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container py-lg-md d-flex">
+            <div class="col px-0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="display-3  text-white">You Are Online With ...</h1>
+                        <a href="javascript:void(0)" class="btn btn-primary mt-sm-3" (click)="leave()">Leave</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!-- SVG separator -->
+      <div class="separator separator-bottom separator-skew">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+             xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </section>
+
+
+    <section class="section section-lg ">
+        <div class="container">
+            <div [id]="localCallId" class="local"></div>
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+        </div>
+    </section>
+</main>
+<!--
+ <div [id]="localCallId" class="local"></div>
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+-->
+

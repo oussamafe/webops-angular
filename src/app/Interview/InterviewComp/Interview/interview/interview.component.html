@@ -64,12 +64,21 @@
                                             <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
                                                 <i class="ni ni-watch-time"></i>
                                             </div>
-                                            <h5 class="text-primary text-uppercase">wait for it</h5>
+                                            <h5 class="text-primary text-uppercase" *ngIf="today(t.date)">ToDay</h5>
+                                            <h5 class="text-primary text-uppercase" *ngIf="afterdate(t.date)">wait for it</h5>
+                                            <h6 class="text-primary text-uppercase" *ngIf="befordate(t.date)">Waiting For Decision </h6>
                                             <h6 class="mb-0"> Date : &nbsp;&nbsp;<span>{{t.date}}</span></h6>
                                             <h6 class="mb-0">start hour : &nbsp;&nbsp;<span>{{t.startHour}}</span></h6>
-                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0" *ngIf="!t.interonligne">Not Online</h6><br>
-                                            <a *ngIf="compare(t.date) && !t.interonligne" href="javascript:void(0)" class="btn btn-outline-primary mt-sm-3" (click)="setonline(t.id)">Set As Online Interview</a>
-                                            <a *ngIf="compare(t.date) && t.interonligne" href="javascript:void(0)" class="btn btn-outline-primary mt-sm-3" (click)="setNotonline(t.id)">Cancel Online Interview</a>
+                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6>
+                                            <h6 class="mb-0" *ngIf="!t.interonligne">Not Online</h6><br>
+                                            <a *ngIf="afterdate(t.date) && !t.interonligne" href="javascript:void(0)"
+                                               class="btn btn-outline-primary mt-sm-3" (click)="setonline(t.id)">Set As
+                                                Online Interview</a>
+                                            <a *ngIf="afterdate(t.date) && t.interonligne" href="javascript:void(0)"
+                                               class="btn btn-outline-primary mt-sm-3" (click)="setNotonline(t.id)">Cancel
+                                                Online Interview</a>
+                                            <a *ngIf="today(t.date) && t.interonligne " href="javascript:void(0)"
+                                               class="btn btn-outline-primary mt-sm-3" [routerLink]="['/vediocall']">GO Online</a>
                                         </div>
                                     </div>
                                 </div>
@@ -79,12 +88,20 @@
                                             <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
                                                 <i class="ni ni-watch-time"></i>
                                             </div>
-                                            <h5 class="text-primary text-uppercase">wait for it</h5>
+                                            <h5 class="text-primary text-uppercase" *ngIf="today(t.date)">ToDay</h5>
+                                            <h5 class="text-primary text-uppercase" *ngIf="afterdate(t.date)">wait for it</h5>
+                                            <h6 class="text-primary text-uppercase" *ngIf="befordate(t.date)">Waiting For Decision </h6>
                                             <h6 class="mb-0"> Date : &nbsp;&nbsp;<span>{{t.date}}</span></h6>
                                             <h6 class="mb-0">start hour : &nbsp;&nbsp;<span>{{t.startHour}}</span></h6>
-                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0" *ngIf="!t.interonligne">Not Online</h6><br>
-                                          <a *ngIf="!compare(t.date)" href="javascript:void(0)" class="btn btn-outline-success mt-sm-3" (click)="accept(t.id)">Accept</a>
-                                          <a *ngIf="!compare(t.date)" href="javascript:void(0)" class="btn btn-outline-danger mt-sm-3" (click)="reject(t.id)">reject</a>
+                                            <h6 class="mb-0" *ngIf="t.interonligne && afterdate(t.date)">Online</h6>
+                                            <h6 class="mb-0" *ngIf="!t.interonligne && afterdate(t.date)">Not Online</h6><br>
+                                            <a *ngIf="befordate(t.date)" href="javascript:void(0)"
+                                               class="btn btn-outline-success mt-sm-3" (click)="accept(t.id)">Accept</a>
+                                            <a *ngIf="befordate(t.date)" href="javascript:void(0)"
+                                               class="btn btn-outline-danger mt-sm-3" (click)="reject(t.id)">reject</a>
+                                            <a *ngIf="today(t.date) && t.interonligne " href="javascript:void(0)"
+                                               class="btn btn-outline-primary mt-sm-3" [routerLink]="['/vediocall']">GO Online</a>
+                                            <br>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +114,9 @@
                                             <h5 class="text-success text-uppercase">Accepted</h5>
                                             <h6 class="mb-0"> Date : &nbsp;&nbsp;<span>{{t.date}}</span></h6>
                                             <h6 class="mb-0">start hour : &nbsp;&nbsp;<span>{{t.startHour}}</span></h6>
-                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0" *ngIf="!t.interonligne">Not Online</h6><br>
+                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0"
+                                                                                                   *ngIf="!t.interonligne">
+                                            Not Online</h6><br>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +129,9 @@
                                             <h5 class="text-warning text-uppercase">rejected</h5>
                                             <h6 class="mb-0"> Date : &nbsp;&nbsp;<span>{{t.date}}</span></h6>
                                             <h6 class="mb-0">start hour : &nbsp;&nbsp;<span>{{t.startHour}}</span></h6>
-                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0" *ngIf="!t.interonligne">Not Online</h6>
+                                            <h6 class="mb-0" *ngIf="t.interonligne">Online</h6><h6 class="mb-0"
+                                                                                                   *ngIf="!t.interonligne">
+                                            Not Online</h6>
                                         </div>
                                     </div>
                                 </div>

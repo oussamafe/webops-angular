@@ -24,6 +24,7 @@ import {InterviewTypeComponent} from './Interview/InterviewComp/InterviewType/in
 import {InterviewComponent} from './Interview/InterviewComp/Interview/interview/interview.component';
 import {StatTestComponent} from './Interview/StatisticComp/TestStat/stat-test/stat-test.component';
 import {StatInterviewComponent} from './Interview/StatisticComp/InterStat/stat-interview/stat-interview.component';
+import {VedioCallComponent} from './Interview/InterviewComp/Interview/vedio-call/vedio-call.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -54,6 +55,7 @@ const routes: Routes = [
     {path: 'Interview/:uid', component: InterviewComponent},
     {path: 'statTest', component: StatTestComponent},
     {path: 'statinter', component: StatInterviewComponent},
+    {path: 'vediocall', component: VedioCallComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
