@@ -80,11 +80,10 @@ export class ApplicationsComponent implements OnInit {
         });
     }
 
-    chooseC(inter) {
-        this.its.getCandidateByidInterview(inter).subscribe((dadi) => {
+    chooseC(canid) {
             this.ots.addOnlineTest().subscribe((data) => {
-                this.router.navigate(['/StepTwoTest/' + dadi.id + '/' + data]);
+                console.log(data);
+                this.router.navigate(['/StepTwoTest/' + canid + '/' + data]);
             });
-        });
     }
 }

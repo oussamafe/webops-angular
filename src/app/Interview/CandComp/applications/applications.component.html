@@ -95,27 +95,36 @@
                                             <h6 class="mb-0">Deposit Date : &nbsp;&nbsp;<span>{{t.depositDate}}</span>
                                             </h6>
                                             <br>
-                                            <app-candidate-offer-information [cid]="t.id.idCandiate" [jid]="t.id.idJobOffer"></app-candidate-offer-information>
+                                            <app-candidate-offer-information [cid]="t.id.idCandiate"
+                                                                             [jid]="t.id.idJobOffer"></app-candidate-offer-information>
                                             <br><br>
                                             <a href="javascript:void(0)"
-                                               class="btn btn-outline-success mt-sm-3" [routerLink]="['/Applications']" (click)="acceptcand(t); open(classic,'' , '')">Accept</a>
+                                               class="btn btn-outline-success mt-sm-3" [routerLink]="['/Applications']"
+                                               (click)="acceptcand(t); open(classic,'' , '')">Accept</a>
                                             <a href="javascript:void(0)"
-                                               class="btn btn-outline-danger mt-sm-3" [routerLink]="['/Applications']" (click)="rejectcand(t)">Reject</a><!--acceptcand(t);-->
+                                               class="btn btn-outline-danger mt-sm-3" [routerLink]="['/Applications']"
+                                               (click)="rejectcand(t)">Reject</a>
                                         </div>
                                     </div>
                                     <ng-template #classic let-c="close" let-d="dismiss">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h6 class="modal-title" >Online Test Option</h6>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                                                <h6 class="modal-title">Online Test Option</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" (click)="d('Cross click')">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
                                             </div>
 
                                             <div class="modal-body" align="center">
-                                                <h6 class="modal-title text-uppercase"  align="center">do you want to add an Online test </h6>
-                                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  (click)="chooseC(t.id)">Add Now</button>
-                                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+                                                <h6 class="modal-title text-uppercase" align="center">do you want to add
+                                                    an Online test </h6>
+                                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"
+                                                        (click)="chooseC(t.id.idCandiate);c('Close click');" >Add Now
+                                                </button>
+                                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"
+                                                        (click)="c('Close click')">Close
+                                                </button>
                                             </div>
 
 
@@ -130,25 +139,31 @@
                                                 <i class="ni ni-check-bold"></i>
                                             </div>
                                             <h5 class="text-success text-uppercase">Accepted</h5>
-                                            <h6 class="mb-0">Deposit Date : &nbsp;&nbsp;<span>{{t.depositDate}}</span></h6>
-                                            <h6 class="mb-0">Answer Date : &nbsp;&nbsp;<span>{{t.answerDate}}</span></h6>
+                                            <h6 class="mb-0">Deposit Date : &nbsp;&nbsp;<span>{{t.depositDate}}</span>
+                                            </h6>
+                                            <h6 class="mb-0">Answer Date : &nbsp;&nbsp;<span>{{t.answerDate}}</span>
+                                            </h6>
                                             <br>
-                                            <app-candidate-offer-information [cid]="t.id.idCandiate" [jid]="t.id.idJobOffer"></app-candidate-offer-information>
+                                            <app-candidate-offer-information [cid]="t.id.idCandiate"
+                                                                             [jid]="t.id.idJobOffer"></app-candidate-offer-information>
                                             <br><br>
                                         </div>
                                     </div>
                                 </div>
-                                <div *ngIf="titleApp == 'Rejected Applications' " >
+                                <div *ngIf="titleApp == 'Rejected Applications' ">
                                     <div class="card card-lift--hover shadow border-0" align="center">
                                         <div class="card-body py-5">
                                             <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
                                                 <i class="ni ni-fat-delete"></i>
                                             </div>
                                             <h5 class="text-warning text-uppercase">rejected</h5>
-                                            <h6 class="mb-0">Deposit Date : &nbsp;&nbsp;<span>{{t.depositDate}}</span></h6>
-                                            <h6 class="mb-0">Answer Date : &nbsp;&nbsp;<span>{{t.answerDate}}</span></h6>
+                                            <h6 class="mb-0">Deposit Date : &nbsp;&nbsp;<span>{{t.depositDate}}</span>
+                                            </h6>
+                                            <h6 class="mb-0">Answer Date : &nbsp;&nbsp;<span>{{t.answerDate}}</span>
+                                            </h6>
                                             <br>
-                                            <app-candidate-offer-information [cid]="t.id.idCandiate" [jid]="t.id.idJobOffer"></app-candidate-offer-information>
+                                            <app-candidate-offer-information [cid]="t.id.idCandiate"
+                                                                             [jid]="t.id.idJobOffer"></app-candidate-offer-information>
                                             <br><br>
                                         </div>
                                     </div>
