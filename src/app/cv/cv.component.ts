@@ -149,4 +149,16 @@ export class CVComponent implements OnInit {
             this.skill = data;
 
         }); }
+    deleteCourse(id) {
+        if (window.confirm('Are you sure, you want to delete?')) {
+            this.cvService.supprimerCourse(id).subscribe(data => {
+                this.loadCandidate();
+                this.cvService.getCourses(this.userID).subscribe((data) => {
+                    this.Course = data;
+
+
+                });
+            });
+        }
+    }
 }
