@@ -19,7 +19,7 @@ export class AvabilityUserComponent implements OnInit {
     }
 
     currava: Availability;
-    Listava: Availability[];
+    Listava: Availability[] = [];
     px: number;
     p = 1;
 

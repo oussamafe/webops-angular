@@ -7,6 +7,7 @@ import {Interview} from '../../../../models/Interview/Interview';
 import {AppliCandService} from '../../../../services/Interview/appli-cand.service';
 import {AuthService} from '../../../../services/auth.service';
 import {DatePipe} from '@angular/common';
+import {InterviewType} from '../../../../models/Interview/InterviewType';
 
 @Component({
     selector: 'app-interview',
@@ -14,25 +15,22 @@ import {DatePipe} from '@angular/common';
     styleUrls: ['./interview.component.css']
 })
 export class InterviewComponent implements OnInit {
-    closeResult: string;
     focus;
     focus1;
     p = 1;
     uid = this.actRoute.snapshot.params['uid'];
     px: number;
-    bool = false;
     private alertSucc: IAlert;
-    listinterview: Interview[];
-    titleinterview = 'All Interview';
+    listinterview: Interview[] = [];
     typeu: number;
     myDate = new Date();
-
+    intertype = {type: '', hours_number: null, roleOfEmploye: ''};
+    employer = {first_Name: '', last_Name: ''};
+    candid = {first_Name: '', last_Name: ''};
 
     // tslint:disable-next-line:max-line-length
     constructor(private modalService: NgbModal, private svc: InterviewService, private actRoute: ActivatedRoute, private router: Router, private sapp: AppliCandService, private auth: AuthService) {
         this.alertSucc = {id: 1, type: 'success', strong: 'Updated !', message: '', icon: 'ni ni-like-2'};
-
-
     }
 
     ngOnInit() {
@@ -63,6 +61,20 @@ export class InterviewComponent implements OnInit {
                 }
             );
         }
+    }
+
+    setinter(iid) {
+        this.svc.getTypeByidInterview(iid).subscribe(
+            (data) => {
+                this.intertype = data;
+            }
+        );
+    //    this.svc.getEmployeByidInterview(iid).subscribe((data) => {
+      //      this.employer = data;
+        // });
+        this.svc.getCandidateByidInterview(iid).subscribe((data) => {
+            this.candid = data;
+        });
     }
 
     compare(d) {
@@ -114,26 +126,5 @@ export class InterviewComponent implements OnInit {
 
     reject(id) {
         this.svc.SetInValidInterview(id).subscribe(() => this.iiniit());
-    }
-
-    open(content) {
-        if (this.bool === true) {
-            this.modalService.open(content, {centered: true}).result.then((result) => {
-                this.closeResult = `Closed with: ${result}`;
-            }, (reason) => {
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            });
-            this.bool = false;
-        }
-    }
-
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return `with: ${reason}`;
-        }
     }
 }

@@ -21,21 +21,45 @@
                 </div>
             </div>
         </div>
-      <!-- SVG separator -->
-      <div class="separator separator-bottom separator-skew">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-             xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
     </section>
 
 
     <section class="section section-lg ">
         <div class="container">
-            <div [id]="localCallId" class="local"></div>
-            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+            <div class="row ">
+                <div class="col">
+                    <div [id]="localCallId" class="local"></div>
+                    <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+                </div>
+                <div class="col" *ngIf="!authService.isCandidate()">
+                    <h5 class="text-primary text-uppercase">  Interview Type :  <p align="center">&nbsp;&nbsp;&nbsp;{{intertype.type}} </p></h5>
+                    <h6 class="mb-0">  Time For Interview :  <span> {{intertype.hours_number}} Hours</span></h6>
+                    <br>
+                    <h5 class="text-primary text-uppercase">   Candidate Information : </h5>
+                    <h6 class="mb-0" > First & Last Name :  </h6> <p align="center">{{caa.first_Name}}  {{caa.last_Name}}</p>
+                    <h6 class="mb-0"> Study Level :  </h6><p align="center">{{caa.studyLevel}}</p>
+                    <h6 class="mb-0"> Experiences :  </h6><p align="center"> {{caa.experiences}}</p>
+                    <h6 class="mb-0"> Certifications : </h6><p align="center">{{caa.certifications}}</p>
+                    <h6 class="mb-0"> Skills :  </h6><p align="center">{{caa.skills}}</p>
+                </div>
+                <div class="col" *ngIf="authService.isCandidate()">
+                    <h5 class="text-primary text-uppercase">   Employer Information : </h5>
+                    <h6 class="mb-0" > First & Last Name :  </h6> <p align="center">{{emm.first_Name}}  {{emm.last_Name}}</p>
+                    <h5 class="text-primary text-uppercase">  Interview Type : <p align="center">&nbsp;&nbsp;&nbsp;{{intertype.type}} </p></h5>
+                    <h6 class="mb-0">  Time For Interview :  <span> {{intertype.hours_number}} Hours</span></h6>
+                </div>
+            </div>
+            <br>
+            <h5 class="text-primary"  *ngIf="!authService.isCandidate()">Candidate Profile :  </h5><p *ngIf="!authService.isCandidate()" align="ju"><span>{{caa.profilIntro}}</span></p>
         </div>
+
     </section>
 </main>
 <!--

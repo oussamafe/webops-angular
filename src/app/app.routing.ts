@@ -58,7 +58,7 @@ const routes: Routes = [
     {path: 'Interview/:uid', component: InterviewComponent},
     {path: 'statTest', component: StatTestComponent},
     {path: 'statinter', component: StatInterviewComponent},
-    {path: 'vediocall', component: VedioCallComponent},
+    {path: 'vediocall/:iid', component: VedioCallComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

@@ -3,6 +3,8 @@ import {NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent} from 'ng
 import {AppliCandService} from '../../../../services/Interview/appli-cand.service';
 import {AuthService} from '../../../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {InterviewService} from '../../../../services/Interview/interview.service';
 
 @Component({
     selector: 'app-vedio-call',
@@ -14,13 +16,33 @@ export class VedioCallComponent implements OnInit {
     title = 'angular-video';
     localCallId = 'agora_local';
     remoteCalls: string[] = [];
-
+    interid = this.actRoute.snapshot.params['iid'];
     private client: AgoraClient;
     private localStream: Stream;
     private uid: number;
-
-    constructor(private ngxAgoraService: NgxAgoraService, private authService: AuthService, private router: Router) {
+    // tslint:disable-next-line:max-line-length
+    caa: { id: number, first_Name: string, last_Name: string, email: string, skills: string, experiences: string, activities: string, studyLevel: string, profilIntro: string, phoneNumber: number, certifications: string } =
+        // tslint:disable-next-line:max-line-length
+        { id: null, first_Name: '', last_Name: '', email: '', skills: '', experiences: '', activities: '', studyLevel: '', profilIntro: '', phoneNumber: null, certifications: '' };
+    // tslint:disable-next-line:max-line-length
+    emm: { id: number, first_Name: string, last_Name: string, email: string, skills: string, experiences: string, activities: string, studyLevel: string, profilIntro: string, phoneNumber: number, certifications: string } =
+        // tslint:disable-next-line:max-line-length
+        { id: null, first_Name: '', last_Name: '', email: '', skills: '', experiences: '', activities: '', studyLevel: '', profilIntro: '', phoneNumber: null, certifications: '' };
+    intertype = {type: '', hours_number: null, roleOfEmploye: ''};
+    // tslint:disable-next-line:max-line-length
+    constructor(private ngxAgoraService: NgxAgoraService, private authService: AuthService, private router: Router, private actRoute: ActivatedRoute, private svc: InterviewService) {
         this.uid = Math.floor(Math.random() * 100);
+        this.svc.getTypeByidInterview(this.interid).subscribe(
+            (data) => {
+                this.intertype = data;
+            }
+        );
+        this.svc.getEmployeByidInterview(this.interid).subscribe((data) => {
+            this.emm = data;
+        });
+        this.svc.getCandidateByidInterview(this.interid).subscribe((data) => {
+            this.caa = data;
+        });
     }
 
     ngOnInit() {
