@@ -17,7 +17,9 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h1 class="display-3  text-white">Add Responces</h1>
-                        <button *ngIf="idq" class="btn btn-outline-primary" routerLink="/Responce/{{idq}}">Back to Responces</button>
+                        <button *ngIf="idq" class="btn btn-outline-primary" routerLink="/Responce/{{idq}}">Back to
+                            Responces
+                        </button>
                     </div>
                 </div>
             </div>
@@ -65,39 +67,53 @@
                 <br><br>
                 <h5 class="text-uppercase text-muted font-weight-bold">&emsp;Responce</h5>
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="text" [(ngModel)]="res.reponce" class="form-control" placeholder="Responce">
-                    </div>
-
-                    <div class=" col-lg-3 col-sm-6 mt-4 mt-md-0" >
-                        <div class="custom-control custom-radio mb-3">
-                            <input class="custom-control-input" id="customRadio1" name="custom-radio-1" type="radio" checked=""  (click)="check(true)">
-                            <label class="custom-control-label" for="customRadio1">True</label>
-                        </div>
-                        <div class="custom-control custom-radio mb-3">
-                            <input  class="custom-control-input" id="customRadio2" name="custom-radio-1" type="radio" (click)="check(false)">
-                            <label class="custom-control-label" for="customRadio2">False</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button *ngIf="idq" class="btn btn-1 btn-outline-primary" type="button" (click)="addResp()">Create Responce</button>
-                        <button *ngIf="qid && otid && cidd" class="btn btn-1 btn-outline-primary" type="button" (click)="addResp();open(classic)">Create Responce</button>
-                        <ng-template #classic let-c="close" let-d="dismiss">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title" >Notification</h6>
-                                </div>
-                                <div class="modal-body">
-                                    Do you want to add an other Responce
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="c('Close click');" routerLink="/AddResponce/{{cidd}}/{{otid}}/{{qid}}">YES</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="YES();c('Close click')">NO</button>
+                    <form #ResponceFrom="ngForm">
+                        <div class="form-group">
+                            <input type="text" [(ngModel)]="res.reponce" class="form-control" placeholder="Responce" #respfor="ngModel" name="resptextf" required>
+                            <div *ngIf="respfor.invalid  &&(respfor.dirty || respfor.touched)">
+                                <div *ngIf="respfor.errors.required">
+                                    <b style="color: red">Responce  is required.</b>
                                 </div>
                             </div>
-                        </ng-template>
-                    </div>
+                        </div>
+
+                        <div class=" col-lg-3 col-sm-6 mt-4 mt-md-0">
+                            <div class="custom-control custom-radio mb-3">
+                                <input class="custom-control-input" id="customRadio1" name="custom-radio-1" type="radio"
+                                       checked="" (click)="check(true)">
+                                <label class="custom-control-label" for="customRadio1">True</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-3">
+                                <input class="custom-control-input" id="customRadio2" name="custom-radio-1" type="radio"
+                                       (click)="check(false)">
+                                <label class="custom-control-label" for="customRadio2">False</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input *ngIf="idq" class="btn btn-1 btn-outline-primary" type="submit"  (click)="addResp()" [disabled]="!ResponceFrom.valid"  value="Create Responce">
+                            <input *ngIf="qid && otid && cidd" class="btn btn-1 btn-outline-primary"  type="submit"  (click)="addResp();open(classic)" [disabled]="!ResponceFrom.valid"  value="Create Responce">
+                            <ng-template #classic let-c="close" let-d="dismiss">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Notification</h6>
+                                    </div>
+                                    <div class="modal-body">
+                                        Do you want to add an other Responce
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                (click)="c('Close click');"
+                                                routerLink="/AddResponce/{{cidd}}/{{otid}}/{{qid}}">YES
+                                        </button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                (click)="YES();c('Close click')">NO
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

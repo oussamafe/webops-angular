@@ -41,22 +41,42 @@
     <div class="container">
       <div class="container custom-container">
         <div class="col-md-12">
+          <form #Questionform="ngForm" >
           <div class="form-group">
-            <input type="text" [(ngModel)]="qss.question" class="form-control" placeholder="Question">
+            <input type="text" [(ngModel)]="qss.question" class="form-control" placeholder="Question"  #questforf="ngModel" name="questtextf" required>
+            <div *ngIf="questforf.invalid  &&(questforf.dirty || questforf.touched)">
+              <div *ngIf="questforf.errors.required">
+                <b style="color: red">Question  is required.</b>
+              </div>
+            </div>
           </div>
 
 
           <div class="form-group">
-            <input type="text" [(ngModel)]="qss.module" class="form-control" placeholder="Module">
+            <input type="text" [(ngModel)]="qss.module" class="form-control" placeholder="Module" #modulefor="ngModel" name="moduletextf" required>
+            <div *ngIf="modulefor.invalid  &&(modulefor.dirty || modulefor.touched)">
+              <div *ngIf="modulefor.errors.required">
+                <b style="color: red">Question  is required.</b>
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
-            <input type="text" [(ngModel)]="qss.estimated_Time" class="form-control" placeholder="Estimated Time">
+            <input type="text" [(ngModel)]="qss.estimated_Time" class="form-control" placeholder="Estimated Time" required pattern="[1-5]"  #estitimefor="ngModel" name="timeinterf">
+            <div *ngIf="estitimefor.invalid  &&(estitimefor.dirty || estitimefor.touched)">
+              <div *ngIf="estitimefor.errors.required">
+                <b style="color: red">number of estimated time/minute must be setted</b>
+              </div>
+              <div *ngIf="estitimefor.errors.pattern">
+                <b style="color: red">must be a  number between 1 and 5</b>
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
-            <button  class="btn btn-1 btn-outline-primary" type="button" (click)="addQuest()">Create Question</button>
+            <input class="btn btn-1 btn-outline-primary" type="submit" [disabled]="!Questionform.valid" (click)="addQuest()" value="Create Question">
           </div>
+          </form>
         </div>
       </div>
     </div>

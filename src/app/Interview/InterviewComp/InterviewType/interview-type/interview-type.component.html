@@ -58,38 +58,54 @@
                     <div class="container">
 
                         <div class="col-md-12">
-
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="type.type" class="form-control"
-                                       placeholder="interview Type">
-                            </div>
-
-
-                            <div class="form-group">
-                                <input type="text" [(ngModel)]="type.hours_number" class="form-control"
-                                       placeholder="hours number of this type of interview">
-                            </div>
+                            <form #intertypeeform="ngForm" >
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="type.type" class="form-control"  #typeinterforf="ngModel" name="typeinterf"  placeholder="interview Type" required>
+                                    <div *ngIf="typeinterforf.invalid  &&(typeinterforf.dirty || typeinterforf.touched)">
+                                        <div *ngIf="typeinterforf.errors.required">
+                                            <b style="color: red">type of interview  is required.</b>
+                                        </div>
+                                    </div>
+                                </div>
 
 
-                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="type.hours_number" class="form-control"   #nbinterforf="ngModel" name="nbinterf"
+                                           required pattern="[1-5]"   placeholder="hours number of this type of interview">
+                                    <div *ngIf="nbinterforf.invalid  &&(nbinterforf.dirty || nbinterforf.touched)">
+                                        <div *ngIf="nbinterforf.errors.required">
+                                            <b style="color: red">number of hour must be setted</b>
+                                        </div>
+                                        <div *ngIf="nbinterforf.errors.pattern">
+                                            <b style="color: red">must be a number between 1 and 5</b>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <SELECT #op name="valid" size="1" class=" mb-4 " style="border: initial">
-                                    <OPTION value="Administrator" selected>Administrator
-                                    <OPTION value="Project_Manager">Project_Manager
-                                    <OPTION value="Human_Resources">Human_Resources
-                                    <OPTION value="Team_Leader">Team_Leader
-                                </SELECT>
 
-                            </div>
+                                <div class="form-group">
 
-                            <div class="form-group">
-                                <button class="btn btn-1 btn-outline-success" type="button"
-                                        (click)="addtype(op.value);c('Close click')">Create Type
-                                </button>
-                                <button class="btn btn-1 btn-outline-danger" type="button" data-dismiss="modal"
-                                        (click)="c('Close click')">Cancel
-                                </button>
-                            </div>
+                                    <SELECT #op name="valid" size="1" class=" mb-4 " style="border: initial">
+                                        <OPTION value="Administrator" selected>Administrator
+                                        <OPTION value="Project_Manager">Project_Manager
+                                        <OPTION value="Human_Resources">Human_Resources
+                                        <OPTION value="Team_Leader">Team_Leader
+                                    </SELECT>
+
+                                </div>
+
+                                <div class="form-group">
+                              <!--      <button class="btn btn-1 btn-outline-success" type="button"
+                                            (click)="addtype(op.value);c('Close click')">Create Type
+                                    </button>
+                                -->
+                                    <input class="btn btn-1 btn-outline-success" type="submit" [disabled]="!intertypeeform.valid" (click)="addtype(op.value);c('Close click');" value="Create Type">
+
+                                    <button class="btn btn-1 btn-outline-danger" type="button" data-dismiss="modal"
+                                            (click)="c('Close click')">Cancel
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
