@@ -40,8 +40,20 @@ export class SignupComponent implements OnInit {
     }
 
     addCandidate(content) {
-        this.candidate.createCandidate(this.candidateDetails).subscribe();
-        this.modalService.open(content);
+        this.candidate.createCandidate(this.candidateDetails).subscribe(success => {
+                // @ts-ignore
+                if (success === true) {
+                    this.modalService.open(content);
+                }
+            },
+            error => {
+                if (error === 406 )  {
+                   alert('this mail already exists ! Choose another one please ');
+                }
+
+            }
+        );
+
 
     }
 

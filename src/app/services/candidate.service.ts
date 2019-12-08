@@ -79,5 +79,15 @@ export class CandidateService {
             catchError(this.handleError)
         );
   }
+  updateimage(image: File) {
+    const postData = new FormData();
+    postData.append('image', image);
+   return  this.http
+        .post<{ message: string; post: Candidate }>(
+            'http://localhost:9080/webops-web/rest/Candidate/image',
+            postData
+        )
+       ;
 
+  }
 }

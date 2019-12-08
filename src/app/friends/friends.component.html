@@ -17,34 +17,7 @@
       </div>
     </div>
     <br><br><br> <br><br><br> <br><br><br>
-    <section class="section">
-      <div class="container">
-        <div class="card card-profile shadow mt--300">
-          <div class="px-5">
-            <div >
-              <br>
 
-              <div  class="form-group"><div  class="input-group input-group-alternative mb-4"><div  class="input-group-prepend"><span  class="input-group-text"><i  class="ni ni-zoom-split-in"></i></span></div><input  #input class="form-control" placeholder="Search" type="text" (keyup)="getCandidates(input.value)" ></div></div>
-
-              <div class="row" >
-                <div  class="col-sm-3 col-6" *ngFor=" let C of Candidates "  >
-
-                  <a class="d-block text-uppercase font-weight-bold mb-4"  routerLink="/user-profile/{{C.id}}">  {{C.first_Name}} {{C.last_Name}}</a>
-                  <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/theme/User.jpeg" style="width: 150px;">
-                  <br><br>
-                  <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest(C.id)" id="Send">Send Friend Request </button>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-
-      </div>
-
-
-    </section>
     <!-- SVG separator -->
     <div class="separator separator-bottom separator-skew">
       <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -53,5 +26,33 @@
 
     </div>
   </section>
+  <section class="section">
+    <div class="container">
+      <div class="card card-profile shadow mt--300">
+        <div class="px-5">
+          <div >
+            <br>
 
+            <div  class="form-group"><div  class="input-group input-group-alternative mb-4"><div  class="input-group-prepend"><span  class="input-group-text"><i  class="ni ni-zoom-split-in"></i></span></div><input  #input class="form-control" placeholder="Search" type="text" (keyup)="getCandidates(input.value)" ></div></div>
+
+            <div class="row"  >
+              <div  class="col-sm-3 col-6"  *ngFor=" let C of Candidates " >
+
+                <a class="d-block text-uppercase font-weight-bold mb-4"  routerLink="/user-profile/{{C.id}}/Contacts">  {{C.first_Name}} {{C.last_Name}}</a>
+                <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/theme/User.jpeg" style="width: 150px;">
+                <br><br>
+                <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest(C.id)" id="Send" >Send Friend Request </button>
+              </div>
+            </div>
+            <br> <br>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </section>
 </main>

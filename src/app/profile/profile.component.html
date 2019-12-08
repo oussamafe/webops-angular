@@ -26,7 +26,7 @@
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
                 <a href="javascript:void(0)">
-                  <img src="./assets/img/theme/User.jpeg" class="rounded-circle">
+                  <img src="./assets/img/profile/{{DetailsCandidate.image}}" class="rounded-circle" alt="profile-image">
                 </a>
               </div>
             </div>
@@ -34,48 +34,51 @@
               <div class="card-profile-actions py-4 mt-lg-0">
 
                 <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4" (click)="open(content)" >My curriculum vitae</a>
+
+
                 <a href="javascript:void(0)" class="btn btn-sm btn-default float-right " routerLink="/EditCV/{{auto.getUserID()}}" *ngIf="userID===auto.getUserID()">Edit My CV </a>
-</div>
+
+              </div>
 
             </div>
             <div class="col-lg-4 order-lg-1">
           <br><br>
               <div class="card-profile-stats d-flex justify-content-center">
                 <div>
-                <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger mr-4">
-                  <span>My Friends List</span>
 
-                </a></div>
-                <div>
+                  <button (click)="openfriends(contentfriends)"  class="btn btn-sm btn-outline-danger mr-4" *ngIf="userID===auto.getUserID()" >My Friends List</button>
 
-                  <span class="heading">89</span>
+                </div>
+                <div *ngIf="userID===auto.getUserID()" >
+
+                  <span class="heading">{{Friends.length}}</span>
                   <span class="description">Friends</span>
                 </div>
-                <div>
-                  <span class="heading">10</span>
-                  <span class="description">Friends Requests</span>
-                </div>
+
 
               </div>
             </div>
 
           </div>
           <div class="text-center mt-5">
-
+            <button type="button" class="btn btn-outline-success btn-sm" (click)="uploadimage(image)" *ngIf="userID===auto.getUserID()"  >upload image for your profile</button>
             <h3>{{DetailsCandidate.first_Name}} {{DetailsCandidate.last_Name }}
 
               <span class="font-weight-light">, {{DetailsCandidate.age}}</span>
             </h3>
-            <button type="button" class="btn btn-primary btn-sm">Follow</button>
+
+
             <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{DetailsCandidate.post}}
             </div>
-
+            <div class="h6 mt-4" *ngIf="DetailsCandidate.post.length===0 "><i class="ni business_briefcase-24 mr-2"></i> What is Your Actual Post? let Us know and edit Your profile
+            </div>
 
           </div>
           <div class="mt-5 py-5 border-top text-center">
             <div class="row justify-content-center">
               <div class="col-lg-9">
-                <p>{{DetailsCandidate.profilIntro}}</p>
+                <p >{{DetailsCandidate.profilIntro}}</p>
+                <p *ngIf="DetailsCandidate.profilIntro.length === 0 ">Write Here Your Profile Introduction , Edit Your Profile to do that </p>
                 <a href="javascript:void(0)" class="btn btn-sm btn-danger float-center " (click)="open1(classic1, 'modal_large', 'sm')" *ngIf="userID===auto.getUserID()" >Edit My Profile </a>
               </div>
             </div>
@@ -263,4 +266,75 @@
       </div>
     </div>
   </div>
+</ng-template>
+<ng-template #contentfriends let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <div class="container">
+      <div class="row">
+        <h4 class="mb-1">Your Friends List</h4>
+
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <table  >
+      <thead >
+      <tr>
+        <th scope="col"> </th>
+        <th scope="col">  </th>
+        <th scope="col">  </th>
+      </tr>
+      </thead>
+      <tbody *ngFor=" let c of Friends ">
+      <tr >
+        <td> <img src="./assets/img/profile/{{c.image}}" class="rounded-circle" width="50%" height="7%" alt="profile-image"></td>
+        <td><button type="button" class="btn btn-outline-secondary btn-sm" (click)="navigate(c.id)">{{c.first_Name}} {{c.last_Name}}</button></td>
+
+        <td><button  type="button" class="btn btn-outline-danger btn-sm" (click)="deletefriend(c.id)">Delete</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="modal-footer">
+
+
+
+  </div>
+
+
+</ng-template>
+<ng-template #image let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <div class="container">
+      <div class="row">
+        <h4 class="mb-1">Choose AN Image To Your Profile</h4>
+
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Upload an Image</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+    <div *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"  class="image-preview" >
+      <img [src]="imagePreview" >
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button  type="button" (click)="updateImage()">Save</button>
+
+  </div>
+
+
 </ng-template>

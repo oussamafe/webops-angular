@@ -61,7 +61,13 @@ export class FriendsService {
             catchError(this.handleError)
         );
   }
-
+  getFriends(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(`${config.apiUrl}/Contacts/AllMyFriends`, this.httpOptions )
+        .pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+  }
   AcceptFriendsRequest(idSender, idReciever): Observable<Friend> {
     return this.http.put<Friend>(`${config.apiUrl}/Contacts/TraiteFriendRequest/Accept?idSender=` + idSender + `&idReciever=` + idReciever, this.httpOptions )
         .pipe(
@@ -76,34 +82,14 @@ export class FriendsService {
             catchError(this.handleError)
         );
   }
-  follow(idCand, idSub): Observable<Candidate> {
-    return this.http.put<Candidate>(`${config.apiUrl}/Contacts/CandidateSub?idCand=` + idCand + `&idSub=` + idSub, this.httpOptions )
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-        );
-}
-  unfollow(idCand, idSub): Observable<Candidate> {
-    return this.http.put<Candidate>(`${config.apiUrl}/Contacts/CandidateRemoveSub?idCand=` + idCand + `&idSub=` + idSub, this.httpOptions )
+  RemoveFriend(idFriend): Observable<Friend> {
+    return this.http.delete<Friend>(`${config.apiUrl}/Contacts/RemoveFriend?idFriend=` + idFriend, this.httpOptions )
         .pipe(
             retry(1),
             catchError(this.handleError)
         );
   }
-  getAllMySubscribers(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(`${config.apiUrl}/Contacts/AllMyFriendsRequests`, this.httpOptions )
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-        );
-  }
-  getMySubSribtions(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(`${config.apiUrl}/Contacts/AllMyFriendsRequests`, this.httpOptions )
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-        );
-  }
+
 
 
 

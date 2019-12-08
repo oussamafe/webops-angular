@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'home',             component: LandingComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'user-profile/:uid',     component: ProfileComponent },
+    {path: 'user-profile/:uid/:Contacts', component: ProfileComponent},
     { path: 'register',           component: SignupComponent },
     { path: 'landing',          component: LandingComponent },
     { path: 'login',          component: LoginComponent },

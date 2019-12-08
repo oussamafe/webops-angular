@@ -162,43 +162,49 @@
   <div class="modal-body">
 
     <p class="mt-0">Your courses are very important to us.</p>
-      <div class="form-group mt-5" [ngClass]="{'focused':focus===true}">
+
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-ruler-pencil"></i></span>
           </div>
-          <input class="form-control"  placeholder="Diploma" [(ngModel)]="DetailsCourse.diploma" name="diploma" type="text"  (focus)="focus=true" (blur)="focus=false">
+          <input #diploma="ngModel" class="form-control"  placeholder="Diploma" [(ngModel)]="DetailsCourse.diploma" name="diploma" required type="text"  (focus)="focus=true" (blur)="focus=false">
+          <div *ngIf="diploma.invalid  &&(diploma.dirty || diploma.touched)">
+            <div *ngIf="diploma.errors.required">
+              <p style="color: red">Name is required.</p>
+            </div>
+
+          </div>
         </div>
-      </div>
-      <div class="form-group" [ngClass]="{'focused':focus1===true}">
+    <br>
+
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
           </div>
           <input class="form-control" placeholder="Institution" type="text" [(ngModel)]="DetailsCourse.institution" name="institution" (focus)="focus1=true" (blur)="focus1=false">
-        </div>
-      </div>
-      <div class="form-group">
+          <br>
+          <br>
+
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
           </div>
           <input class="form-control datepicker" placeholder="Select a start date" [(ngModel)]="DetailsCourse.startDate" name="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" />
         </div>
-      </div>
-      <div class="form-group">
+
+          <br>
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
           </div>
           <input class="form-control datepicker" placeholder="Select an end date" [(ngModel)]="DetailsCourse.endDate" name="endDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
         </div>
-      </div>
+
 
     </div>
     <br>
 
-
+  </div>
 
 
   <div class="modal-footer">

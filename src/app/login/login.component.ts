@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   focus1;
   loginForm: FormGroup;
   FriendsRequest: Candidate  [] = [];
+  errorLogin = null;
   // tslint:disable-next-line:max-line-length
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private friend: FriendsService) {
 
@@ -32,15 +33,24 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   login() {
+    this.errorLogin = null;
     this.authService.login(this.f.username.value , this.f.password.value)
-    .subscribe(success => {
-      if (success) {
-
-        this.router.navigate(['/home']);
-        this.getCandidates();
-      }
-    });
+        .subscribe(success => {
+              if (success === true) {
+                this.router.navigate(['/home']);
+              }
+            },
+            error => {
+              if (error === 406 )  {
+                this.errorLogin = false;
+              }
+              else {
+                this.errorLogin = true;
+              }
+            }
+        );
   }
+
   getCandidates() {
 
     this.friend.getFriendsRequest().subscribe((data) => {
