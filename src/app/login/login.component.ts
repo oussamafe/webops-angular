@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     .subscribe(success => {
       if (success) {
         if (this.authService.isAdmin()) {
+          console.log(this.authService.getUserID());
           this.router.navigate(['/admin']);
         } else { this.router.navigate(['/home']); }
       }

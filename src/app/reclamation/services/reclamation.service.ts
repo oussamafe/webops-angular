@@ -4,18 +4,23 @@ import {HttpClient} from '@angular/common/http';
 import {Reclamation} from '../model/reclamtion.model';
 import 'rxjs-compat/add/operator/finally';
 import {tap} from 'rxjs/operators';
+import {AuthService} from '../../services/auth.service';
 
 
 @Injectable({providedIn: 'root'})
 export class ReclamationService {
-    constructor(private http: HttpClient) { }
+    constructor(public auth: AuthService, private http: HttpClient) { }
     private reclamation: Reclamation[] = [];
     private url = 'http://localhost:9080/webops-web/rest/claims';
 
     getReclamations(): Observable<Reclamation[]> {
         return this.http.get<Reclamation[]>(this.url + '/admin');
     }
-
+    getUserReclamations(): Observable<Reclamation[]> {
+        const urli = this.url + '/all/' + this.auth.getUserID();
+        console.log(urli);
+        return this.http.get<Reclamation[]>(urli);
+    }
     addReclamation(rec: Reclamation): Observable<Reclamation> {
         return this.http.post<Reclamation>(this.url, rec).pipe(
             tap((resultat) => console.log('Résultat de la requête : ', resultat))
@@ -28,24 +33,30 @@ export class ReclamationService {
         );
     }
 
-   /* addclaimwithimage(rec: Reclamation) {
-        const postData = new FormData(rec);
-        postData.append(rec);
+    addclaimwithimage(rec: Reclamation, image: File) {
+       // this.auth.getId();
+        const postData = new FormData();
+        postData.append('sujet', rec.sujet);
+        postData.append('message', rec.message);
+        postData.append('id', this.auth.getUserID());
+        postData.append('image', image);
         this.http
-            .post<{ message: string; post: Post }>(
-                "http://localhost:3000/api/posts",
+            .post<{ message: string; post: Reclamation }>(
+                'http://localhost:9080/webops-web/rest/claims/image',
                 postData
             )
-            .subscribe(responseData => {
-                const post: Post = {
-                    id: responseData.post.id,
-                    title: title,
-                    content: content,
-                    imagePath: responseData.post.imagePath
-                };
-                this.posts.push(post);
-                this.postsUpdated.next([...this.posts]);
-                this.router.navigate(["/"]);
-            });
-    }*/
+            .subscribe();
+
+    }
+    addclaiimage(image: File) {
+        const postData = new FormData();
+        postData.append('image', image);
+        this.http
+            .post<{ message: string; post: Reclamation }>(
+                'http://localhost:9080/webops-web/rest/claims/image',
+                postData
+            )
+            .subscribe();
+
+    }
 }

@@ -4,6 +4,7 @@ import {ReclamationService} from '../services/reclamation.service';
 import {Reclamation} from '../model/reclamtion.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import {AuthService} from '../../services/auth.service';
 @Component({
   selector: 'app-create-reclamation',
   templateUrl: './create-reclamation.component.html',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CreateReclamationComponent implements OnInit {
 
-  constructor(public reclamationService: ReclamationService, private modalService: NgbModal) { }
+  constructor(public auth: AuthService, public reclamationService: ReclamationService, private modalService: NgbModal) { }
     imagePreview: string | ArrayBuffer;
     form: FormGroup;
     reclamation: Reclamation = new Reclamation();
@@ -35,10 +36,11 @@ if (this.form.valid) {
             showConfirmButton: true,
             timer: 1500
         });
-    /* this.reclamationService.addReclamation(this.reclamation)
-        .subscribe( (resp) => {
+        this.reclamation.sujet = this.form.value.sujet;
+        this.reclamation.message = this.form.value.message;
+     this.reclamationService.addclaimwithimage(this.reclamation, this.form.value.image);
+     console.log('valu= ' + this.form.value);
       this.form.reset();
-    });*/
 } else {
     Swal.fire({
         position: 'center',
@@ -59,6 +61,5 @@ if (this.form.valid) {
             this.imagePreview = reader.result;
         };
         reader.readAsDataURL(file);
-        console.log(this.form.value.image);
     }
 }

@@ -120,4 +120,10 @@ export class AuthService {
   public isAdmin(): boolean {
     return this.isLoggedIn() && this.roleMatch(['Administrator']);
   }
+
+  getUserID(): string {
+    const idu: string = this.getJwtTokens().sub;
+    return idu;
+  }
+
 }

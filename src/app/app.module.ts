@@ -38,7 +38,7 @@ import {
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatSortModule, MatIconModule, MatBadgeModule
+    MatSortModule, MatIconModule, MatBadgeModule, MatGridListModule
 } from '@angular/material';
 import { PackComponent } from './pack/pack.component';
 import { PaymentComponent } from './pack/payment/payment.component';
@@ -129,7 +129,8 @@ import { PackEditComponent } from './pack/pack-edit/pack-edit.component';
         MatTableModule,
         MatSortModule,
         MatIconModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatGridListModule
     ],
   providers: [
     {

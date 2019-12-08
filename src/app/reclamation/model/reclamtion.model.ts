@@ -11,4 +11,5 @@ export class Reclamation {
     dateDeTraitement;
     reponse: string;
      user: User;
+     image: string;
 }
