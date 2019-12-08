@@ -27,7 +27,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { JobComponent } from './company-profile/job/job.component';
 import { EventComponent } from './company-profile/event/event.component';
 import { EmployeeComponent } from './company-profile/employee/employee.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,8 @@ import { EmployeeComponent } from './company-profile/employee/employee.component
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    NgSelectModule
   ],
   entryComponents:[
     LoginDialogComponent

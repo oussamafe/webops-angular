@@ -13,17 +13,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class JobComponent implements OnInit {
 
   searching = false;
+  searchingPlace = false;
   searchFailed = false;
   skills: any[] = [];
   jobForm: FormGroup;
   focus = false;
-  focus1 = true;
+  focus1 = false;
   focus2 = false;
   focus3 = false;
   focus4 = false;
   focus5 = false;
   spinnerSkills = 'skills';
   spinnerPlaces = 'places';
+  spinnerConfirm = 'confirm';
+  types = ['Full-time', 'Part-time', 'Contract' , 'Temporary' , 'Volunteer' , 'Internship']
+  levels = ['Internship', 'Entry level', 'Associate' , 'Mid-Senior level' , 'Director' , 'Executive','Not Applicable']
   formatter = (result: any) => result.normalized_skill_name;
   formatterPlace = (result: any) => result.label;
 
@@ -33,10 +37,10 @@ export class JobComponent implements OnInit {
     this.jobForm = this.formBuilder.group({
       description: [''],
       job_title: [''],
-      type: [''],
-      level: [''],
+      type: [null],
+      level: [null],
       location: ['', [Validators.required, Validators.pattern(/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/)]],
-      available: [''],
+      available: [true],
       skills: ['']
     });
   }
@@ -46,7 +50,7 @@ export class JobComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       tap(() => { this.searching = true, this.spinner.show('skills', { fullScreen: false }); }),
-      switchMap(term =>
+      switchMap(term => 
         this.companyService.autoCompleteSkills(term).pipe(
           tap(() => this.searchFailed = false),
           catchError(() => {
@@ -61,16 +65,16 @@ export class JobComponent implements OnInit {
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap(() => { this.searching = true, this.spinner.show('places', { fullScreen: false }); }),
+      tap(() => { this.searchingPlace = true, this.spinner.show('places', { fullScreen: false }); }),
       switchMap(term =>
-        this.companyService.autoCompleteSkills(term).pipe(
+        this.companyService.autoCompleteAddress(term).pipe(
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
             return of([]);
           }))
       ),
-      tap(() => { this.searching = false, this.spinner.hide('places')})
+      tap(() => { this.searchingPlace = false, this.spinner.hide('places')})
     )
 
   getLocationCoodinates(adress) {
@@ -93,9 +97,19 @@ export class JobComponent implements OnInit {
 
   selectPlace(item) {
     item.preventDefault();
-    this.skills.push(item.item.locationId);
-    this.jobForm.controls['location'].reset();
+    this.jobForm.controls['location'].setValue(item.item.label)
     this.spinner.hide('places');
+  }
+
+  addJob() {
+    this.spinner.show('confirm', { fullScreen: false });
+    let skillsList = [];
+    this.skills.forEach(skill => {skillsList.push( { type : skill }) })
+    this.companyService.addJobOffer(this.jobForm.value , skillsList).subscribe(
+      result => console.log(result) ,
+      error => console.log(error),
+      () =>  this.spinner.hide('confirm')
+    );
   }
 
 }

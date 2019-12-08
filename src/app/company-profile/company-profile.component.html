@@ -92,14 +92,20 @@
                               <dd class="col-sm-9"><span
                                   [ngClass]=" item.available == true ? {'badge badge-success': 'true'} : {'badge badge-danger': 'true'}">
                                   {{item.available == true ? 'Yes' : 'No' }} </span></dd>
+                              <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
+                                <strong>Actions : </strong> </dt>
+                              <dd class="col-sm-9">
+                                <button type="button" class="btn btn-primary btn-sm mr-4">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                              </dd>
                             </dl>
                           </ng-template>
                         </ngb-tab>
                       </ngb-tabset>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success  p-2"
-                      routerLink="/job" (click)="c('Close click')" >Add Job</button>
+                      <button type="button" class="btn btn-success  p-2" routerLink="/job"
+                        (click)="c('Close click')">Add Job</button>
                       <button type="button" class="btn btn-link  p-2" data-dismiss="modal"
                         (click)="c('Close click')">Close</button>
                     </div>
@@ -142,12 +148,21 @@
                               <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
                                 <strong>Participants : </strong> </dt>
                               <dd class="col-sm-9">{{item.nbParticipants}}</dd>
+                              <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
+                                <strong>Actions : </strong> </dt>
+                              <dd class="col-sm-9">
+                                <button type="button" class="btn btn-primary btn-sm mr-4">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" (click)="deleteEvent(item)">Delete</button>
+                                <ngx-spinner [name]="spinnerEvent"></ngx-spinner>
+                              </dd>
                             </dl>
                           </ng-template>
                         </ngb-tab>
                       </ngb-tabset>
                     </div>
                     <div class="modal-footer">
+                      <button type="button" class="btn btn-success  p-2" routerLink="/event"
+                        (click)="c('Close click')">Add Event</button>
                       <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"
                         (click)="c('Close click')">Close</button>
                     </div>

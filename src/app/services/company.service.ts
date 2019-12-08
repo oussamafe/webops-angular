@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { config } from '../models/config';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +31,46 @@ export class CompanyService {
 
   }
 
-  autoCompleteAddress(address:string) : Observable<any> {
-    const params = new HttpParams().set('query', address).set('app_id', 'BnAqyTVpTpaSvovZlYe1').set('app_code', 'gy6olYoQlY8yR2M3Om1KYw');
-    return this.http.get<any>('http://autocomplete.geocoder.api.here.com/6.2/suggest.json?maxresults=5' , { params })
-      .pipe(tap(result => result) );
+  autoCompleteAddress(address: string): Observable<any> {
+    const params = new HttpParams()
+    .set('app_id', 'BnAqyTVpTpaSvovZlYe1')
+    .set('app_code', 'gy6olYoQlY8yR2M3Om1KYw')
+    .set('query', address);
+
+
+    return this.http.get('/api?maxresults=5' , {params} )
+      .pipe(
+        map( (data: any) => data.suggestions ));
+  }
+
+
+  addJobOffer(form , skills) {
+
+    form.skills = skills ;
+    return this.http.post(`${config.apiUrl}/joboffers` , form ).pipe(
+      map(result => result),
+      catchError( error =>  {
+        return throwError(error.status)  ;
+      }))
+  }
+
+  addEvent(form , skills , date) {
+
+    form.skills = skills ;
+    form.date = date ;
+    return this.http.post(`${config.apiUrl}/events` , form ).pipe(
+      map(result => result),
+      catchError( error =>  {
+        return throwError(error.status)  ;
+      }))
+  }
+
+  deleteEvent(event) {
+    return this.http.delete(`${config.apiUrl}/events/remove/${event}` , {responseType: 'text'} ).pipe(
+      map(result => { result  }),
+      catchError( error => {
+        return throwError(error.status) 
+      })
+    )
   }
 }

@@ -29,6 +29,7 @@ export class CompanyProfileComponent implements OnInit {
   isLoading = false;
   eventForm: FormGroup;
   employeeForm: FormGroup;
+  spinnerEvent = 'event'
 
   model: any;
 
@@ -80,7 +81,24 @@ export class CompanyProfileComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  addJob() {
+  deleteEvent(event) {
+    this.spinner.show('event');
+    this.companyService.deleteEvent(event.id).subscribe(
+      result => { console.log(result) } ,
+      error => {this.spinner.hide('event');} ,
+      () => {
+        const index: number = this.loggedCompany.events.indexOf(event);
+        if (index !== -1) {
+          console.log(this.loggedCompany.events[index])
+            this.loggedCompany.events.splice(index, 1);
+        }
+        this.spinner.hide('event');
+       }
+    )
+  }
+
+  deleteJob() {
+
   }
 
 

@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "http://autocomplete.geocoder.api.here.com/6.2/suggest.json",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {"^/api": ""}
+    }
+  }

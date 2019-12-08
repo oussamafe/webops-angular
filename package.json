@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "7.2.9",
     "@angular/router": "7.2.9",
     "@ng-bootstrap/ng-bootstrap": "4.1.0",
+    "@ng-select/ng-select": "^2.20.5",
     "jw-bootstrap-switch-ng2": "2.0.5",
     "moment": "^2.24.0",
     "ng2-nouislider": "1.7.13",

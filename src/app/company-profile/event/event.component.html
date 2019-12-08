@@ -1,3 +1,119 @@
-<p>
-  event works!
-</p>
+<main>
+    <section class="section section-shaped section-lg">
+      <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="container pt-lg-md">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-body px-lg-5 py-lg-5">
+                <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
+                  <span><strong>Submit an event</strong></span>
+                </div>
+                <form role="form" [formGroup]="eventForm" (ngSubmit)="addEvent()">
+                  <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-address-book"></i></span>
+                      </div>
+                      <input class="form-control" formControlName="description" placeholder="Description" type="text"
+                        (focus)="focus1 = true" (blur)="focus1 = false" />
+                    </div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ focused: focus2 === true  }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-address-book-o"></i></span>
+                      </div>
+                      <input class="form-control" formControlName="title" placeholder="Event Title" type="text"
+                        (focus)="focus2 = true" (blur)="focus2 = false" />
+                    </div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ focused: focus3 === true }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-address-book-o"></i></span>
+                      </div>
+                      <ng-select [items]="types" formControlName="type" style="width: 87.5%;" placeholder="Type">
+                      </ng-select>
+                    </div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ focused: focus === true  }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" formControlName="date" placeholder="Event Date" type="text"
+                        (focus)="focus2 = true" (blur)="focus2 = false" />
+                    </div>
+                  </div>
+                  <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-sort-numeric-desc"></i></span>
+                        </div>
+                        <input class="form-control" formControlName="nbParticipants" placeholder="Number of participants" type="text"
+                          (focus)="focus1 = true" (blur)="focus1 = false" />
+                      </div>
+                    </div>
+                  <div class="form-group" [ngClass]="{ focused: focus4 === true  }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
+                      </div>
+                      <input class="form-control" [ngbTypeahead]="searchPlace" (selectItem)="selectPlace($event)"
+                        [resultFormatter]="formatterPlace" formControlName="location" placeholder="Address" type="text"
+                        (focus)="focus5 = true" (blur)="focus5 = false" />
+                      <div class="input-group-append">
+                        <div>
+                          <button type="button" class="btn btn-icon btn-2 btn-primary" *ngIf="searchingPlace"><span
+                              class="btn-inner--icon"><i class="fa"></i>
+                              <ngx-spinner [name]="spinnerPlaces"></ngx-spinner>
+                            </span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ focused: focus5 === true }">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-settings-gear-65"></i></span>
+                      </div>
+                      <input class="form-control" [ngbTypeahead]="search" (selectItem)="selectSkill($event)"
+                        [resultFormatter]="formatter" formControlName="skills" placeholder="Skills" type="text"
+                        (focus)="focus5 = true" (blur)="focus5 = false" />
+                      <div class="input-group-append">
+                        <div>
+                          <button type="button" class="btn btn-icon btn-2 btn-primary" *ngIf="searching"><span
+                              class="btn-inner--icon"><i class="fa"></i>
+                              <ngx-spinner [name]="spinnerSkills"></ngx-spinner>
+                            </span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="alert alert-secondary alert-dismissible fade show" role="alert" *ngIf="skills.length > 0">
+                    <span class="badge badge-pill badge-default mr-2" *ngFor="let item of skills">{{item}} </span>
+                  </div>
+                  <div class="text-center">
+                    <ngx-spinner [name]="spinnerConfirm"></ngx-spinner>
+                    <button class="btn btn-primary my-4" type="submit">
+                      Add
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
