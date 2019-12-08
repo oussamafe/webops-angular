@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h1 class="display-3  text-white">Questions
-                                <button class="btn btn-1 btn-neutral" [routerLink]="['/AddQuestion']" type="button">
+                                <button *ngIf="!otidd" class="btn btn-1 btn-neutral" [routerLink]="['/AddQuestion']" type="button">
                                     Add Question
                                 </button>
                             </h1>
@@ -59,11 +59,16 @@
             <div class="col-md-12">
                 <div class="form-group" [ngClass]="{'focused': focus===true}">
                     <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                        </div>
-                        <input *ngIf="question" class="form-control" placeholder="Search" type="text" #thisInput value="{{question}}"  (keyup)="searchQ(thisInput.value)">
-                        <input *ngIf="!question" class="form-control" placeholder="Search" type="text" #thisInput (keyup)="searchQ(thisInput.value)">
+
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i> <label class="custom-toggle"><input type="radio" #chekedfor name="radio2"   (click)="chekedfor.value='Q'; thisInputM.value='';"><span class="custom-toggle-slider rounded-circle"></span></label></span>
+                                                </div>
+                                                <input  class="form-control" placeholder="Search By Question" type="text" #thisInputQ value="{{question}}" (keyup)="searchQ(thisInputQ.value)" [disabled]="chekedfor.value != 'Q' ">
+
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i> <label class="custom-toggle"><input type="radio" #chekedfor name="radio2" (click)="chekedfor.value='M' ; thisInputQ.value='';"><span class="custom-toggle-slider rounded-circle"></span></label></span>
+                                                </div>
+                                                <input class="form-control" placeholder="Search By Module" type="text" #thisInputM (keyup)="searchM(thisInputM.value)"  [disabled]="chekedfor.value != 'M'">
                     </div>
                 </div>
 

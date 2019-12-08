@@ -61,7 +61,14 @@ export class StepTwoTestComponent implements OnInit {
         this.svc.affectTestToAnCandidate(this.cid, this.otid).subscribe(() => this.router.navigate(['/OnlineTest']));
     }
 
-
+    searchQ(qsqest) {
+        this.svc.ListQuestionNotAffectForTestByQuest(this.otid, qsqest).subscribe(
+            (data) => {
+                this.listNotAffect = data;
+                this.px1 = Math.trunc(this.listNotAffect.length / 10) + 1;
+            }
+        );
+    }
     searchM(module) {
         this.svc.ListQuestionByModuleNotAffectForTest(this.otid, module).subscribe(
             (data) => {

@@ -43,7 +43,10 @@ export class AddResponceComponent implements OnInit {
     }
 
     YES() {
-        this.svc.AffectQuestionToAnOnlineTest(this.otid, this.qid).subscribe();
+        // tslint:disable-next-line:max-line-length
+        this.svc.AffectQuestionToAnOnlineTest(this.otid, this.qid).subscribe(
+            (data) => this.router.navigate(['/StepTwoTest/' + this.cidd + '/' + this.otid])
+        );
     }
 
     addResp() {

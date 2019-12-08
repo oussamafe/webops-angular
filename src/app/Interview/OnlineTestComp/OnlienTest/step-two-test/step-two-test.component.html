@@ -43,9 +43,13 @@
                     <div class="form-group" [ngClass]="{'focused': focus===true}">
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i> <label class="custom-toggle"><input type="radio" #chekedfor name="radio2"   (click)="chekedfor.value='Q'; thisInputM.value='';"><span class="custom-toggle-slider rounded-circle"></span></label></span>
                             </div>
-                            <input class="form-control" placeholder="Search Bt" type="text" #thisInput (keyup)="searchM(thisInput.value)">
+                            <input class="form-control" placeholder="Search By Question" type="text" #thisInputQ (keyup)="searchQ(thisInputQ.value)" [disabled]="chekedfor.value != 'Q' ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i> <label class="custom-toggle"><input type="radio" #chekedfor name="radio2" (click)="chekedfor.value='M' ; thisInputQ.value='';"><span class="custom-toggle-slider rounded-circle"></span></label></span>
+                            </div>
+                            <input class="form-control" placeholder="Search By Module" type="text" #thisInputM (keyup)="searchM(thisInputM.value)"  [disabled]="chekedfor.value != 'M'">
                         </div>
                     </div>
                     <table class="table table-bordered">

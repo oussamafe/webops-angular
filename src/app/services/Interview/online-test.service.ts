@@ -112,7 +112,10 @@ export class OnlineTestService {
     // tslint:disable-next-line:max-line-length
     return this.http.get<Question[]>(this.URL + '/ListQuestionByModuleNotAffectForTest?otid=' + otid + '&module=' + module, this.httpOptions);
   }
-
+  ListQuestionNotAffectForTestByQuest( otid, Quest) {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Question[]>(this.URL + '/ListQuestionNotAffectForTestByQuest?otid=' + otid + '&Quest=' + Quest, this.httpOptions);
+  }
   getOnlineTestbyid(id) {
     return this.http.get<OnlineTest>(this.URL + '/getOnlineTestbyid?otid=' + id, this.httpOptions);
   }

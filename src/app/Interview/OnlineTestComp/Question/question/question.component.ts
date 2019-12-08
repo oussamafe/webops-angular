@@ -52,7 +52,14 @@ export class QuestionComponent implements OnInit {
             }
         );
     }
-
+    searchM(module) {
+        this.svc.ListQuestionByModule(module).subscribe(
+            (data) => {
+                this.listQuestion = data;
+                this.px = Math.trunc(this.listQuestion.length / 10) + 1;
+            }
+        );
+    }
     DeleteQuestion(id) {
         if (window.confirm('Are you sure, you want to delete?')) {
             this.svc.DeleteQuestion(id).subscribe(data => {
