@@ -34,8 +34,15 @@
         </section>
         <!-- 1st Hero Variation -->
     </div>
-
-    <div class="container custom-container-2">
+    <div class="container" *ngIf="Listava.length == 0">
+        <br><br>
+        <div class="card bg-gradient-warning shadow">
+            <div class="card-body p-lg-5" align="center">
+                <h3 class="mb-1">Availability table will be available in limited period when u are selected to take an interview</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container custom-container-2" *ngIf="Listava.length != 0">
         <br>
         <br>
         <table class="table table-bordered">

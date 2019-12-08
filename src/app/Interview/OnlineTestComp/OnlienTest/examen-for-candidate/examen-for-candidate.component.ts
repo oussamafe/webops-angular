@@ -72,7 +72,7 @@ export class ExamenForCandidateComponent implements OnInit {
                 this.timeerr = this.timeerr - 1;
                 this.munitttt = Math.trunc(this.timeerr / 60);
                 this.timedCount();
-            }, 100);
+            }, 1000);
         }
     }
 
@@ -98,6 +98,7 @@ export class ExamenForCandidateComponent implements OnInit {
     }
 
     endtest() {
+          this.stopCount();
         this.svc.setTestNoteByQuestion(this.testss.id, this.quest.id, this.listResid).subscribe(
             () => this.svc.setTestResult(this.testss.id).subscribe(
                 () => this.router.navigate(['/ResultExamen/' + this.candidateid]))
