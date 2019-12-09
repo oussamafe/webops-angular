@@ -69,7 +69,18 @@ export class CompanyService {
     return this.http.delete(`${config.apiUrl}/events/remove/${event}` , {responseType: 'text'} ).pipe(
       map(result => { result  }),
       catchError( error => {
-        return throwError(error.status) 
+        return throwError(error.status)
+      })
+    )
+  }
+
+  editEvent(event , date , skills , id) {
+    event.date = date ;
+    event.skills = skills ;
+    return this.http.put(`${config.apiUrl}/events/edit/${id}` , event , {responseType: 'text'}).pipe(
+      map(result => result),
+      catchError( error => {
+        return throwError(error);
       })
     )
   }

@@ -1,28 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { CompanyService } from 'src/app/services/company.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
-import { DatePipe, formatDate } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CompanyService } from 'src/app/services/company.service';
+import { DatePipe } from '@angular/common';
+import { LocationLookupService } from 'src/app/services/location-lookup.service';
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  selector: 'app-edit-event',
+  templateUrl: './edit-event.component.html',
+  styleUrls: ['./edit-event.component.css']
 })
-export class EventComponent implements OnInit {
+export class EditEventComponent implements OnInit {
 
+  @Input() public event;
+  focus;
+  focus1 = true;
+  focus2;
+  focus3;
+  focus4;
+  classic1;
   searching = false;
   searchingPlace = false;
   searchFailed = false;
   eventForm: FormGroup;
-  focus = false;
-  focus1 = true;
-  focus2 = false;
-  focus3 = false;
-  focus4 = false;
-  focus5 = false;
   skills: any[] = [];
   spinnerSkills = 'skills';
   spinnerPlaces = 'places';
@@ -30,20 +33,25 @@ export class EventComponent implements OnInit {
   types = ['Formation' , 'WorkShop']
   formatter = (result: any) => result.normalized_skill_name;
   formatterPlace = (result: any) => result.label;
+  location = null;
 
-
-  constructor(private spinner: NgxSpinnerService , private companyService: CompanyService, private formBuilder: FormBuilder) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private modalService: NgbModal , private formBuilder: FormBuilder , private spinner: NgxSpinnerService , private companyService: CompanyService , private lookupService:LocationLookupService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    var date = new Date(this.datePipe.transform(this.event.date , 'yyyy-MM-dd' , 'CET'));
+    let datePicker = { year: date.getUTCFullYear() , month: date.getMonth()+1, day: date.getUTCDate() };
     this.eventForm = this.formBuilder.group({
-      date: [''],
-      type: [null],
-      title: [''],
-      nbParticipants: [null],
-      location: ['', [Validators.required, Validators.pattern(/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/)]],
+      date: [datePicker],
+      type: [this.event.type],
+      title: [this.event.title],
+      nbParticipants: [this.event.nbParticipants],
+      location: [this.location],
       skills: [''],
-      description: ['']
+      description: [this.event.description]
     });
+    this.lookupService.lookup(this.event.location).subscribe(result => { this.eventForm.controls['location'].setValue(result.address)} );
+    this.event.skills.forEach(element => { this.skills.push(element.type) ; });
   }
 
   search = (text$: Observable<string>) =>
@@ -84,25 +92,30 @@ export class EventComponent implements OnInit {
       this.eventForm.controls['skills'].reset();
       this.spinner.hide('skills');
     }
-  
+
     selectPlace(item) {
       item.preventDefault();
       this.eventForm.controls['location'].setValue(item.item.label)
       this.spinner.hide('places');
     }
 
-    addEvent() {
+    removeSkill(skill) {
+      const index: number = this.skills.indexOf(skill);
+        if (index !== -1) {
+            this.skills.splice(index, 1);
+        }
+    }
+
+    editEvent() {
 
       let date = this.eventForm.controls['date'].value ;
       let dateF = new Date(date.year, date.month-1, date.day);
-      this.spinner.show('confirm', { fullScreen: false });
       let skillsList = [];
-      this.skills.forEach(skill => {skillsList.push( { type : skill })})
-      this.companyService.addEvent(this.eventForm.value , skillsList , dateF).subscribe(
-        result => console.log(result) ,
-        error => { this.spinner.hide('confirm') ; console.log(error) },
-        () =>  this.spinner.hide('confirm')
-      );
+      this.skills.forEach(skill => {skillsList.push( { type : skill })});
+      this.companyService.editEvent(this.eventForm.value , dateF , skillsList , this.event.id ).subscribe(
+        result => {console.log(result)},
+        error => {console.log(error)},
+        () => {} );
     }
 
 }

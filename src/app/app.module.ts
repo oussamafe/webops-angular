@@ -28,6 +28,8 @@ import { JobComponent } from './company-profile/job/job.component';
 import { EventComponent } from './company-profile/event/event.component';
 import { EmployeeComponent } from './company-profile/employee/employee.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { EditEventComponent } from './company-profile/job/edit-event/edit-event.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SkillsComponent,
     JobComponent,
     EventComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,
@@ -69,16 +72,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgSelectModule
   ],
   entryComponents:[
-    LoginDialogComponent
+    LoginDialogComponent,
+    EditEventComponent
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
+      
     },
     HttpClient,
-    FormBuilder
+    FormBuilder,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -17,11 +17,17 @@ export class ProfileComponent implements OnInit {
     closeResult: string;
     adress: string[] = [];
 
+    // tslint:disable-next-line: max-line-length
     constructor(private profileService: ProfileService, private authService: AuthService, private router: Router, private modalService: NgbModal , private locationService: LocationLookupService) {
         this.profileService.getEmployeeDetails().subscribe((data) => { this.employeeDetails = data; });
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.locationService.getCurrentPosition().subscribe(
+            result => console.log(result) ,
+            error => console.log(error)
+        );
+    }
 
     logout() {
         this.authService.logout();

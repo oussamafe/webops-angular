@@ -10,6 +10,8 @@ import { SlicePipe } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { EditEventComponent } from './job/edit-event/edit-event.component';
+
 
 @Component({
   selector: 'app-company-profile',
@@ -29,7 +31,9 @@ export class CompanyProfileComponent implements OnInit {
   isLoading = false;
   eventForm: FormGroup;
   employeeForm: FormGroup;
-  spinnerEvent = 'event'
+  spinnerEvent = 'event';
+  edit = false;
+  eventEdits = null;
 
   model: any;
 
@@ -99,6 +103,11 @@ export class CompanyProfileComponent implements OnInit {
 
   deleteJob() {
 
+  }
+
+  editEvent(event) {
+    const modalRef = this.modalService.open(EditEventComponent , { windowClass: 'modal-mini', size: 'sm', centered: true });
+    modalRef.componentInstance.event = event;
   }
 
 

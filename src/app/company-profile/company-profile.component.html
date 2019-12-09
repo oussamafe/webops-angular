@@ -137,7 +137,7 @@
                             <dl class="row">
                               <dt class="col-sm-3 text-truncate"> <i class="fa fa-calendar mr-2"></i> <strong>Deposit
                                   Date : </strong> </dt>
-                              <dd class="col-sm-9">{{item.date | date:'dd/MM/yyyy' }} </dd>
+                                <dd  class="col-sm-9">{{item.date | date:'dd/MM/yyyy' }} </dd>
                               <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
                                 <strong>Description : </strong> </dt>
                               <dd class="col-sm-9">{{item.description}}</dd>
@@ -151,8 +151,9 @@
                               <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
                                 <strong>Actions : </strong> </dt>
                               <dd class="col-sm-9">
-                                <button type="button" class="btn btn-primary btn-sm mr-4">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm" (click)="deleteEvent(item)">Delete</button>
+                                <button type="button" class="btn btn-primary btn-sm mr-4" (click)="editEvent(item)">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                  (click)="deleteEvent(item)">Delete</button>
                                 <ngx-spinner [name]="spinnerEvent"></ngx-spinner>
                               </dd>
                             </dl>
