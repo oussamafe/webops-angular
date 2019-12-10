@@ -82,4 +82,8 @@ export class NavbarComponent implements OnInit {
                 document.getElementById('Reject').hidden = true;
             }); });
     }
+    logout() {
+
+        this.authService.logout().subscribe();
+    }
 }

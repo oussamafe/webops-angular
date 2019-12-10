@@ -5,6 +5,8 @@ import {CandidateService} from '../services/candidate.service';
 import {CVService} from '../services/cv.service';
 import {AuthService} from '../services/auth.service';
 import {FriendsService} from '../services/friends.service';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-friends',
@@ -16,7 +18,7 @@ export class FriendsComponent implements OnInit {
 
 
 
-  constructor(public auto: AuthService, public candidateService: CandidateService, public friendS: FriendsService) { }
+  constructor( private router: Router, public auto: AuthService, public candidateService: CandidateService, public friendS: FriendsService, private modalService: NgbModal) { }
 
   ngOnInit() {}
   getCandidates(str) {
@@ -29,9 +31,14 @@ export class FriendsComponent implements OnInit {
     }
   }
 
-  SendFriendRequest(idReciever) {this.friendS.SendFriendsRequest(this.auto.getUserID(), idReciever).subscribe(success => {
-    if (success) {
-     document.getElementById('Send').hidden = true ;
-    }});
+  SendFriendRequest(pop , idReciever) {
+    this.friendS.SendFriendsRequest(this.auto.getUserID(), idReciever).subscribe();
+     this.modalService.open(pop, { size: 'sm' });
+
+  }
+
+  close() {
+    this.modalService.dismissAll();
+    this.router.navigate(['home']);
   }
 }

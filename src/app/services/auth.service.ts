@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<any>(`${config.apiUrl}/logout`, {
+   /* return this.http.post<any>(`${config.apiUrl}/logout`, {
       'refreshToken': this.getRefreshToken()
     }).pipe(
         tap(() => this.doLogoutUser()),
@@ -49,7 +49,8 @@ export class AuthService {
         catchError(error => {
           alert(error.error);
           return of(false);
-        }));
+        }));*/
+    return this.doLogoutUser();
   }
 
   isLoggedIn() {

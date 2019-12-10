@@ -26,19 +26,9 @@
         </div>
       </div>
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <li class="nav-item ">
-          <a class="nav-link no-caret">
-            <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/landing']" class="navbar-brand">Page 1</a>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link no-caret">
-            <i class="ni ni-collection d-lg-none"></i>
-            <a class="navbar-brand">Page 2</a>
-          </a>
-        </li>
-        <li class="nav-item ">
+
+
+        <li class="nav-item " *ngIf="authService.isLoggedIn()" >
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
             <a [routerLink]="['/Jobs']" class="navbar-brand">Jobs</a>
@@ -107,6 +97,14 @@
               <span class="nav-link-inner--text" >Profile</span>
             </a>
           </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="authService.isLoggedIn()">
+          <a class="btn btn-white">
+              <span class="btn-inner--icon">
+                <i class=" ni ni-curved-next"></i>
+              </span>
+            <span class="nav-link-inner--text" (click)="logout()" > Log out</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
