@@ -23,10 +23,6 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.locationService.getCurrentPosition().subscribe(
-            result => console.log(result) ,
-            error => console.log(error)
-        );
     }
 
     logout() {

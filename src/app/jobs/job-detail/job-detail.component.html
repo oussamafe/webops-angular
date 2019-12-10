@@ -5,11 +5,67 @@
         <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
           <span><strong>Job Detail</strong></span>
         </div>
-        <div class="text-center">
-            <button class="btn btn-primary my-4" type="submit">
-              Apply Now
-            </button>
+        <div class="form-group " [ngClass]="{ focused: focus1 === false }">
+          <label class="text-primary">
+            <li><strong>Job Title</strong></li>
+          </label>
+          <div class="input-group input-group-alternative">
+            <input type="text" [value]="job.job_title" class="form-control form-control-alternative display-4 "
+              disabled="">
           </div>
+        </div>
+        <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+          <label class="text-primary">
+            <li><strong>Description</strong></li>
+          </label>
+          <div class="input-group input-group-alternative">
+
+            <input type="text" [value]="job.description" class="form-control form-control-alternative display-4 "
+              disabled="">
+          </div>
+        </div>
+        <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+          <label class="text-primary">
+            <li><strong>Level</strong></li>
+          </label>
+          <div class="input-group input-group-alternative">
+
+            <input type="text" [value]="job.level " class="form-control form-control-alternative display-4 "
+              disabled="">
+          </div>
+        </div>
+        <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+          <label class="text-primary">
+            <li><strong>Deposit Date</strong></li>
+          </label>
+          <div class="input-group input-group-alternative">
+
+            <input type="text" [value]="job.depositDate | dateAgo"
+              class="form-control form-control-alternative display-4 " disabled="">
+          </div>
+        </div>
+        <div class="form-group " [ngClass]="{ focused: focus1 === true }">
+          <label class="text-primary">
+            <li><strong>Type</strong></li>
+          </label>
+          <div class="input-group input-group-alternative">
+
+            <input type="text" [value]="job.type" class="form-control form-control-alternative display-4 " disabled="">
+          </div>
+        </div>
+        <div>
+          <label class="text-primary">
+            <li><strong>Skills</strong></li>
+          </label>
+          <div>
+            <span class="badge badge-default mr-2" *ngFor="let skills of job.skills">{{skills.type}}</span>
+          </div>
+        </div>
+        <div class="text-center" role="alert">
+          <button class="btn btn-primary my-4" type="submit">
+            Apply Now
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -37,6 +37,9 @@ import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { UploadImageComponent } from './company-profile/upload-image/upload-image.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { DateAgoPipe } from './jobs/job-detail/date-ago.pipe';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { RtlDirective } from './jobs/rtl.directive';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -67,7 +70,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     EditJobComponent,
     JobsComponent,
     UploadImageComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    DateAgoPipe,
+    RtlDirective
   ],
   imports: [
     BrowserModule,
@@ -90,7 +95,11 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NgxSpinnerModule,
     GooglePlaceModule,
     NgSelectModule,
-    DropzoneModule
+    DropzoneModule,
+    NgxMapboxGLModule.withConfig({
+      // tslint:disable-next-line: max-line-length
+      accessToken: 'pk.eyJ1Ijoib3Vzc2FtYWZlIiwiYSI6ImNrM3hvMDUxZjBzZG8za3A2cHNyMzh3bWQifQ.zjwKRhcnIP_nowp9lPg5PA', // Optionnal, can also be set per map (accessToken input of mgl-map)
+    })
   ],
   entryComponents:[
     LoginDialogComponent,

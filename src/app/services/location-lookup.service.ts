@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { of, Observable, throwError, Observer } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,21 @@ export class LocationLookupService {
             }
         );
     });
+}
+
+getJobsByLocation(location , distance): Observable<any> {
+  console.log(location)
+  const params = new HttpParams()
+    .set('lat', location[1])
+    .set('lon', location[0])
+    .set('distance', distance);
+  return this.http.post<any>('http://localhost:9080/webops-web/rest/search' , params, { headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    })
+  }).pipe(
+    map(result => result),
+    catchError(error =>
+        throwError(error.status))
+  )
 }
 }

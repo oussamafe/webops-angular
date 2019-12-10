@@ -11,7 +11,7 @@ export class JobDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.job.id);
+    console.log(this.job);
   }
 
 }
