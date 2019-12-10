@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { ApplicationComponent } from './application/application.component';
 
 
 
@@ -50,6 +51,7 @@ import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
     DashboardComponent,
     JobsComponent,
     JobDetailComponent,
+    ApplicationComponent,
 
 
   ],

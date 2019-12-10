@@ -6,4 +6,5 @@ export class Application {
     depositDate: string ;
     answerDate: string ;
     result: boolean ;
+    cv: string ;
 }
