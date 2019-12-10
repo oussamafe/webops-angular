@@ -50,7 +50,9 @@
             </h3>
             <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>{{loggedCompany.field}}</div>
             <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{loggedCompany.email}}</div>
-            <div><i class="ni education_hat mr-2"></i></div>
+            <div>
+              <dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+            </div>
           </div>
           <div class="mt-2 py-2 border-top text-center">
             <div class="row">
@@ -95,8 +97,9 @@
                               <dt class="col-sm-3 text-truncate"> <i class="fa fa-file-text-o mr-2"></i>
                                 <strong>Actions : </strong> </dt>
                               <dd class="col-sm-9">
-                                <button type="button" class="btn btn-primary btn-sm mr-4">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-primary btn-sm mr-4" (click)="editJob(item)">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" (click)="deleteJob(item)">Delete</button>
+                                <ngx-spinner [name]="spinnerJob"></ngx-spinner>
                               </dd>
                             </dl>
                           </ng-template>

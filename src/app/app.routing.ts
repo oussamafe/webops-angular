@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { JobComponent } from './company-profile/job/job.component';
 import { EventComponent } from './company-profile/event/event.component';
+import { JobsComponent } from './jobs/jobs.component';
 
 const routes: Routes =[
     { path: 'home',             component: LandingComponent },
@@ -21,6 +22,7 @@ const routes: Routes =[
     { path: 'company',          component: CompanyProfileComponent },
     { path: 'job',          component: JobComponent },
     { path: 'event',          component: EventComponent },
+    { path: 'jobs',          component: JobsComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

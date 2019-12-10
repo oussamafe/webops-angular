@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { EditEventComponent } from './job/edit-event/edit-event.component';
+import { EditJobComponent } from './job/edit-job/edit-job.component';
 
 
 @Component({
@@ -32,9 +33,20 @@ export class CompanyProfileComponent implements OnInit {
   eventForm: FormGroup;
   employeeForm: FormGroup;
   spinnerEvent = 'event';
+  spinnerJob = 'job';
   edit = false;
   eventEdits = null;
 
+  config = {
+    // Change this to your upload POST address:
+     url: 'http://localhost:9080/webops-web/rest/employee/company/edit/image',
+     maxFilesize: 1,
+     paramName: 'image',
+     acceptedFiles: 'image/*',
+     headers: {
+      'Authorization': `Bearer ${this.authService.getJwtToken()}`
+     }
+   };
   model: any;
 
 
@@ -101,7 +113,20 @@ export class CompanyProfileComponent implements OnInit {
     )
   }
 
-  deleteJob() {
+  deleteJob(job) {
+    this.spinner.show('job');
+    this.companyService.deleteJob(job.id).subscribe(
+      result => {} ,
+      error => {this.spinner.hide('job');} ,
+      () => {
+        const index: number = this.loggedCompany.comapnyJobs.indexOf(job);
+        if (index !== -1) {
+          console.log(this.loggedCompany.comapnyJobs[index])
+            this.loggedCompany.comapnyJobs.splice(index, 1);
+        }
+        this.spinner.hide('job');
+       }
+    )
 
   }
 
@@ -110,6 +135,19 @@ export class CompanyProfileComponent implements OnInit {
     modalRef.componentInstance.event = event;
   }
 
+  editJob(job) {
+    const modalRef = this.modalService.open(EditJobComponent , { windowClass: 'modal-mini', size: 'sm', centered: true });
+    modalRef.componentInstance.job = job;
+  }
+
+
+  public onUploadError(args: any): void {
+    console.log('onUploadError:', args);
+  }
+
+  public onUploadSuccess(args: any): void {
+    console.log('onUploadSuccess:', args);
+  }
 
 
 }

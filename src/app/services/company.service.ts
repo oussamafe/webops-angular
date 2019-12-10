@@ -84,4 +84,32 @@ export class CompanyService {
       })
     )
   }
+
+  deleteJob(job) {
+    return this.http.delete(`${config.apiUrl}/joboffers/remove/${job}` , {responseType: 'text'} ).pipe(
+      map(result => { result  }),
+      catchError( error => {
+        return throwError(error.status)
+      })
+    )
+  }
+
+  editJob(event , skills , id) {
+    event.skills = skills ;
+    return this.http.put(`${config.apiUrl}/joboffers/edit/${id}` , event , {responseType: 'text'}).pipe(
+      map(result => result),
+      catchError( error => {
+        return throwError(error);
+      })
+    )
+  }
+
+  getAllJobs(): Observable<any> {
+    return this.http.get<any>(`${config.apiUrl}/joboffers/jobs/all`).pipe(
+      map(result => result),
+      catchError(error => {
+        return error.status;
+      })
+    )
+  }
 }

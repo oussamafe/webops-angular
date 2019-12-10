@@ -28,6 +28,7 @@
     "jw-bootstrap-switch-ng2": "2.0.5",
     "moment": "^2.24.0",
     "ng2-nouislider": "1.7.13",
+    "ngx-dropzone-wrapper": "^8.0.0",
     "ngx-google-places-autocomplete": "^2.0.4",
     "ngx-spinner": "^7.2.0",
     "nouislider": "13.1.3",

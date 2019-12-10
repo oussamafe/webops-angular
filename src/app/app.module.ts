@@ -30,6 +30,20 @@ import { EmployeeComponent } from './company-profile/employee/employee.component
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditEventComponent } from './company-profile/job/edit-event/edit-event.component';
 import { DatePipe } from '@angular/common';
+import { EditJobComponent } from './company-profile/job/edit-job/edit-job.component';
+import { JobsComponent } from './jobs/jobs.component';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+   url: 'http://localhost:9080/webops-web/rest/employee/company/edit/image',
+   maxFilesize: 1,
+   paramName: 'image',
+   acceptedFiles: 'image/*',
+ };
+
 
 @NgModule({
   declarations: [
@@ -47,7 +61,9 @@ import { DatePipe } from '@angular/common';
     JobComponent,
     EventComponent,
     EmployeeComponent,
-    EditEventComponent
+    EditEventComponent,
+    EditJobComponent,
+    JobsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,18 +85,23 @@ import { DatePipe } from '@angular/common';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     GooglePlaceModule,
-    NgSelectModule
+    NgSelectModule,
+    DropzoneModule
   ],
   entryComponents:[
     LoginDialogComponent,
-    EditEventComponent
+    EditEventComponent,
+    EditJobComponent
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
-      
+    },
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG
     },
     HttpClient,
     FormBuilder,
