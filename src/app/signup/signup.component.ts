@@ -14,19 +14,18 @@ export class SignupComponent implements OnInit {
     focus;
     focus1;
     focus2;
-    IsShow  ;
-    IsShow1  ;
+
     constructor(public candidate: CandidateService, public router: Router, config: NgbModalConfig, private modalService: NgbModal) {
         config.backdrop = 'static';
         config.keyboard = false;
     }
 
     ngOnInit() {
-        this.IsShow = false ;
-        this.IsShow1 = false ;
+       // this.IsShow = false ;
+        //this.IsShow1 = false ;
 
     }
-
+/*
     showCandidateForm() {
         this.IsShow = !this.IsShow;
         this.IsShow1 = false ;
@@ -38,24 +37,11 @@ export class SignupComponent implements OnInit {
         this.IsShow = false ;
         console.log(this.IsShow1);
     }
-
+*/
     addCandidate(content) {
-        this.candidate.createCandidate(this.candidateDetails).subscribe(success => {
-                // @ts-ignore
-                if (success === true) {
-                    this.modalService.open(content);
-                }
-            },
-            error => {
-                if (error === 406 )  {
-                   alert('this mail already exists ! Choose another one please ');
-                }
-
-            }
-        );
-
-
-    }
+        this.candidate.createCandidate(this.candidateDetails).subscribe();
+        this.modalService.open(content);
+       }
 
     Home() {
         this.modalService.dismissAll();

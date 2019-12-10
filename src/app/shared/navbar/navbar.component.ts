@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getCandidates();
         this.router.events.subscribe((event) => {
             this.isCollapsed = true;
             if (event instanceof NavigationStart) {
@@ -82,8 +83,5 @@ export class NavbarComponent implements OnInit {
                 document.getElementById('Reject').hidden = true;
             }); });
     }
-    logout() {
 
-        this.authService.logout().subscribe();
-    }
 }

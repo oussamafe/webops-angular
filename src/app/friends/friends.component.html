@@ -39,7 +39,7 @@
               <div  class="col-sm-3 col-6"  *ngFor=" let C of Candidates " >
 
                 <a class="d-block text-uppercase font-weight-bold mb-4"  routerLink="/user-profile/{{C.id}}/Contacts">  {{C.first_Name}} {{C.last_Name}}</a>
-                <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/theme/{{C.image}}" style="width: 150px;">
+                <img  alt="Circle image" class="img-fluid rounded-circle shadow" src="./assets/img/profile/{{C.image}}" style="width: 150px;">
                 <br><br>
                 <button class="btn btn-sm btn-info" type="button" (click)="SendFriendRequest(pop,C.id)" id="Send" >Send Friend Request </button>
               </div>

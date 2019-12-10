@@ -70,15 +70,14 @@
 
             <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{DetailsCandidate.post}}
             </div>
-            <div class="h6 mt-4" *ngIf="DetailsCandidate.post.length===0 "><i class="ni business_briefcase-24 mr-2"></i> What is Your Actual Post? let Us know and edit Your profile
-            </div>
+
 
           </div>
           <div class="mt-5 py-5 border-top text-center">
             <div class="row justify-content-center">
               <div class="col-lg-9">
                 <p >{{DetailsCandidate.profilIntro}}</p>
-                <p *ngIf="DetailsCandidate.profilIntro.length === 0 ">Write Here Your Profile Introduction , Edit Your Profile to do that </p>
+
                 <a href="javascript:void(0)" class="btn btn-sm btn-danger float-center " (click)="open1(classic1, 'modal_large', 'sm')" *ngIf="userID===auto.getUserID()" >Edit My Profile </a>
               </div>
             </div>

@@ -33,7 +33,14 @@ export class ProfileComponent implements OnInit {
     form: FormGroup;
     // tslint:disable-next-line:max-line-length
     constructor(private http: HttpClient, public candidateService: CandidateService, public friendsSrv: FriendsService, public cvService: CVService, public auto: AuthService, private Actrouter: ActivatedRoute, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
-
+        this.form = new FormGroup({
+            image: new FormControl(null)
+        });
+        this.loadFriends() ;
+        this.loadCandidate();
+        this.getProfExp();
+        this.getCourse();
+        this.getSkill();
                      config.backdrop = 'static';
                     config.keyboard = false;
 
@@ -74,14 +81,7 @@ export class ProfileComponent implements OnInit {
         }); }
 
     ngOnInit() {
-        this.form = new FormGroup({
-            image: new FormControl(null)
-        });
-        this.loadFriends() ;
-        this.loadCandidate();
-        this.getProfExp();
-        this.getCourse();
-        this.getSkill();
+
     }
 
     open(content) {
