@@ -18,6 +18,7 @@ export class ApplicationsComponent implements OnInit {
     listapplicaion: Application[];
     titleApp = 'Still Wait Applications';
     closeResult: string;
+    let;
 
     // tslint:disable-next-line:max-line-length
     constructor(private ots: OnlineTestService, private its: InterviewService, private svc: AppliCandService, private actRoute: ActivatedRoute, private router: Router, private auth: AuthService, private modalService: NgbModal) {
@@ -54,7 +55,9 @@ export class ApplicationsComponent implements OnInit {
     }
 
     acceptcand(can: Application) {
-        this.svc.acceptApplication(can.id).subscribe(() => this.showstill());
+        this.svc.acceptApplication(can.id).subscribe(() => {
+            this.showstill();
+        });
     }
 
     rejectcand(can: Application) {
@@ -81,9 +84,9 @@ export class ApplicationsComponent implements OnInit {
     }
 
     chooseC(canid) {
-            this.ots.addOnlineTest().subscribe((data) => {
-                console.log(data);
-                this.router.navigate(['/StepTwoTest/' + canid + '/' + data]);
-            });
+        this.ots.addOnlineTest().subscribe((data) => {
+            console.log(data);
+            this.router.navigate(['/StepTwoTest/' + canid + '/' + data]);
+        });
     }
 }

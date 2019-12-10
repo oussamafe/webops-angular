@@ -55,24 +55,23 @@
           </a>
         </li>
 
-        <li class="nav-item " >
-          <a class="nav-link no-caret">
-            <i class="ni ni-collection d-lg-none"></i>
-            <a *ngIf="authService.isLoggedIn()" routerLink="/AvaibilityUser/{{authService.getUserID()}}" class="navbar-brand">Avaibility</a>
-            <a *ngIf="!authService.isLoggedIn()" routerLink="/login" class="navbar-brand">Avaibility</a>
-          </a>
-        </li>
-
-        <li class="nav-item dropdown"  *ngIf="authService.isLoggedIn()">
-          <a class="nav-link no-caret" data-toggle="dropdown" role="button" routerLink="/Interview/{{authService.getUserID()}}">
+        <li class="nav-item dropdown" >
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button"  routerLink="/login" *ngIf="!authService.isLoggedIn()">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text navbar-brand">Interview</span>
           </a>
-          <div class="dropdown-menu" *ngIf="!authService.isCandidate()">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" *ngIf="authService.isLoggedIn()">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text navbar-brand">Interview</span>
+          </a>
+          <div class="dropdown-menu" *ngIf="authService.isLoggedIn()">
+            <a routerLink="/Interview/{{authService.getUserID()}}" class="dropdown-item">Interview</a>
             <a [routerLink]="['/Interview']" class="dropdown-item " *ngIf="authService.isAdmin()">All Interview</a>
-            <a [routerLink]="['/InterviewType']" class="dropdown-item ">InterviewType</a>
+            <a [routerLink]="['/InterviewType']" class="dropdown-item " *ngIf="!authService.isCandidate()">InterviewType</a>
+            <a routerLink="/AvaibilityUser/{{authService.getUserID()}}" class="dropdown-item">Avaibility</a>
           </div>
         </li>
+
         <li class="nav-item dropdown"  >
           <a class="nav-link no-caret" data-toggle="dropdown" role="button" >
             <i class="ni ni-collection d-lg-none"></i>
@@ -81,6 +80,17 @@
           <div class="dropdown-menu">
             <a [routerLink]="['/statTest']" class="dropdown-item ">Online Test</a>
             <a [routerLink]="['/statinter']" class="dropdown-item ">Interview</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="!authService.isCandidate()">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button" >
+            <i class="ni ni-collection d-lg-none"></i>
+            <a class="nav-link-inner--text navbar-brand ni ni-notification-70"><span *ngIf="x == 0" class="badge badge-pill badge-secondary">{{x}}</span>
+              <span *ngIf="x != 0" class="badge badge-pill badge-danger">{{x}}</span></a>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item ">online test need to add</a>
           </div>
         </li>
       </ul>

@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd, NavigationStart} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
 import {AuthService} from 'src/app/services/auth.service';
+import {AppliCandService} from '../../services/Interview/appli-cand.service';
+import {OnlineTestService} from '../../services/Interview/online-test.service';
+import {Application} from '../../models/Interview/Application';
 
 @Component({
     selector: 'app-navbar',
@@ -13,10 +16,13 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public location: Location, private router: Router, private authService: AuthService) {
+    constructor(public location: Location, private router: Router, private authService: AuthService, private svc: OnlineTestService) {
     }
 
+    x = 0;
+
     ngOnInit() {
+        this.startTimer();
         this.router.events.subscribe((event) => {
             this.isCollapsed = true;
             if (event instanceof NavigationStart) {
@@ -54,5 +60,22 @@ export class NavbarComponent implements OnInit {
         } else {
             return false;
         }
+    }
+
+    timedCount() {
+        setTimeout(() => {
+            this.nottif();
+            this.timedCount();
+        }, 2000);
+    }
+    startTimer() {
+        this.timedCount();
+    }
+    nottif() {
+        this.svc.getCandidateWaitFortest().subscribe(
+            (data) => {
+                this.x = data.length;
+            }
+        );
     }
 }
