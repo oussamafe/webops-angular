@@ -59,4 +59,8 @@ export class ReclamationService {
             .subscribe();
 
     }
+
+    delete(reference) {
+        return this.http.delete(`http://localhost:9080/webops-web/rest/claims/${reference}`);
+    }
 }

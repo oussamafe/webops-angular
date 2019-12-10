@@ -73,7 +73,7 @@ export class ListReclamationComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  delete() {
+  delete(id) {
 
     this.swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
@@ -85,6 +85,12 @@ export class ListReclamationComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
+        this.reclamationService.delete(id).subscribe(
+            () => {});
+        console.log('ID: ' + id);
+        const index = this.dataSource.data.indexOf(id);
+        this.dataSource.data.splice(index, 1);
+        this.dataSource._updateChangeSubscription(); // <-- Refresh the datasource
         this.swalWithBootstrapButtons.fire(
             'Deleted!',
             'Your file has been deleted.',

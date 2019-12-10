@@ -15,6 +15,7 @@ import {AdminComponent} from './admin/admin.component';
 import {ListReclamationComponent} from './reclamation/list-reclamation/list-reclamation.component';
 import {PackCreateComponent} from './pack/pack-create/pack-create.component';
 import {PackListComponent} from './pack/pack-list/pack-list.component';
+import {HelpListComponent} from './reclamation/help/help-list/help-list.component';
 
 const routes: Routes =[
     { path: 'home',             component: LandingComponent },
@@ -27,6 +28,7 @@ const routes: Routes =[
     {path: 'reclamation', component: ListReclamationComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'packs', component: PackCreateComponent},
+    { path: 'helplist',          component: HelpListComponent },
     {path: 'packslist', component: PackListComponent},
     {
         path: 'admin',          component: AdminComponent,

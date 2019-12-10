@@ -59,15 +59,26 @@ td, th {
     justify-content: left;
     align-items: flex-start;
     width: 70%;
-    box-shadow: 10px 10px 5px grey;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 mat-card.cardholder {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 0 auto;
+    margin: 1rem auto;
+}
+.nomsg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    margin: 1rem auto;
+    background-color: gainsboro;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
 }
 mat-accordion{
     width: 70%;
@@ -80,4 +91,13 @@ mat-accordion{
 .post-image img {
     width: 100%;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-size: 100px;
+
+}
+mat-expansion-panel{
+    margin: 1rem auto;
 }

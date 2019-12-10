@@ -16,7 +16,7 @@ export class CreateReclamationComponent implements OnInit {
     imagePreview: string | ArrayBuffer;
     form: FormGroup;
     reclamation: Reclamation = new Reclamation();
-
+    checked = false;
   ngOnInit() {
       this.form = new FormGroup({
           sujet: new FormControl(null, {
@@ -29,6 +29,11 @@ export class CreateReclamationComponent implements OnInit {
 
 private add () {
 if (this.form.valid) {
+    this.reclamation.sujet = this.form.value.sujet;
+    this.reclamation.message = this.form.value.message;
+    if (this.checked) {
+        this.reclamationService.addclaimwithimage(this.reclamation, this.form.value.image); } else {
+        this.reclamationService.addReclamation(this.reclamation); }
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -36,10 +41,6 @@ if (this.form.valid) {
             showConfirmButton: true,
             timer: 1500
         });
-        this.reclamation.sujet = this.form.value.sujet;
-        this.reclamation.message = this.form.value.message;
-     this.reclamationService.addclaimwithimage(this.reclamation, this.form.value.image);
-     console.log('valu= ' + this.form.value);
       this.form.reset();
 } else {
     Swal.fire({
@@ -61,5 +62,8 @@ if (this.form.valid) {
             this.imagePreview = reader.result;
         };
         reader.readAsDataURL(file);
+    }
+    imgChecked() {
+        this.checked = !this.checked;
     }
 }
