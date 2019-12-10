@@ -112,4 +112,16 @@ export class CompanyService {
       })
     )
   }
+
+  searchAll(term): Observable<any> {
+    const params = new HttpParams()
+    .set('by', term);
+
+    return this.http.get<any>(`${config.apiUrl}/search` , { params }).pipe(
+      map(result => result),
+      catchError(error => {
+        return error.status;
+      })
+    )
+  }
 }

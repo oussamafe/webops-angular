@@ -35,6 +35,8 @@ import { JobsComponent } from './jobs/jobs.component';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { UploadImageComponent } from './company-profile/upload-image/upload-image.component';
+import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -63,7 +65,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     EmployeeComponent,
     EditEventComponent,
     EditJobComponent,
-    JobsComponent
+    JobsComponent,
+    UploadImageComponent,
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   entryComponents:[
     LoginDialogComponent,
     EditEventComponent,
-    EditJobComponent
+    EditJobComponent,
+    UploadImageComponent,
+    JobDetailComponent
   ],
   providers: [
     {

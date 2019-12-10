@@ -12,6 +12,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { EditEventComponent } from './job/edit-event/edit-event.component';
 import { EditJobComponent } from './job/edit-job/edit-job.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 @Component({
@@ -22,6 +23,8 @@ import { EditJobComponent } from './job/edit-job/edit-job.component';
 export class CompanyProfileComponent implements OnInit {
 
   loggedCompany = null;
+  myImgUrl = '../assets/images/';
+  defaultImg = '../assets/images/no-image.jpg';
   closeResult: string;
   focus = false;
   focus1 = true ;
@@ -36,17 +39,6 @@ export class CompanyProfileComponent implements OnInit {
   spinnerJob = 'job';
   edit = false;
   eventEdits = null;
-
-  config = {
-    // Change this to your upload POST address:
-     url: 'http://localhost:9080/webops-web/rest/employee/company/edit/image',
-     maxFilesize: 1,
-     paramName: 'image',
-     acceptedFiles: 'image/*',
-     headers: {
-      'Authorization': `Bearer ${this.authService.getJwtToken()}`
-     }
-   };
   model: any;
 
 
@@ -141,12 +133,10 @@ export class CompanyProfileComponent implements OnInit {
   }
 
 
-  public onUploadError(args: any): void {
-    console.log('onUploadError:', args);
-  }
 
-  public onUploadSuccess(args: any): void {
-    console.log('onUploadSuccess:', args);
+
+  uploadImage() {
+    const modalRef = this.modalService.open(UploadImageComponent , { windowClass: 'modal-mini', size: 'sm', centered: true });
   }
 
 

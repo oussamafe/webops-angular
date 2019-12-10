@@ -19,4 +19,12 @@ export class RegisterCompanyService {
       return of(false);
     }));
   }
+
+  getAllJobs(): Observable<any>  {
+    return this.http.get<any>(`${config.apiUrl}/joboffers/jobs/all`).pipe(
+      map(result => result),
+      catchError(error =>
+          throwError(error.status))
+    )
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-navbar',
@@ -12,6 +13,7 @@ export class NavbarComponent implements OnInit {
     public isCollapsed = true;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
+    searchField;
 
     constructor(public location: Location, private router: Router , public authService: AuthService) {
     }
@@ -55,5 +57,9 @@ export class NavbarComponent implements OnInit {
         else {
             return false;
         }
+    }
+
+    submitSearch(searchField) {
+        this.router.navigate(['/search'] , { queryParams: { search: searchField.value } })
     }
 }

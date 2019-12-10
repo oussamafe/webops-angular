@@ -57,7 +57,10 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
             </div>
-            <input class="form-control form-control-alternative" placeholder="Search" type="text">
+            <form (ngSubmit)="submitSearch(searchField)">
+              <input class="form-control form-control-alternative" #searchField placeholder="Search"
+                type="text">
+            </form>
           </div>
         </li>
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
