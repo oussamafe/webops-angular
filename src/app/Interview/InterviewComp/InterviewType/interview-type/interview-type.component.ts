@@ -4,7 +4,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {InterviewService} from '../../../../services/Interview/interview.service';
 import {IAlert} from '../../../../sections/alerts-section/alerts-section.component';
-import {Question} from '../../../../models/Interview/Question';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
     selector: 'app-interview-type',
@@ -38,12 +38,26 @@ export class InterviewTypeComponent implements OnInit {
     }
 
     Deletetype(id) {
-        if (window.confirm('Are you sure, you want to delete?')) {
-            this.svc.DeleteInterviewType(id).subscribe(data => {
-                this.svc.ListAllInterviewType().subscribe(
-                    (datao) => this.listtype = datao);
-            });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to undo delete!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.value) {
+                this.svc.DeleteInterviewType(id).subscribe(data => {
+                    this.svc.ListAllInterviewType().subscribe(
+                        (datao) => this.listtype = datao);
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Type has been deleted.',
+                    'success'
+                );
+            }
+        });
     }
 
     open(content) {

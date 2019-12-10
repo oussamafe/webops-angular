@@ -5,6 +5,7 @@ import {Question} from '../../../../models/Interview/Question';
 import {Responce} from '../../../../models/Interview/Responce';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {IAlert} from '../../../../sections/alerts-section/alerts-section.component';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
     selector: 'app-responce',
@@ -54,12 +55,26 @@ export class ResponceComponent implements OnInit {
         );
     }
     DeleteResponce(id) {
-        if (window.confirm('Are you sure, you want to delete?')) {
-            this.svc.DeleteResponce(id).subscribe(data => {
-                this.svc.ListResponceByQuestion(this.idq).subscribe(
-                    (datao) => this.listResponces = datao);
-            });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to undo delete!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.value) {
+                this.svc.DeleteResponce(id).subscribe(data => {
+                    this.svc.ListResponceByQuestion(this.idq).subscribe(
+                        (datao) => this.listResponces = datao);
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Responce has been deleted.',
+                    'success'
+                );
+            }
+        });
     }
 
     updateResponce(id, r, prop, event: any) {

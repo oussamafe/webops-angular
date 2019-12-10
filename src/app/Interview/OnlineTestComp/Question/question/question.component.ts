@@ -4,6 +4,7 @@ import {OnlineTestService} from '../../../../services/Interview/online-test.serv
 import {IAlert} from '../../../../sections/alerts-section/alerts-section.component';
 import {ModalDismissReasons, NgbDate, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
     selector: 'app-question',
@@ -62,12 +63,26 @@ export class QuestionComponent implements OnInit {
     }
 
     DeleteQuestion(id) {
-        if (window.confirm('Are you sure, you want to delete?')) {
-            this.svc.DeleteQuestion(id).subscribe(data => {
-                this.svc.getListAllQuestion().subscribe(
-                    (datao) => this.listQuestion = datao);
-            });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to undo delete!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.value) {
+                this.svc.DeleteQuestion(id).subscribe(data => {
+                    this.svc.getListAllQuestion().subscribe(
+                        (datao) => this.listQuestion = datao);
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Question has been deleted.',
+                    'success'
+                );
+            }
+        });
     }
 
     updateQuestion(id, q, prop, event: any) {
