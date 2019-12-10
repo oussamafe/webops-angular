@@ -29,6 +29,7 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { JobsComponent } from './jobs/jobs.component';
+import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 
 
 
@@ -48,6 +49,7 @@ import { JobsComponent } from './jobs/jobs.component';
     FriendsComponent,
     DashboardComponent,
     JobsComponent,
+    JobDetailComponent,
 
 
   ],
@@ -71,7 +73,12 @@ import { JobsComponent } from './jobs/jobs.component';
         MatBadgeModule,
 
     ],
-  providers: [
+    entryComponents: [
+
+        JobDetailComponent ,
+    ],
+
+    providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
