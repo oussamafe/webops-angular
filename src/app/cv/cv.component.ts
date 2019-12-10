@@ -9,60 +9,70 @@ import {CandidateService} from '../services/candidate.service';
 import {Skill} from '../models/Skill';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProfessionalExperience} from '../models/ProfessionalExperience';
+import {NgForm} from '@angular/forms';
+
 @Component({
-  selector: 'app-cv',
-  templateUrl: './cv.component.html',
-  styleUrls: ['./cv.component.css']
+    selector: 'app-cv',
+    templateUrl: './cv.component.html',
+    styleUrls: ['./cv.component.css']
 })
 export class CVComponent implements OnInit {
-  focus;
-  focus1;
+    focus;
+    focus1;
     focus2;
     focus0;
     focus11;
     focus21;
- done = false ;
-    done1 = false ;
-  @Input() DetailsCourse = {diploma: ' ', institution: ' ', endDate: ' ' , startDate: ' '} ;
-    @Input() DetailsProfExp = {description: ' ', company: ' ', endDate: ' ' , startDate: ' ', place: ''} ;
-   // @Input() DetailsCandidates = {certifications: ' ', activities: ' '} ;
+    done = false;
+    done1 = false;
+    p = 1;
+    px: number;
+
+    @Input() DetailsCourse = {diploma: ' ', institution: ' ', endDate: ' ', startDate: ' '};
+    @Input() DetailsProfExp = {description: ' ', company: ' ', endDate: ' ', startDate: ' ', place: ''};
+    // @Input() DetailsCandidates = {certifications: ' ', activities: ' '} ;
     selectedValue: Skill;
     Skills: Skill [] = [];
     Candidates: Candidate;
-    ProfExp: ProfessionalExperience [] = [] ;
-    skill: Skill [] = [] ;
-    Course: Course [] = [] ;
-
+    ProfExp: ProfessionalExperience [] = [];
+    skill: Skill [] = [];
+    Course: Course [] = [];
+    cour: Course;
     userID = this.Actrouter.snapshot.params['uid'];
+
     // tslint:disable-next-line:max-line-length
-  constructor(public cvService: CVService , private Actrouter: ActivatedRoute , public candidateService: CandidateService, private modalService: NgbModal , private router: Router) {
-      this.getSkills();  this.getCourse();
-      this.getProfExp(); this.loadCandidate(); this.getSkill();
-  }
+    constructor(public cvService: CVService, private Actrouter: ActivatedRoute, public candidateService: CandidateService, private modalService: NgbModal, private router: Router) {
+        this.getSkills();
+        this.getCourse();
+        this.getProfExp();
+        this.loadCandidate();
+        this.getSkill();
+    }
 
-  ngOnInit() {this.loadCandidate();
-  }
+    ngOnInit() {
+        this.loadCandidate();
+    }
 
 
-  AddCourse() {
-      // tslint:disable-next-line:max-line-length
-      const date = this.DetailsCourse.startDate['year'] + '-' + this.DetailsCourse.startDate['month'] + '-' + this.DetailsCourse.startDate['day'];
-      const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
-      // tslint:disable-next-line:max-line-length
-      const date2 = this.DetailsCourse.endDate['year'] + '-' + this.DetailsCourse.endDate['month'] + '-' + this.DetailsCourse.endDate['day'];
-      const formattedDate2 = formatDate(date2, 'yyyy-MM-dd', 'en-US');
-      this.DetailsCourse.startDate = formattedDate ;
-      this.DetailsCourse.endDate = formattedDate2 ;
-        this.cvService.addCourse( this.DetailsCourse)
-        .subscribe(success => {
-            this.cvService.getCourses(this.userID).subscribe((data) => {
-                this.Course = data;
-                this.modalService.dismissAll();
-                this.router.navigate(['/EditCV/' + this.userID]);
+    AddCourse() {
+        // tslint:disable-next-line:max-line-length
+        const date = this.DetailsCourse.startDate['year'] + '-' + this.DetailsCourse.startDate['month'] + '-' + this.DetailsCourse.startDate['day'];
+        const formattedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
+        // tslint:disable-next-line:max-line-length
+        const date2 = this.DetailsCourse.endDate['year'] + '-' + this.DetailsCourse.endDate['month'] + '-' + this.DetailsCourse.endDate['day'];
+        const formattedDate2 = formatDate(date2, 'yyyy-MM-dd', 'en-US');
+        this.DetailsCourse.startDate = formattedDate;
+        this.DetailsCourse.endDate = formattedDate2;
+        this.cvService.addCourse(this.DetailsCourse)
+            .subscribe(success => {
+                this.cvService.getCourses(this.userID).subscribe((data) => {
+                    this.Course = data;
+                    this.modalService.dismissAll();
+                    this.router.navigate(['/EditCV/' + this.userID]);
 
+                });
             });
-});
-  }
+    }
 
     AddProfExp() {
         // tslint:disable-next-line:max-line-length
@@ -71,24 +81,28 @@ export class CVComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         const date2 = this.DetailsProfExp.endDate['year'] + '-' + this.DetailsProfExp.endDate['month'] + '-' + this.DetailsProfExp.endDate['day'];
         const formattedDate2 = formatDate(date2, 'yyyy-MM-dd', 'en-US');
-        this.DetailsProfExp.startDate = formattedDate ;
-        this.DetailsProfExp.endDate = formattedDate2 ;
-        this.cvService.addProfessionalExp( this.DetailsProfExp)
+        this.DetailsProfExp.startDate = formattedDate;
+        this.DetailsProfExp.endDate = formattedDate2;
+        this.cvService.addProfessionalExp(this.DetailsProfExp)
             .subscribe(success => {
                 this.cvService.getProfessionalExperiences(this.userID).subscribe((data) => {
                     this.ProfExp = data;
                     this.modalService.dismissAll();
                     this.router.navigate(['/EditCV/' + this.userID]);
-                 }); });
+                });
+            });
     }
+
     addCertification() {
         this.cvService.AddCertif(this.Candidates.certifications).subscribe(dataa => {
             this.candidateService.getCandidate(this.userID).subscribe((data) => {
                 this.Candidates = data;
                 this.modalService.dismissAll();
                 this.router.navigate(['/EditCV/' + this.userID]);
-            }); });
+            });
+        });
     }
+
     addActivity() {
         this.cvService.AddActivity(this.Candidates
             .activities).subscribe(dataa => {
@@ -96,60 +110,76 @@ export class CVComponent implements OnInit {
                 this.Candidates = data;
                 this.modalService.dismissAll();
                 this.router.navigate(['/EditCV/' + this.userID]);
-            }); });
+            });
+        });
     }
+
     getSkills() {
         this.cvService.getSkillnotAffected().subscribe((data) => {
             this.Skills = data;
 
         });
     }
+
     addSkill() {
         this.cvService.addSkill(this.selectedValue.id).subscribe(data =>
             this.cvService.getSkills(this.userID).subscribe((datao) => {
-            this.skill = datao;
+                this.skill = datao;
                 this.modalService.dismissAll();
                 this.router.navigate(['/EditCV/' + this.userID]);
-        }));
-}
+            }));
+    }
+
     getProfExp() {
         this.cvService.getProfessionalExperiences(this.userID).subscribe((data) => {
             this.ProfExp = data;
+         //   this.px = Math.trunc(this.ProfExp.length / 10) + 1;
         });
     }
+
     getCourse() {
         this.cvService.getCourses(this.userID).subscribe((data) => {
             this.Course = data;
+        //    this.px1 = Math.trunc(this.Course.length / 10) + 1;
 
         });
 
     }
+
     loadCandidate() {
         this.candidateService.getCandidate(this.userID).subscribe((data) => {
             this.Candidates = data;
         });
 
     }
+
     open(content) {
-        this.modalService.open(content , { size: 'sm' });
+        this.modalService.open(content, {size: 'sm'});
     }
+
     open1(content1) {
-        this.modalService.open(content1 , { size: 'lg' });
+        this.modalService.open(content1, {size: 'lg'});
     }
+
     open2(content2) {
-        this.modalService.open(content2 , { size: 'lg' });
+        this.modalService.open(content2, {size: 'lg'});
     }
+
     open3(content3) {
-        this.modalService.open(content3 , { size: 'lg' });
+        this.modalService.open(content3, {size: 'lg'});
     }
+
     open4(content4) {
-        this.modalService.open(content4 , { size: 'lg' });
+        this.modalService.open(content4, {size: 'lg'});
     }
+
     getSkill() {
         this.cvService.getSkills(this.userID).subscribe((data) => {
             this.skill = data;
 
-        }); }
+        });
+    }
+
     deleteCourse(id) {
         if (window.confirm('Are you sure, you want to delete?')) {
             this.cvService.supprimerCourse(id).subscribe(data => {
@@ -162,6 +192,7 @@ export class CVComponent implements OnInit {
             });
         }
     }
+
     deleteProfExp(id) {
         if (window.confirm('Are you sure, you want to delete?')) {
             this.cvService.supprimerProfExp(id).subscribe(data => {
@@ -171,5 +202,31 @@ export class CVComponent implements OnInit {
                 });
             });
         }
+    }
+
+    updateCourse(c, prop, event: any) {
+        const editField = event.target.textContent;
+        this.cour = c;
+        if (prop === 'diploma' && editField !== this.cour.diploma) {
+            this.cour.diploma = editField;
+            this.cvService.updateCourse(this.cour).subscribe();
+
+        }
+        if (prop === 'institution' && editField !== this.cour.institution) {
+            this.cour.institution = editField;
+            this.cvService.updateCourse(this.cour).subscribe();
+
+        }
+        if (prop === 'startDate' && editField !== this.cour.startDate) {
+            this.cour.startDate = editField;
+            this.cvService.updateCourse(this.cour).subscribe();
+
+        }
+        if (prop === 'endDate' && editField !== this.cour.endDate) {
+            this.cour.endDate = editField;
+            this.cvService.updateCourse(this.cour).subscribe();
+
+        }
+
     }
 }

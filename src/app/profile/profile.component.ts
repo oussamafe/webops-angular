@@ -8,9 +8,10 @@ import {ProfessionalExperience} from '../models/ProfessionalExperience';
 import {Course} from '../models/Course';
 import {Skill} from '../models/Skill';
 import {CVService} from '../services/cv.service';
-import {AuthService} from '../services/auth.service';
+
 import {FriendsService} from '../services/friends.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class ProfileComponent implements OnInit {
     userID = this.Actrouter.snapshot.params['uid'];
     form: FormGroup;
     // tslint:disable-next-line:max-line-length
-    constructor( private http: HttpClient, public candidateService: CandidateService,  public friendsSrv: FriendsService, public cvService: CVService, public auto: AuthService,  private Actrouter: ActivatedRoute, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
+    constructor(private http: HttpClient, public candidateService: CandidateService, public friendsSrv: FriendsService, public cvService: CVService, public auto: AuthService, private Actrouter: ActivatedRoute, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
 
                      config.backdrop = 'static';
                     config.keyboard = false;

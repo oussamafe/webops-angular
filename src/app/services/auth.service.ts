@@ -24,32 +24,32 @@ export class AuthService {
 
   login(username: string, password: string): Observable<boolean> {
     const body = new HttpParams()
-    .set('username', username)
-    .set('password', password);
+        .set('username', username)
+        .set('password', password);
     return this.http.post<any>(`${config.apiUrl}/login`, body.toString(), {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
     })
-  })
-      .pipe(
-        tap(tokens => this.doLoginUser(username, tokens)),
-        mapTo(true),
-        catchError(error => {
-          alert(error.error);
-          return of(false);
-        }));
+        .pipe(
+            tap(tokens => this.doLoginUser(username, tokens)),
+            mapTo(true),
+            catchError(error => {
+              alert(error.error);
+              return of(false);
+            }));
   }
 
   logout() {
     return this.http.post<any>(`${config.apiUrl}/logout`, {
       'refreshToken': this.getRefreshToken()
     }).pipe(
-      tap(() => this.doLogoutUser()),
-      mapTo(true),
-      catchError(error => {
-        alert(error.error);
-        return of(false);
-      }));
+        tap(() => this.doLogoutUser()),
+        mapTo(true),
+        catchError(error => {
+          alert(error.error);
+          return of(false);
+        }));
   }
 
   isLoggedIn() {
@@ -99,20 +99,20 @@ export class AuthService {
 
   private getJwtTokens(): JwtToken {
     const decodedJwtJsonData = window.atob(this.getRefreshToken().split('.')[1]);
-   // console.log('jwtoken: ' + decodedJwtJsonData);
+    // console.log('jwtoken: ' + decodedJwtJsonData);
     const decodedJwtData = JSON.parse(decodedJwtJsonData) as JwtToken;
 
     decodedJwtData.exp = decodedJwtData.exp * 1000;
     decodedJwtData.iat = decodedJwtData.iat * 1000;
-   // console.log('decoded jwtoken: ' + decodedJwtData.Role);
+    // console.log('decoded jwtoken: ' + decodedJwtData.Role);
     return decodedJwtData;
   }
   roleMatch(allowedRoles: string[]): boolean {
     let isMatch = false;
     const userRoles: string[] = this.getJwtTokens().Role;
-   // console.log('user role: ' + userRoles + allowedRoles);
+    // console.log('user role: ' + userRoles + allowedRoles);
     allowedRoles.forEach(element => {
-       //   console.log('elements : ' + element + allowedRoles);
+          //   console.log('elements : ' + element + allowedRoles);
           if (userRoles.indexOf(element) > -1) {
             isMatch = true;
 

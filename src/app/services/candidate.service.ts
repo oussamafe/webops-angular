@@ -5,6 +5,7 @@ import {catchError, retry} from 'rxjs/operators';
 import {Candidate} from '../models/Candidate';
 import {config} from '../models/config';
 import {Skill} from '../models/Skill';
+import {SocialUser} from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,6 @@ export class CandidateService {
 
     );
   }
-
 
   getCandidate(idC): Observable<Candidate> {
     return this.http.get<Candidate>(`${config.apiUrl}/Candidate/profileCandidate?idC=` + idC, this.httpOptions )

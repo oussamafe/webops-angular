@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
-import { AuthService } from 'src/app/services/auth.service';
 import {FriendsService} from '../../services/friends.service';
 import {Candidate} from '../../models/Candidate';
+import {AuthService} from '../../services/auth.service';
+
+
 
 @Component({
     selector: 'app-navbar',

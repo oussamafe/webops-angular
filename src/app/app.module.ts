@@ -19,6 +19,17 @@ import {TokenInterceptor} from './services/TokenInterceptor';
 import { CVComponent } from './cv/cv.component';
 import { FriendsComponent } from './friends/friends.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+import { getAuthServiceConfigs } from '../socialloginConfig';
+import {
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule, MatBadgeModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { JobsComponent } from './jobs/jobs.component';
+
 
 
 
@@ -36,21 +47,30 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CVComponent,
     FriendsComponent,
     DashboardComponent,
+    JobsComponent,
+
 
   ],
-  imports: [
+    imports: [
+        SocialLoginModule,
+        BrowserModule,
+        NgbModule.forRoot(),
+        FormsModule,
+        RouterModule,
+        AppRoutingModule,
+        HomeModule,
+        HttpClientModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        NgxPaginationModule,
+        MatBadgeModule,
 
-    BrowserModule,
-    NgbModule.forRoot(),
-    FormsModule,
-    RouterModule,
-    AppRoutingModule,
-    HomeModule,
-    HttpClientModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

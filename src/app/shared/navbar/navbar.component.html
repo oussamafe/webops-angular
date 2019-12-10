@@ -1,3 +1,4 @@
+
 <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
   <div class="container">
     <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
@@ -40,7 +41,7 @@
         <li class="nav-item ">
           <a class="nav-link no-caret">
             <i class="ni ni-collection d-lg-none"></i>
-            <a [routerLink]="['/landing']" class="navbar-brand">Page 3</a>
+            <a [routerLink]="['/Jobs']" class="navbar-brand">Jobs</a>
           </a>
         </li>
         <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()" >
@@ -63,15 +64,23 @@
         </li>
         <li _ngcontent-c1="" class="nav-item dropdown"  *ngIf="authService.isLoggedIn()">
           <a _ngcontent-c1="" class="nav-link no-caret" data-toggle="dropdown" role="button" >
-            <i class="ni ni-notification-70"></i>
+            <mat-icon matBadge="{{FriendsRequest.length}}" matBadgeColor="warn">email</mat-icon>
             <span _ngcontent-c1="" class="nav-link-inner--text"></span></a>
             <div _ngcontent-c1="" class="dropdown-menu"
                  >
               <a ngcontent-c1="" class="dropdown-item"  *ngIf="FriendsRequest.length === 0 "  > You dont have Friends Requests</a>
               <a _ngcontent-c1="" class="dropdown-item"   *ngFor=" let F of FriendsRequest" routerLink="/user-profile/{{F.id}}"  >{{F.first_Name}} {{F.last_Name}} want to be your friend   <a id="Accept" href="javascript:void(0)" class="badge badge-success" (click)="AcceptFriend(F.id ,authService.getUserID())">Accept</a> <a id="Reject" href="javascript:void(0)" class="badge badge-danger" (click)="RejectFriend(F.id,authService.getUserID())">Reject</a></a>
+
             </div>
         </li>
+
+        <!-- Include text description of the icon's meaning for screen-readers -->
+        <span class="cdk-visually-hidden">
+
+    </span>
       </ul>
+
+
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
         <li class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!authService.isLoggedIn()">
           <a [routerLink]="['/login']" class="btn btn-success">

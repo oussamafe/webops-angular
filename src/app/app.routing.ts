@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { CVComponent } from './cv/cv.component';
 import {FriendsComponent} from './friends/friends.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {JobsComponent} from './jobs/jobs.component';
 const routes: Routes = [
     { path: 'home',             component: LandingComponent },
     { path: 'user-profile',     component: ProfileComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'EditCV/:uid',          component: CVComponent },
     {path: 'Friends'  ,          component: FriendsComponent },
     {path: 'Stat'  ,          component: DashboardComponent },
+    {path: 'Jobs'  ,          component: JobsComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

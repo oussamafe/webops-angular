@@ -6,19 +6,23 @@ import {Candidate} from '../models/Candidate';
 import {Location} from '@angular/common';
 import {FriendsService} from '../services/friends.service';
 
+import {CandidateService} from '../services/candidate.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  loggedIn: boolean;
   focus;
   focus1;
   loginForm: FormGroup;
   FriendsRequest: Candidate  [] = [];
   errorLogin = null;
+
   // tslint:disable-next-line:max-line-length
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private friend: FriendsService) {
+  constructor( private authServices: AuthService, private formBuilder: FormBuilder, private canser : CandidateService , private router: Router, private friend: FriendsService ) {
 
   }
 
@@ -28,13 +32,14 @@ export class LoginComponent implements OnInit {
       username: [''],
       password: ['']
     });
+
   }
 
   get f() { return this.loginForm.controls; }
 
   login() {
     this.errorLogin = null;
-    this.authService.login(this.f.username.value , this.f.password.value)
+    this.authServices.login(this.f.username.value , this.f.password.value)
         .subscribe(success => {
               if (success === true) {
                 this.router.navigate(['/home']);

@@ -45,16 +45,24 @@
           <th scope="col"></th>
         </tr>
         </thead>
-        <tbody *ngFor=" let c of Course ">
+        <tbody *ngFor=" let c of Course | paginate: { itemsPerPage: 2, currentPage: p } ">
         <tr >
-          <td>{{c.diploma}}</td>
-          <td>{{c.institution}}</td>
-          <td>{{c.startDate}}</td>
-          <td>{{c.endDate}}</td>
-          <td><button  type="button" class="btn btn-outline-danger" (click)="deleteCourse(c.id)">Delete</button></td>
+          <td contenteditable="true" (blur)="updateCourse(c,'diploma',$event)">{{c.diploma}}</td>
+          <td contenteditable="true" (blur)="updateCourse(c,'institution',$event)">{{c.institution}}</td>
+          <td contenteditable="true" (blur)="updateCourse(c,'startDate',$event)">{{c.startDate}}</td>
+          <td contenteditable="true"(blur)="updateCourse(c,'endDate',$event)">{{c.endDate}}</td>
+          <td  ><button  type="button" class="btn btn-outline-danger" (click)="deleteCourse(c.id)">Delete</button></td>
         </tr>
         </tbody>
+
       </table>
+      <nav aria-label="Page navigation example">
+        <ngb-pagination [collectionSize]="50" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+          <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+          <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+        </ngb-pagination>
+      </nav>
+
     </div>
     <h4 class="text-black">Your actual Professional Experiences</h4>
     <a href="javascript:void(0)" class="btn btn-sm btn-default mr-4" (click)="open1(content1)" >Add New Professional Experience to your CV</a>
@@ -72,7 +80,7 @@
 
         </tr>
         </thead>
-        <tbody *ngFor=" let c of ProfExp " >
+        <tbody *ngFor=" let c of ProfExp | paginate: { itemsPerPage: 2, currentPage: p }  " >
         <tr>
           <td>{{c.description}}</td>
           <td>{{c.company}}</td>
@@ -83,6 +91,12 @@
         </tr>
         </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+        <ngb-pagination [collectionSize]="50" [(page)]="p" (pageChange)="p = $event" aria-label="Default pagination">
+          <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+          <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+        </ngb-pagination>
+      </nav>
     </div>
     <h4 class="text-black">Your actual Certifications</h4>
     <a href="javascript:void(0)" class="btn btn-sm btn-success mr-4" (click)="open2(content2)" >Update Certifications to your CV</a>
@@ -162,55 +176,65 @@
   <div class="modal-body">
 
     <p class="mt-0">Your courses are very important to us.</p>
+<form  >
 
+    <label >Diploma</label>
         <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-ruler-pencil"></i></span>
-          </div>
-          <input #diploma="ngModel" class="form-control"  placeholder="Diploma" [(ngModel)]="DetailsCourse.diploma" name="diploma" required type="text"  (focus)="focus=true" (blur)="focus=false">
-          <div *ngIf="diploma.invalid  &&(diploma.dirty || diploma.touched)">
-            <div *ngIf="diploma.errors.required">
-              <p style="color: red">Name is required.</p>
-            </div>
 
-          </div>
+          <span class="input-group-text"><i class="ni ni-ruler-pencil"></i></span>
+          <input required #diploma="ngModel" class="form-control"  name="diplomaa" type="text"  placeholder="Diploma" [(ngModel)]="DetailsCourse.diploma"   >
+          <span *ngIf="diploma.invalid"> hhhh</span>
+
+
         </div>
     <br>
-
+  <label >Institution</label>
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
           </div>
-          <input class="form-control" placeholder="Institution" type="text" [(ngModel)]="DetailsCourse.institution" name="institution" (focus)="focus1=true" (blur)="focus1=false">
+          <input #institution="ngModel" class="form-control" placeholder="Institutionn" type="text" name="institution" [(ngModel)]="DetailsCourse.institution" required  >
+          <div *ngIf="institution.invalid  &&(institution.dirty || institution.touched)">
+            <div  *ngIf="institution.errors">
+              <div *ngIf="institution.errors.required">
+                <p style="color: red">institution is required.</p>
+              </div>
+            </div></div>
+
+            </div>
+
+
           <br>
-          <br>
-
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-          </div>
-          <input class="form-control datepicker" placeholder="Select a start date" [(ngModel)]="DetailsCourse.startDate" name="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" />
-        </div>
-
-          <br>
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-          </div>
-          <input class="form-control datepicker" placeholder="Select an end date" [(ngModel)]="DetailsCourse.endDate" name="endDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
-        </div>
-
-
+  <div class="form-group">
+    <div class="input-group input-group-alternative">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+      </div>
+      <input class="form-control datepicker" placeholder="Select a start date" [(ngModel)]="DetailsCourse.startDate" name="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" />
     </div>
-    <br>
-
+  </div>
+  <div class="form-group">
+    <div class="input-group input-group-alternative">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+      </div>
+      <input class="form-control datepicker" placeholder="Select an end date" [(ngModel)]="DetailsCourse.endDate" name="endDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
+    </div>
   </div>
 
 
+
+
+</form>
+
+</div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-warning btn-round btn-block btn-lg" (click)="AddCourse()">Add Course to your CV</button>
+    <button type="button" class="btn btn-warning btn-round btn-block btn-lg" (click)="AddCourse()" >Add Course to your CV</button>
 
   </div>
+
+
+
 
 
 </ng-template>
