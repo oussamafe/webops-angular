@@ -77,4 +77,18 @@ export class AddResponceComponent implements OnInit {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
+
+    ttest(bool, div, input) {
+        if (bool) {
+            document.getElementById(div).classList.add('has-success');
+            document.getElementById(input).classList.add('is-valid');
+            document.getElementById(div).classList.remove('has-danger');
+            document.getElementById(input).classList.remove('is-invalid');
+        } else {
+            document.getElementById(div).classList.add('has-danger');
+            document.getElementById(input).classList.add('is-invalid');
+            document.getElementById(div).classList.remove('has-success');
+            document.getElementById(input).classList.remove('is-valid');
+        }
+    }
 }

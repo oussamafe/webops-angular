@@ -68,8 +68,8 @@
                 <h5 class="text-uppercase text-muted font-weight-bold">&emsp;Responce</h5>
                 <div class="col-md-12">
                     <form #ResponceFrom="ngForm">
-                        <div class="form-group">
-                            <input type="text" [(ngModel)]="res.reponce" class="form-control" placeholder="Responce" #respfor="ngModel" name="resptextf" required>
+                        <div class="form-group" id="divR">
+                            <input id="inR" type="text" [(ngModel)]="res.reponce" class="form-control" placeholder="Responce" #respfor="ngModel" name="resptextf" required (click)="ttest(respfor.valid , 'divR','inR')" (keyup)="ttest(respfor.valid , 'divR','inR')">
                             <div *ngIf="respfor.invalid  &&(respfor.dirty || respfor.touched)">
                                 <div *ngIf="respfor.errors.required">
                                     <b style="color: red">Responce  is required.</b>
