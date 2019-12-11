@@ -20,11 +20,21 @@ export class JobsComponent implements OnInit {
   center = null ;
   jobsMap = null ;
   zoom = [3];
+  rtl = false ;
   // tslint:disable-next-line: max-line-length
-  constructor(private jobService: RegisterCompanyService , private spinner: NgxSpinnerService , private modalService: NgbModal , private locationService: LocationLookupService ) { }
-
+  constructor(private jobService: RegisterCompanyService , private spinner: NgxSpinnerService , private modalService: NgbModal , private locationService: LocationLookupService ) {  
+  }
   ngOnInit() {
-    mapBoxGl.setRTLTextPlugin('../assets/RtlMapbox.js', () => {});
+
+    /*if(!this.rtl) {
+      console.log(this.rtl)
+      //mapBoxGl.setRTLTextPlugin('../assets/RtlMapbox.js', () => {});
+      this.rtl = true ;
+    }*/
+
+    this.locationService.checkRTL();
+
+
     this.locationService.getCurrentPosition().subscribe(
       // tslint:disable-next-line: max-line-length
       result => {this.center = [result.coords.longitude , result.coords.latitude] }  ,

@@ -26,6 +26,7 @@ export class JobComponent implements OnInit {
   spinnerSkills = 'skills';
   spinnerPlaces = 'places';
   spinnerConfirm = 'confirm';
+  success = false ;
   types = ['Full-time', 'Part-time', 'Contract' , 'Temporary' , 'Volunteer' , 'Internship']
   levels = ['Internship', 'Entry level', 'Associate' , 'Mid-Senior level' , 'Director' , 'Executive','Not Applicable']
   formatter = (result: any) => result.normalized_skill_name;
@@ -107,8 +108,14 @@ export class JobComponent implements OnInit {
     this.skills.forEach(skill => {skillsList.push( { type : skill }) })
     this.companyService.addJobOffer(this.jobForm.value , skillsList).subscribe(
       result => console.log(result) ,
-      error => console.log(error),
-      () =>  this.spinner.hide('confirm')
+      error => this.spinner.hide('confirm'),
+      () =>  {
+        this.jobForm.reset();
+        this.skills = [];
+        this.spinner.hide('confirm');
+        this.success = true ;
+      }
+
     );
   }
 

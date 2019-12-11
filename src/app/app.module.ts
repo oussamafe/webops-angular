@@ -40,6 +40,7 @@ import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { DateAgoPipe } from './jobs/job-detail/date-ago.pipe';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { RtlDirective } from './jobs/rtl.directive';
+import { AddCompanyComponent } from './company-profile/add-company/add-company.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -72,7 +73,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     UploadImageComponent,
     JobDetailComponent,
     DateAgoPipe,
-    RtlDirective
+    RtlDirective,
+    AddCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     EditEventComponent,
     EditJobComponent,
     UploadImageComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    AddCompanyComponent
   ],
   providers: [
     {

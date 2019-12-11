@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LocationLookupService } from '../services/location-lookup.service';
+import { AddCompanyComponent } from '../company-profile/add-company/add-company.component';
 
 @Component({
     selector: 'app-profile',
@@ -67,6 +68,10 @@ export class ProfileComponent implements OnInit {
                 this.adress[index] = data ;
             }
         );
+    }
+
+    addCompany() {
+        this.modalService.open(AddCompanyComponent , { windowClass: 'modal-mini', size: 'sm', centered: true });
     }
 
 }

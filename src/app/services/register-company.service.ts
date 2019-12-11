@@ -27,4 +27,14 @@ export class RegisterCompanyService {
           throwError(error.status))
     )
   }
+
+  registerCompany(company) {
+    //console.log(company)
+    return this.http.post<any>(`${config.apiUrl}/employee/register/company` , company , { responseType: 'text' as 'json' } ).pipe(
+      map(result => result),
+      catchError(error =>
+        throwError(error.status)
+      )
+    )
+  }
 }

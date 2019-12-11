@@ -37,8 +37,10 @@
             <div class="col-lg-4 order-lg-1" >
               <div class="card-profile-stats d-flex justify-content-center" >
                 <div *ngIf="employeeDetails != null" class="btn btn-md btn-primary mb-3" (click)="open(classic,'' , '')">
+                  <div *ngIf="employeeDetails.jobsSubmitted != null">
                   <span class="heading">{{employeeDetails.jobsSubmitted.length}}</span>
                   <span>Jobs Submitted</span>
+                </div>
                   <ng-template #classic let-c="close" let-d="dismiss">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -76,11 +78,18 @@
             </div> 
           </div>
           <div class="text-center mt-5" *ngIf="employeeDetails != null">
+            <div class="alert alert-danger" role="alert" *ngIf="employeeDetails.company == null" >
+                <strong>Attention!</strong> You didn't create a profile for your company yet - <span class="badge badge-secondary" (click)="addCompany()" >Click here to proceed ! </span>
+            </div>
+        </div>
+          <div class="text-center mt-5" *ngIf="employeeDetails != null">
+            <div>
             <h3>{{employeeDetails.first_Name}} {{employeeDetails.last_Name}}
             </h3>
             <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>{{employeeDetails.role}}</div>
             <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{employeeDetails.email}}</div>
             <div><i class="ni education_hat mr-2"></i></div>
+          </div>
           </div>
           <div class="mt-5 py-5 border-top text-center">
             <div class="row justify-content-center">

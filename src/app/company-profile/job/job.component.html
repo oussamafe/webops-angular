@@ -18,6 +18,9 @@
               <div class="alert alert-secondary alert-dismissible fade show text-center" role="alert">
                 <span><strong>Submit a job</strong></span>
               </div>
+              <div class="alert alert-success" role="alert" *ngIf="success != false">
+                  <span *ngIf="success != false"><strong>Success !</strong> Your job offer has been submitted </span>
+               </div>
               <form role="form" [formGroup]="jobForm" (ngSubmit)="addJob()">
                 <div class="form-group " [ngClass]="{ focused: focus1 === true }">
                   <div class="input-group input-group-alternative">
